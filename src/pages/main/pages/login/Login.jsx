@@ -49,29 +49,46 @@ export default function Login() {
       console.log(error);
     }
   };
-
+  const logout = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/logout",
+        {},
+        {
+          withCredentials: true, // Esta línea es importante
+        }
+      );
+      const user = response.data;
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={handleUsernameChange} />
-      </label>
-      <br />
-      <label>
-        Email:
-        <input type="text" value={email} onChange={handleEmailChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </label>
-      <br />
-      <button type="submit">Login</button>
-    </form>
+    <>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={handleUsernameChange} />
+        </label>
+        <br />
+        <label>
+          Email:
+          <input type="text" value={email} onChange={handleEmailChange} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </label>
+        <br />
+        <button type="submit">Login</button>
+      </form>
+      <button onClick={logout}>Cerrar sesion</button>
+    </>
   );
 }
