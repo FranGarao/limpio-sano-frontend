@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./Login.scss";
 import useFetch from "../../../../hooks/useFetch";
+import axios from "axios";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { post } = useFetch();
+  // const { post } = useFetch();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -19,19 +20,34 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Username: ", username);
-    console.log("Email: ", email);
-    console.log("Password: ", password);
-    const user = { username, email, password };
-    post("/users/login", user)
-      .then((user) => {
-        return user;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // const user = { username, email, password };
+    // post("/users/login", user)
+    //   .then((user) => {
+    //     return user;
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/login",
+        {
+          username,
+          email,
+          password,
+        },
+        {
+          withCredentials: true, // Esta línea es importante
+        }
+      );
+      const user = response.data;
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

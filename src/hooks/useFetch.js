@@ -12,6 +12,18 @@ const useFetch = () => {
     setLoading(true);
     setError(false);
     try {
+      if (method === "POST" && data.email) {
+        const response = await axios({
+          method,
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          url: apiUrl + url,
+          data,
+      }) 
+        return response.data;
+      }
       const response = await axios({
         method,
         url: apiUrl + url,
