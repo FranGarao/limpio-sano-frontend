@@ -1,0 +1,20 @@
+#main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .main {
+    margin: 120px 0 50px 0;
+    width: 100%;
+    display: flex;
+    align-self: center;
+  }
+  .whatsapp-fixed {
+    width: 65px;
+    height: auto;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+}

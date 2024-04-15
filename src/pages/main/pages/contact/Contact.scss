@@ -1,0 +1,223 @@
+$black-color: #1d1d1d;
+$white-color: #f2f2f2;
+$white-color-secondary: #fff;
+$blue-color: #0f036d;
+$green-color: #009d71;
+$wc: #e4e4e4;
+.contact {
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 90%;
+  align-items: center;
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    min-height: 70%;
+    background-image: linear-gradient(112.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%,rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%,rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%,rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%,rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%,rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%,rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%),linear-gradient(157.5deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%,rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%,rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%,rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%,rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%,rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%,rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%),linear-gradient(141deg, rgb(214, 214, 214) 0%, rgb(214, 214, 214) 10%,rgb(195, 195, 195) 10%, rgb(195, 195, 195) 53%,rgb(176, 176, 176) 53%, rgb(176, 176, 176) 55%,rgb(157, 157, 157) 55%, rgb(157, 157, 157) 60%,rgb(137, 137, 137) 60%, rgb(137, 137, 137) 88%,rgb(118, 118, 118) 88%, rgb(118, 118, 118) 91%,rgb(99, 99, 99) 91%, rgb(99, 99, 99) 100%),linear-gradient(96deg, rgb(195, 195, 195),rgb(228, 228, 228)); background-blend-mode:overlay,overlay,overlay,normal;
+    border: 2px solid #909192;
+    box-shadow:
+      rgba(14, 30, 37, 0.12) 0px 8px 19px 0px,
+      rgba(14, 30, 37, 0.32) 0px 8px 16px 0px;
+    color: $black-color;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    padding: 0 10px;
+    .contact-title {
+      margin: 30px 0 10px 0;
+    }
+    .name-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 14%;
+      align-items: flex-start;
+      .name-label {
+        position: relative;
+        padding: 5px 0;
+        top: 15px;
+        left: 5px;
+        padding: 0 5px;
+        margin: 0 0 5px 10px;
+        background-color: #FDFDFD ;
+        font-weight: 650;
+        color: #1d1d1dcb;
+      }
+      .name-input {
+        width: 80% !important;
+        height: 35px;
+        background-color: #FDFDFD;
+        border-radius: 15px;
+        padding: 5px 25px;
+        caret-color: #0b57d0;
+        color: #1d1d1d;
+        animation: inputNotFocus 0.3s forwards;
+        border: 2px solid #909192;
+        -webkit-animation: inputNotFocus 0.3s forwards;
+      }
+      .name-input::placeholder {
+        color: #1d1d1d6e;
+      }
+
+      .name-input:focus {
+        border: 2px solid $green-color;
+        outline: $green-color;
+        animation: inputFocus 0.3s forwards;
+        -webkit-animation: inputFocus 0.3s forwards;
+      }
+    }
+
+    .email-container {
+      @extend .name-container;
+      .email-label {
+        @extend .name-label;
+      }
+      .email-input {
+        @extend .name-input;
+      }
+      .email-input::placeholder {
+        color: #1d1d1d6e;
+      }
+
+      .email-input:focus {
+        border: 2px solid $green-color;
+        outline: $green-color;
+        animation: inputFocus 0.3s forwards;
+        -webkit-animation: inputFocus 0.3s forwards;
+      }
+    }
+    .phone-container {
+      @extend .name-container;
+      .phone-label {
+        @extend .name-label;
+      }
+      .phone-input {
+        @extend .name-input;
+      }
+    }
+    .location-container {
+      @extend .name-container;
+      label {
+        @extend .name-label;
+      }
+      .location-select {
+        margin-top: 5px;
+        width: 80% !important;
+        height: 35px;
+        background-color: #FDFDFD;
+        border-radius: 15px;
+        padding: 5px 25px;
+        color: #1d1d1d;
+        animation: inputNotFocus 0.3s forwards;
+        border: 2px solid #909192;
+        -webkit-animation: inputNotFocus 0.3s forwards;
+      }
+    }
+    .service-container {
+      @extend .location-container;
+      label {
+        @extend .name-label;
+      }
+      .service-select {
+        @extend .location-select;
+      }
+    }
+    .message-container {
+      @extend .name-container;
+      height: 250px;
+      .message-label {
+        @extend .name-label;
+      }
+      .message-textarea {
+        width: 100%;
+        height: 100%;
+        background-color: $wc;
+        border-radius: 12px;
+        padding: 10px 15px;
+        border: 2px solid #909192;
+        color: $black-color;
+        animation: textNotFocus 0.3s forwards;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        -ms-border-radius: 12px;
+        -o-border-radius: 12px;
+        -webkit-animation: textNotFocus 0.3s forwards;
+      }
+      .message-textarea:focus {
+        border: 2px solid $green-color;
+        outline: $green-color;
+        animation: textFocus 0.3s forwards;
+        -webkit-animation: textFocus 0.3s forwards;
+        animation: textFocus 0.3s forwards;
+      }
+    }
+  }
+  .submit {
+    width: 40%;
+    margin: 25px 0;
+    padding: 10px 0;
+    background-color: #0b57d0;
+    border: 2px solid $wc;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    color: $wc;
+    transition: all 0.2s;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+  .submit:hover {
+    background-color: #063d97;
+  }
+}
+
+@keyframes inputFocus {
+  0% {
+    width: 70%;
+    height: 35px;
+  }
+  100% {
+    width: calc(70% + 6px);
+    height: calc(35px + 5px);
+  }
+}
+
+@keyframes inputNotFocus {
+  0% {
+    width: calc(70% + 4px);
+    height: calc(35px + 3px);
+  }
+  100% {
+    width: 70%;
+    height: 35px;
+  }
+}
+@keyframes textFocus {
+  0% {
+    width: 100%;
+    height: 140px;
+  }
+  100% {
+    width: calc(100% + 6px);
+    height: calc(140px + 5px);
+  }
+}
+
+@keyframes textNotFocus {
+  0% {
+    width: calc(100% + 4px);
+    height: calc(140px + 3px);
+  }
+  100% {
+    width: 100%;
+    height: 140px;
+  }
+}

@@ -1,0 +1,35 @@
+// Definicion de variables
+
+//Colors
+$black-color: #1d1d1d;
+$white-color: #f2f2f2;
+$white-color-secondary: #fff;
+$blue-color: #0f036d;
+$green-color: #009d71;
+$wc: #e4e4e4;
+
+// $green-color: #00A6A6;
+
+//Fonts
+$font-size: 16px;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: $black-color;
+  background-color: $white-color;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}

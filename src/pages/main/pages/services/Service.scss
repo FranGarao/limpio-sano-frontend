@@ -1,0 +1,14 @@
+.services-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  .service-card {
+    min-width: 200px;
+    min-height: 300px;
+    max-width: 300px;
+    max-height: 400px;
+    background-color: antiquewhite;
+    margin: 10px 5px;
+    padding: 15px 10px;
+  }
+}

@@ -1,0 +1,40 @@
+//Colors
+$black-color: #1d1d1d;
+$white-color: #f2f2f2;
+$white-color-secondary: #fff;
+$blue-color: #0f036d;
+$green-color: #009d71;
+$wc: #e4e4e4;
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+body {
+  min-height: 100vh;
+  scrollbar-color: #1c1c1c;
+  background-color: #cecece;
+  z-index: -99999;
+  font-size: 0.8rem !important;
+}
+body::-webkit-scrollbar {
+    width: 8px; /* Ancho de toda la barra de desplazamiento */
+}
+body::-webkit-scrollbar-track {
+    background: $green-color; /* Color del área de seguimiento */
+}
+body::-webkit-scrollbar-thumb {
+    background-color: $blue-color; /* Color del pulgar de desplazamiento */
+    border-radius: 20px; /* Redondez del pulgar de desplazamiento */
+    border: 1px solid  $wc; /* Crea un margen alrededor del pulgar */
+}
+
+
+.special-char {
+  color: $green-color;
+  font-weight: bold;
+}
+.hidden {
+  display: none;
+}
