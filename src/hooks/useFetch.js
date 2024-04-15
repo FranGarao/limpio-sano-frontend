@@ -6,7 +6,7 @@ const useFetch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiUrl = "http://localhost:3000/api";
+  const apiUrl = "http://localhost:4567/api";
 
   const makeRequest = async (method, url, data) => {
     setLoading(true);

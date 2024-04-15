@@ -11,7 +11,7 @@ export default function MainPage() {
   return (
     <>
       <Helmet>
-        <title>Home | Limpio&Sano</title>
+        <title>Limpio&Sano</title>
       </Helmet>
 
       <div id="main-page">

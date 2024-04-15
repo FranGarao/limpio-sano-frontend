@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Login.scss";
-import useFetch from "../../../../hooks/useFetch";
 import axios from "axios";
+import Cookies from 'js-cookie'
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -33,7 +33,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/users/login",
+        "http://localhost:4567/api/users/login",
         {
           username,
           email,
@@ -43,8 +43,10 @@ export default function Login() {
           withCredentials: true, // Esta línea es importante
         }
       );
-      const user = response.data;
-      console.log(user);
+      const data = response.data;
+      const token = Cookies.get('token');
+      console.log({token});
+      console.log({data});
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +54,7 @@ export default function Login() {
   const logout = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/users/logout",
+        "http://localhost:4567/api/users/logout",
         {},
         {
           withCredentials: true, // Esta línea es importante
