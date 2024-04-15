@@ -1,7 +1,9 @@
 import { Helmet } from "react-helmet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Faqs.scss";
 import topArrow from "../../../../assets/icons/topArrow.svg";
+import useFetch from "../../../../hooks/useFetch";
+
 export default function Faqs() {
   const faqsData = [
     {
@@ -21,6 +23,20 @@ export default function Faqs() {
     },
     // Agrega más preguntas y respuestas aquí
   ];
+  const { get } = useFetch();
+  const [faqs, setFaqs] = useState([{}]);
+
+  useEffect(() => {
+    get("/faqs")
+      .then((faqs) => {
+        setFaqs(faqs);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(faqs);
   const [faqVisibility, setFaqVisibility] = useState(
     Array(faqsData.length).fill(true)
   );
@@ -39,7 +55,7 @@ export default function Faqs() {
       <section className="section-container">
         <h2>Preguntas Frecuentes</h2>
         <section className="faqs-container">
-          {faqsData.map((faq, index) => (
+          {faqs.map((faq, index) => (
             <div
               onClick={() => toggleFaqVisibility(index)}
               className="faq"
@@ -48,13 +64,20 @@ export default function Faqs() {
               <div className="faq-header">
                 <h2 className="faq-title">{faq.title}</h2>
                 <img
-                  className={`${faqVisibility[index] ? "faq-arrow-inverse" : "faq-arrow"}`}
+                  className={`${
+                    faqVisibility[index] ? "faq-arrow-inverse" : "faq-arrow"
+                  }`}
                   src={topArrow}
                   alt=""
                 />
               </div>
+            <hr   className={`${
+                  faqVisibility[index] ? "hr" : "hidden"
+                }`} />
               <p
-                className={`${faqVisibility[index] ? "faq-description" : "hidden"}`}
+                className={`${
+                  faqVisibility[index] ? "faq-description" : "hidden"
+                }`}
               >
                 {faq.description}
               </p>
