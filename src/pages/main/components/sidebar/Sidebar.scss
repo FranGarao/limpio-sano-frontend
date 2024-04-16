@@ -19,7 +19,13 @@ $green-color: #009d71;
   @extend .slideIn;
   box-shadow: none;
 }
-
+.block{
+background-color: #1d1d1d60;
+width: 100vh;
+min-height: 200vh !important;
+position: fixed;
+z-index: 999;
+}
 .sidebar,
 .slideIn {
   position: fixed;

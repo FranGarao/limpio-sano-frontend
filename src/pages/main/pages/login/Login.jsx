@@ -45,7 +45,7 @@ export default function Login() {
       );
       const data = response.data;
       const token = Cookies.get('token');
-      console.log({token});
+      console.log({ttkkoonne: token});
       console.log({data});
     } catch (error) {
       console.log(error);

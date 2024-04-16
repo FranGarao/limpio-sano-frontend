@@ -24,9 +24,11 @@ export default function Sidebar() {
         src={burgerMenu}
         alt=""
       />
+<div onClick={() => setShowSidebar(false)} className={` ${
+          hidden ? "hidden" : showSidebar ? "block" : "hidden"
+        }`}>
       <nav
-        // // onMouseOver={() => setShowSidebar(true)}
-        // // onMouseOut={() => setShowSidebar(false)}
+
         className={` ${
           hidden ? "hidden" : showSidebar ? "slideIn" : "slideOut"
         }`}
@@ -70,6 +72,7 @@ export default function Sidebar() {
           <img className="network-icon" src={whatsapp} alt="whatsapp" />
         </div>
       </nav>
+</div>
     </>
   );
 }
