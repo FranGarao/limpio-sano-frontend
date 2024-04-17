@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const useFetch = () => {
   // const [data, setData] = useState([]);
@@ -12,7 +13,8 @@ const useFetch = () => {
     setLoading(true);
     setError(false);
     try {
-      if (method === "POST" && data.email) {
+      const token = Cookies.get("token");
+      if (token) {
         const response = await axios({
           method,
           credentials: "include",
