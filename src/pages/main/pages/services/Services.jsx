@@ -57,6 +57,7 @@ export default function Services() {
           <article className="service-card" key={service.id}>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
+            <button>Alquilar</button>
           </article>
         ))}
 
