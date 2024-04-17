@@ -17,14 +17,24 @@ import About from "./pages/main/pages/about/About";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/main/pages/login/Login";
 import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 
 function App() {
-  
-  const session = Cookies.get("token");
-  console.log(session);
+  const [admin, setAdmin] = useState(false);
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    const session = Cookies.get("token");
+    if (session) {
+      setToken(session);
+      console.log("Llegue aquí");
+      setAdmin(true);
+      console.log({ session, admin });
+      return;
+    }
+  }, []);
 
   return (
-   <AuthProvider>
+    <AuthProvider>
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />}>
@@ -36,7 +46,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          <Route path="/dashboard" element={<Dashboard />} />
+          {admin && (
+            <>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </>
+          )}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

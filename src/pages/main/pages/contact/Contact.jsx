@@ -53,45 +53,25 @@ export default function Contact() {
             <label className="name-label" htmlFor="name">
               Nombre
             </label>
-            <input
-              className="name-input"
-              type="text"
-              id="name"
-              placeholder="Mauricio"
-            />
+            <input className="name-input" type="text" id="name" />
           </div>
           <div className="name-container">
             <label className="name-label" htmlFor="lastName">
               Apellido
             </label>
-            <input
-              className="name-input"
-              type="text"
-              id="lastName"
-              placeholder="Rusinque"
-            />
+            <input className="name-input" type="text" id="lastName" />
           </div>
           <div className="email-container">
             <label className="email-label" htmlFor="email">
               Correo Electrónico
             </label>
-            <input
-              className="email-input"
-              type="email"
-              id="email"
-              placeholder="ejemplo@gmail.com"
-            />
+            <input className="email-input" type="email" id="email" />
           </div>
           <div className="phone-container">
             <label className="phone-label" htmlFor="phoneNumber">
               Numero de Teléfono
             </label>
-            <input
-              className="phone-input"
-              type="text"
-              id="phoneNumber"
-              placeholder="+57 xxx xxxxxxx"
-            />
+            <input className="phone-input" type="text" id="phoneNumber" />
           </div>
           <div className="location-container">
             <label htmlFor="city">¿En qué ciudad se encuentra?</label>
@@ -114,11 +94,7 @@ export default function Contact() {
             <label className="message-label" htmlFor="message">
               Mensaje
             </label>
-            <textarea
-              className="message-textarea"
-              id="message"
-              placeholder="Tu mensaje aquí"
-            ></textarea>
+            <textarea className="message-textarea" id="message"></textarea>
           </div>
           <button className="submit" type="submit">
             Enviar

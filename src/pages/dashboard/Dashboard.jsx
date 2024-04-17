@@ -1,13 +1,18 @@
-import { useContext } from 'react';
-import { AuthContext } from './components/AuthContext';
+import { useContext } from "react";
+import { AuthContext } from "./components/AuthContext";
+import CreateService from "./components/create/CreateService";
 
-
-export default function Dashboard () {
+export default function Dashboard() {
   const { isLoggedIn } = useContext(AuthContext);
 
   if (!isLoggedIn) {
-    console.log('ta logueado');
+    console.log("ta logueado");
   }
 
-  return <div>Bienvenido al panel de control</div>;
+  return (
+    <>
+      <h1>Bienvenido al panel de control</h1>
+      <CreateService />
+    </>
+  );
 }

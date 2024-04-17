@@ -2,15 +2,16 @@ import "./Home.scss";
 import { useEffect } from "react";
 // import Footer from "../../components/footer/Footer";
 import useFetch from "../../../../hooks/useFetch";
+import Services from "../services/Services";
 
 import { Helmet } from "react-helmet";
 export default function Home() {
   //, loading, error
   const { get } = useFetch();
 
-  useEffect(() => {
-    get("/services").then((data) => console.log(data));
-  }, []);
+  // useEffect(() => {
+  //   get("/services").then((data) => console.log(data));
+  // }, []);
 
   return (
     <>
@@ -18,6 +19,7 @@ export default function Home() {
         <title>Inicio | Limpio&Sano</title>
       </Helmet>
       <div className="home">
+        <Services />
         {/* <Contact />
         <Faqs /> */}
       </div>

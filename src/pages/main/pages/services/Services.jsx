@@ -8,7 +8,6 @@ export default function Services() {
   const { get } = useFetch();
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     get("/services")
       .then((data) => setServices(data.services))
@@ -27,10 +26,12 @@ export default function Services() {
         <div>
           <h2>Servicios</h2>
         </div>
+
         {services.map((service) => (
           <article className="service-card" key={service.id}>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
+            <button>Alquilar</button>
           </article>
         ))}
       </section>

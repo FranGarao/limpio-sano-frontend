@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./Login.scss";
 import axios from "axios";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -44,9 +45,10 @@ export default function Login() {
         }
       );
       const data = response.data;
-      const token = Cookies.get('token');
-      console.log({ttkkoonne: token});
-      console.log({data});
+      const token = Cookies.get("token");
+      console.log({ ttkkoonne: token });
+      console.log({ data });
+      window.location.href = "/dashboard";
     } catch (error) {
       console.log(error);
     }
@@ -90,6 +92,9 @@ export default function Login() {
         <br />
         <button type="submit">Login</button>
       </form>
+      <Link to="/dashboard">
+        <button>dashboard</button>
+      </Link>
       <button onClick={logout}>Cerrar sesion</button>
     </>
   );
