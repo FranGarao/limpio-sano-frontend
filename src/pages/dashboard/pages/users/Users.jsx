@@ -12,7 +12,36 @@ export default function Users() {
   const [password, setPassword] = useState("");
   const [id, setId] = useState(null);
   const { get, post, del, update } = useApiRequest();
+  const [qr, setQr] = useState(null);
+  const [faCode, setFaCode] = useState("");
+  const [token, setToken] = useState();
 
+  const getQr = async () => {
+    await get("/users/authenticate")
+      .then((res) => {
+        console.log(res.secret);
+        setQr(res?.qrSrc);
+        setToken(res?.secret);
+        console.log({token});
+        return res;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+  };
+  const submitFA = async () => {
+  console.log(token);
+    await post(`/users/verify`, {token})
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+  };
   const getUsers = async () => {
     await get("/users")
       .then((res) => {
@@ -42,6 +71,9 @@ export default function Users() {
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
+  };
+  const handleFaCode = (e) => {
+    setFaCode(e.target.value);
   };
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -119,7 +151,7 @@ export default function Users() {
         console.log({ error });
         return error;
       });
-}
+  };
   return (
     <div>
       <h2>Users</h2>
@@ -183,13 +215,27 @@ export default function Users() {
           <p>Email</p>
           <p>Opciones</p>
         </div>
-
+        {qr && (
+          <div>
+            <img src={qr} alt="" />
+            <input
+              type="text"
+              onChange={handleFaCode}
+              value={faCode}
+              name="faCode"
+              id="faCode"
+              placeholder="faCode"
+            />
+            <button onClick={submitFA}>Ingresar Codigo</button>
+          </div>
+        )}
         {users?.map((user) => {
           return (
             <div className="row" key={user?.id}>
               <p>{user?.username}</p>
               <p>{user?.email}</p>
               <div>
+                <button onClick={getQr}>D.A</button>
                 <button
                   onClick={() => {
                     showAlert(

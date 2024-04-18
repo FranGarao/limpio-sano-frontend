@@ -7,6 +7,8 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
   const { post } = useApiRequest();
 
   const handleUsernameChange = (e) => {
@@ -22,6 +24,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     // const user = { username, email, password };
     // post("/users/login", user)
     //   .then((user) => {
@@ -37,22 +40,20 @@ export default function Login() {
       password,
     })
       .then((response) => {
-        window.location.href = "/dashboard";
+        console.log(response);
+        if (response?.user?.error) {
+          setError(response?.user?.error);
+        } else {
+          window.location.href = "/dashboard";
+          setError(null);
+        }
         return response;
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const logout = async () => {
-    post("/users/logout")
-      .then((response) => {
-        return response;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
   return (
     <>
       <form className="login-form" onSubmit={handleSubmit}>
@@ -74,13 +75,13 @@ export default function Login() {
             onChange={handlePasswordChange}
           />
         </label>
+        {error && <p>{error}</p>}
         <br />
         <button type="submit">Login</button>
       </form>
       <Link to="/dashboard">
         <button>dashboard</button>
       </Link>
-      <button onClick={logout}>Cerrar sesion</button>
     </>
   );
 }
