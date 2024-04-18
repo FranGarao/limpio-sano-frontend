@@ -1,13 +1,13 @@
 import { Helmet } from "react-helmet";
 // import { Outlet } from "react-router-dom";
-import useFetch from "../../../../hooks/useFetch";
 import { useEffect, useState } from "react";
 import "./Service.scss";
+import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Services() {
-  const { get } = useFetch();
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
+  const { get } = useApiRequest();
   useEffect(() => {
     get("/services")
       .then((data) => setServices(data.services))
@@ -31,6 +31,7 @@ export default function Services() {
           <article className="service-card" key={service.id}>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
+            <img src={services?.img}></img>
             <button>Alquilar</button>
           </article>
         ))}

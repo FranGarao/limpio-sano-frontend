@@ -1,10 +1,7 @@
 import "./CreateService.scss";
-import { Helmet } from "react-helmet";
-import useFetch from "../../../../hooks/useFetch";
 import { useState } from "react";
-import axios from "axios";
 import checkLogin from "../../../../hooks/checkLogin";
-import Cookies from "js-cookie";
+import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function CreateService() {
   const [title, setTitle] = useState("");
@@ -12,10 +9,8 @@ export default function CreateService() {
   const [img, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState(null);
+  const { post } = useApiRequest();
 
-  const api = axios.create({
-    baseURL: "http://localhost:4567/api",
-  });
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -32,12 +27,9 @@ export default function CreateService() {
     setImage(e.target.value);
   };
 
-  const { post } = useFetch();
 
   const handleSubmit = (e) => {
     if (checkLogin()) {
-      const token = Cookies.get("token");
-      console.log(category);
       e.preventDefault();
       const service = {
         title,
@@ -45,22 +37,14 @@ export default function CreateService() {
         description,
         category_id: Number(category),
       };
-      console.log(service);
-      api
-        .post("/services/create", {
-          withCredentials: true, // Esta línea es importante
-          headers: {
-            Authorization: `${token}`,
-          },
-          service,
-        })
+        post("/services/create", service)
         .then((response) => {
-          console.log(response.data);
-          // setFaqs(response.data);
+          return response;
         })
         .catch((error) => {
           // Maneja el error (por ejemplo, si el token ha expirado)
-          console.error({ errrrrr: error });
+          console.error({ error });
+          return error;
         });
     }
   };

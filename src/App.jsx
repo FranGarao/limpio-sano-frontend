@@ -22,12 +22,11 @@ import Users from "./pages/dashboard/pages/users/Users";
 
 function App() {
   const [admin, setAdmin] = useState(false);
-  const [token, setToken] = useState("");
+  //! const [token, setToken] = useState("");
   useEffect(() => {
     const session = Cookies.get("token");
     if (session) {
-      setToken(session);
-      console.log("Llegue aquí");
+      //! setToken(session);
       setAdmin(true);
       console.log({ session, admin });
       return;

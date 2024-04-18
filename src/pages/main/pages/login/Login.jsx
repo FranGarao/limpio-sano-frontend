@@ -1,14 +1,13 @@
 import { useState } from "react";
 import "./Login.scss";
-import axios from "axios";
-import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  // const { post } = useFetch();
+  const { post } = useApiRequest();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -32,41 +31,27 @@ export default function Login() {
     //     console.log(error);
     //   });
 
-    try {
-      const response = await axios.post(
-        "http://localhost:4567/api/users/login",
-        {
-          username,
-          email,
-          password,
-        },
-        {
-          withCredentials: true, // Esta línea es importante
-        }
-      );
-      const data = response.data;
-      const token = Cookies.get("token");
-      console.log({ ttkkoonne: token });
-      console.log({ data });
-      window.location.href = "/dashboard";
-    } catch (error) {
-      console.log(error);
-    }
+    post("/users/login", {
+      username,
+      email,
+      password,
+    })
+      .then((response) => {
+        window.location.href = "/dashboard";
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const logout = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:4567/api/users/logout",
-        {},
-        {
-          withCredentials: true, // Esta línea es importante
-        }
-      );
-      const user = response.data;
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
+    post("/users/logout")
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>

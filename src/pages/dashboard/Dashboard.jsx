@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { AuthContext } from "./components/AuthContext";
-import CreateService from "./components/create/CreateService";
+// import { useContext } from "react";
+// import { AuthContext } from "./components/AuthContext";
+// import CreateService from "./components/create/CreateService";
 import "./Dashboard.scss";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -10,11 +10,11 @@ import whatsapp from "../../assets/footer-icons/whatsapp.svg";
 import { Helmet } from "react-helmet";
 
 export default function Dashboard() {
-  const { isLoggedIn } = useContext(AuthContext);
+  // const { isLoggedIn } = useContext(AuthContext);
 
-  if (!isLoggedIn) {
-    console.log("ta logueado");
-  }
+  // if (!isLoggedIn) {
+  //   console.log("ta logueado");
+  // }
 
   return (
     <>
