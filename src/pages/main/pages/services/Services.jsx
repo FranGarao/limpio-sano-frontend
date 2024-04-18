@@ -39,8 +39,8 @@ export default function Services() {
 
   /* Método para rotar cards */
 
-  function flipped() {
-    const flipped = document.querySelector('.services-content');
+  function flipped(event) {
+    const flipped = event.currentTarget.closest('.services-content');
     flipped.classList.toggle('flipped');
 
     const frontRotate = flipped.querySelector('.service-card-front');
