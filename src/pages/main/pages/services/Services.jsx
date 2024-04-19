@@ -5,13 +5,89 @@ import "./Service.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Services() {
+<<<<<<< HEAD
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
   const { get } = useApiRequest();
+=======
+  const { get } = useFetch();
+  // const [services, setServices] = useState([]);
+  
+  const [categories, setCategories] = useState([]);
+
+  /* Array de objetos de PRUEBA */
+  const service = [
+    {
+      id: 1,
+      title: "Servicio de limpieza de tapetes o alfombras",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/Limpieza.png",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+    {
+      id: 2,
+      title: "Limpieza de colchones",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/sabanas.jpg",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+    {
+      id: 3,
+      title: "Servicios de limpieza de cortinas",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/Limpieza.png",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+    {
+      id: 4,
+      title: "Servicio de limpieza de tapetes o alfombras",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/sabanas.jpg",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+    {
+      id: 5,
+      title: "Limpieza de colchones",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/Limpieza.png",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+    {
+      id: 6,
+      title: "Servicios de limpieza de cortinas",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/sabanas.jpg",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+  ];
+
+  /* FIN Array de objetos de PRUEBA */
+
+  /* Método para rotar cards */
+
+  function flipped(event) {
+    const flipped = event.currentTarget.closest('.services-content');
+    flipped.classList.toggle('flipped');
+
+    const frontRotate = flipped.querySelector('.service-card-front');
+    const backRotate = flipped.querySelector('.service-card-back');
+    
+    if ((flipped.classList.contains('flipped'))) {
+      backRotate.classList.add('back-rotate');
+      frontRotate.classList.add('front-rotate');
+    } else {
+      frontRotate.classList.remove('front-rotate');
+      backRotate.classList.remove('back-rotate');
+    }
+  }
+
+  /* FIN rotar cards */
+
+>>>>>>> 9d192cb48dc473d627cc4ca9d32bc9c09461ccfb
   useEffect(() => {
-    get("/services")
-      .then((data) => setServices(data.services))
-      .catch((error) => console.log(error));
+    // get("/services")
+    //   .then((data) => setServices(data.services))
+    //   .catch((error) => console.log(error));
     get("/categories")
       .then((data) => setCategories(data.categories))
       .catch((error) => console.log(error));
@@ -22,19 +98,46 @@ export default function Services() {
       <Helmet>
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
-      <section className="services-container">
-        <div>
+      <div>
           <h2>Servicios</h2>
-        </div>
+      </div>
+      <section className="services-container">
+        {service.map((service) => (
+          <div className="services-content" key={service.id}>
+            <article className="service-card-front">
+              <div className="h3-ctn">
+                <h3>{service.title}</h3>
+              </div>
+              <div className="img-ctn">
+                <img className="img-cover" src={service.img} />
+              </div>
+              <div className="btn-ctn">
+                <button>Alquilar</button>
+                <button onClick={flipped}>Más información</button>
+              </div>
+            </article>
 
-        {services.map((service) => (
+            <article className="service-card-back">
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <div className="btn-ctn">
+                <button onClick={flipped}>Regresar</button>
+              </div>
+            </article>
+          </div>  
+        ))}
+
+        {/* {services.map((service) => (
           <article className="service-card" key={service.id}>
             <h3>{service.title}</h3>
             <p>{service.description}</p>
+<<<<<<< HEAD
             <img src={services?.img}></img>
             <button>Alquilar</button>
+=======
+>>>>>>> 9d192cb48dc473d627cc4ca9d32bc9c09461ccfb
           </article>
-        ))}
+        ))} */}
       </section>
     </>
   );
