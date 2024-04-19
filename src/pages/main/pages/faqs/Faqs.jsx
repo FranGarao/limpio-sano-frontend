@@ -2,55 +2,23 @@ import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
 import "./Faqs.scss";
 import topArrow from "../../../../assets/icons/topArrow.svg";
-// import useFetch from "../../../../hooks/useFetch";
-import axios from "axios";
-import Cookies from "js-cookie";
+import useApiRequest from "../../../../hooks/useApiRequest";
 // import jwt_decode from "jwt-decode";
 
 export default function Faqs() {
   // Agrega más preguntas y respuestas aquí
-  // const { get } = useFetch();
+  const { get } = useApiRequest();
   const [faqs, setFaqs] = useState([{}]);
 
-  // useEffect(() => {
-  //   get("/faqs")
-  //     .then((faqs) => {
-  //       setFaqs(faqs);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   useEffect(() => {
-    const api = axios.create({
-      baseURL: "http://localhost:4567/api",
-    });
-    // Obtén el token de las cookies
-    const token = Cookies.get("token");
-    console.log({ token });
-    const doc = document.cookie;
-    console.log({ doc });
-    // Obtén el token de las cookies (debes implementar esto)
-    console.log({ token });
-    // Configura el token en Axios
-    // api.defaults.headers.common['Authorization'] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzEzMTk3ODU5LCJleHAiOjE3MTMyODQyNTl9.g737kJIcCYjJBvdcwFnmj_47co2vbUZFs_sJX9h1L6Y`;
-
-    // Ahora puedes hacer solicitudes a tu backend
-    api
-      .get("/faqs", {
-        withCredentials: true, // Esta línea es importante
-        headers: {
-          Authorization: `${token}`,
-        },
-      })
+      get("/faqs")
       .then((response) => {
-        console.log(response.data);
         setFaqs(response.data);
       })
       .catch((error) => {
         // Maneja el error (por ejemplo, si el token ha expirado)
-        console.error({ errrrrr: error });
+        console.error({ error });
       });
   }, []);
 

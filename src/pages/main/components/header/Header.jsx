@@ -2,12 +2,16 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import "./Header.scss";
+import Swal from "sweetalert2";
 import search from "../../../../assets/icons/search.svg";
+import useApiRequest from "../../../../hooks/useApiRequest";
+import checkLogin from "../../../../hooks/checkLogin";
 export default function Header() {
   const [showSearchbar, setShowSearchbar] = useState(false);
   const [hidden, setHidden] = useState(true);
   const [searchParams, setSearchParams] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const { post } = useApiRequest();
   useEffect(() => {
     if (showSearchbar) {
       setHidden(false);
@@ -40,10 +44,39 @@ export default function Header() {
       setSearchResults(["No se encontraron resultados"]);
     }
   };
+
+  const logout = async () => {
+    post("/users/logout")
+      .then((response) => {
+        Swal.fire({
+          title: "Sesion cerrada",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <header className="header">
       <div className="header-header">
         <span>Servicios disponibles en Ibagué y Bogotá</span>
+        {checkLogin() ? (
+          <p onClick={logout} className="logout">
+            Cerrar Sesion
+          </p>
+        ) : (
+          <Link to='/login'>
+            <p className="login">
+              Iniciar Sesion
+            </p>
+          </Link>
+        )}
       </div>
       <div className="header-main">
         <Sidebar />

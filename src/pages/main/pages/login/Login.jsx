@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./Login.scss";
-import axios from "axios";
-import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  // const { post } = useFetch();
+  const [error, setError] = useState("");
+
+  const { post } = useApiRequest();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -23,6 +24,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     // const user = { username, email, password };
     // post("/users/login", user)
     //   .then((user) => {
@@ -32,42 +34,26 @@ export default function Login() {
     //     console.log(error);
     //   });
 
-    try {
-      const response = await axios.post(
-        "http://localhost:4567/api/users/login",
-        {
-          username,
-          email,
-          password,
-        },
-        {
-          withCredentials: true, // Esta línea es importante
+    post("/users/login", {
+      username,
+      email,
+      password,
+    })
+      .then((response) => {
+        console.log(response);
+        if (response?.user?.error) {
+          setError(response?.user?.error);
+        } else {
+          window.location.href = "/dashboard";
+          setError(null);
         }
-      );
-      const data = response.data;
-      const token = Cookies.get("token");
-      console.log({ ttkkoonne: token });
-      console.log({ data });
-      window.location.href = "/dashboard";
-    } catch (error) {
-      console.log(error);
-    }
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-  const logout = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:4567/api/users/logout",
-        {},
-        {
-          withCredentials: true, // Esta línea es importante
-        }
-      );
-      const user = response.data;
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   return (
     <>
       <form className="login-form" onSubmit={handleSubmit}>
@@ -89,13 +75,13 @@ export default function Login() {
             onChange={handlePasswordChange}
           />
         </label>
+        {error && <p>{error}</p>}
         <br />
         <button type="submit">Login</button>
       </form>
       <Link to="/dashboard">
         <button>dashboard</button>
       </Link>
-      <button onClick={logout}>Cerrar sesion</button>
     </>
   );
 }

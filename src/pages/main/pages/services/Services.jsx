@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet";
 // import { Outlet } from "react-router-dom";
-import useFetch from "../../../../hooks/useFetch";
 import { useEffect, useState } from "react";
 import "./Service.scss";
+import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Services() {
   const { get } = useFetch();

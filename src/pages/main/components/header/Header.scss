@@ -17,6 +17,15 @@ $green-color: #009d71;
     align-items: center;
     background-color: $blue-color;
     padding: 20px;
+    .logout, .login {
+      position: absolute;
+      right: 20px;
+      color: $blue-color;
+      cursor: pointer;
+      background-color: #e4e4e4;
+      border-radius: 10px;
+      padding: 5px;
+    }
   }
   // #3e2db9;
   .header-main {
@@ -112,12 +121,11 @@ $green-color: #009d71;
           text-decoration: none;
           list-style: none;
         }
-        .empty-results{
+        .empty-results {
           color: #1c1c1c57;
           text-decoration: none;
           list-style: none;
           font-weight: bold;
-        
         }
       }
     }
