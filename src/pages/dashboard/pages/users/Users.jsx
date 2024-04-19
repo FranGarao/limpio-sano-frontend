@@ -14,15 +14,25 @@ export default function Users() {
   const { get, post, del, update } = useApiRequest();
   const [qr, setQr] = useState(null);
   const [faCode, setFaCode] = useState("");
-  const [token, setToken] = useState();
 
   const getQr = async () => {
     await get("/users/authenticate")
       .then((res) => {
-        console.log(res.secret);
         setQr(res?.qrSrc);
-        setToken(res?.secret);
-        console.log({token});
+        // setToken(secret);
+        submitQrCode(res?.secret?.ascii);
+        return res;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+  };
+  const submitQrCode = async (secret) => {
+    console.log({ secretito: secret });
+    await post("/users/code", secret)
+      .then((res) => {
+        console.log(res);
         return res;
       })
       .catch((error) => {
@@ -31,8 +41,7 @@ export default function Users() {
       });
   };
   const submitFA = async () => {
-  console.log(token);
-    await post(`/users/verify`, {token})
+    await post(`/users/verify`)
       .then((res) => {
         console.log(res);
         return res;
