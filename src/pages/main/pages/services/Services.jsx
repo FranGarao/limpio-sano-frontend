@@ -5,58 +5,71 @@ import "./Service.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Services() {
-  const { get } = useFetch();
+ 
   // const [services, setServices] = useState([]);
   
+  // const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
+  const { get } = useApiRequest();
+  
+
 
   /* Array de objetos de PRUEBA */
-  const service = [
+  const services = [
     {
       id: 1,
       title: "Servicio de limpieza de tapetes o alfombras",
       category: "MÁQUINA DE VAPOR",
       img: "src/assets/Limpieza.png",
-      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+      description: "Desde la limpieza de áreas comunes hasta la atención meticulosa a los detalles en cada habitación, nos aseguramos de que tu espacio esté libre de polvo, gérmenes y desorden."
     },
     {
       id: 2,
       title: "Limpieza de colchones",
       category: "MÁQUINA DE VAPOR",
       img: "src/assets/sabanas.jpg",
-      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+      description: "Desde la limpieza de áreas comunes hasta la atención meticulosa a los detalles en cada habitación, nos aseguramos de que tu espacio esté libre de polvo, gérmenes y desorden. Con un enfoque personalizado, adaptamos nuestros servicios según tus necesidades y preferencias, asegurando una experiencia de limpieza completamente satisfactoria."
     },
     {
       id: 3,
       title: "Servicios de limpieza de cortinas",
       category: "MÁQUINA DE VAPOR",
       img: "src/assets/Limpieza.png",
-      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+      description: "Desde la limpieza de áreas comunes hasta la atención meticulosa a los detalles en cada habitación, nos aseguramos de que tu espacio esté libre de polvo, gérmenes y desorden. Con un enfoque personalizado, adaptamos nuestros servicios según tus necesidades y preferencias, asegurando una experiencia de limpieza completamente satisfactoria."
     },
     {
       id: 4,
       title: "Servicio de limpieza de tapetes o alfombras",
       category: "MÁQUINA DE VAPOR",
       img: "src/assets/sabanas.jpg",
-      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+      description: "Desde la limpieza de áreas comunes hasta la atención meticulosa a los detalles en cada habitación, nos aseguramos de que tu espacio esté libre de polvo, gérmenes y desorden. Con un enfoque personalizado, adaptamos nuestros servicios según tus necesidades y preferencias, asegurando una experiencia de limpieza completamente satisfactoria."
     },
     {
       id: 5,
       title: "Limpieza de colchones",
       category: "MÁQUINA DE VAPOR",
       img: "src/assets/Limpieza.png",
-      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+      description: "Desde la limpieza de áreas comunes hasta la atención meticulosa a los detalles en cada habitación, nos aseguramos de que tu espacio esté libre de polvo, gérmenes y desorden. Con un enfoque personalizado, adaptamos nuestros servicios según tus necesidades y preferencias, asegurando una experiencia de limpieza completamente satisfactoria."
     },
     {
       id: 6,
       title: "Servicios de limpieza de cortinas",
       category: "MÁQUINA DE VAPOR",
       img: "src/assets/sabanas.jpg",
-      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+      description: "Desde la limpieza de áreas comunes hasta la atención meticulosa a los detalles en cada habitación, nos aseguramos de que tu espacio esté libre de polvo, gérmenes y desorden. Con un enfoque personalizado, adaptamos nuestros servicios según tus necesidades y preferencias, asegurando una experiencia de limpieza completamente satisfactoria."
     },
   ];
 
   /* FIN Array de objetos de PRUEBA */
+
+  // useEffect(() => {
+  //   get("/services")
+  //     .then((data) => setServices(data.services))
+  //     .catch((error) => console.log(error));
+  //   get("/categories")
+  //     .then((data) => setCategories(data.categories))
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   /* Método para rotar cards */
 
@@ -77,26 +90,17 @@ export default function Services() {
   }
 
   /* FIN rotar cards */
-
-  useEffect(() => {
-    // get("/services")
-    //   .then((data) => setServices(data.services))
-    //   .catch((error) => console.log(error));
-    get("/categories")
-      .then((data) => setCategories(data.categories))
-      .catch((error) => console.log(error));
-  }, []);
-  console.log(categories);
+  
   return (
     <>
       <Helmet>
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
-      <div>
+      <div className="services-title-ctn">
           <h2>Servicios</h2>
       </div>
       <section className="services-container">
-        {service.map((service) => (
+        {services.map((service) => (
           <div className="services-content" key={service.id}>
             <article className="service-card-front">
               <div className="h3-ctn">
@@ -112,8 +116,12 @@ export default function Services() {
             </article>
 
             <article className="service-card-back">
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
+              <div className="h3-ctn">
+                <h3>{service.title}</h3>
+              </div>
+              <div className="p-ctn">
+                <p>{service.description}</p>
+              </div>  
               <div className="btn-ctn">
                 <button onClick={flipped}>Regresar</button>
               </div>
