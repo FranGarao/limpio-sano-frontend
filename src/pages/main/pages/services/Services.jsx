@@ -14,25 +14,46 @@ export default function Services() {
   const service = [
     {
       id: 1,
-      title: "Maestranza",
-      category: "",
-      img: "",
+      title: "Servicio de limpieza de tapetes o alfombras",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/Limpieza.png",
       description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
     },
     {
       id: 2,
-      title: "Artículos",
-      category: "",
-      img: "",
+      title: "Limpieza de colchones",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/sabanas.jpg",
       description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
     },
     {
       id: 3,
-      title: "Sastrería",
-      category: "",
-      img: "",
+      title: "Servicios de limpieza de cortinas",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/Limpieza.png",
       description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
-    }
+    },
+    {
+      id: 4,
+      title: "Servicio de limpieza de tapetes o alfombras",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/sabanas.jpg",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+    {
+      id: 5,
+      title: "Limpieza de colchones",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/Limpieza.png",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
+    {
+      id: 6,
+      title: "Servicios de limpieza de cortinas",
+      category: "MÁQUINA DE VAPOR",
+      img: "src/assets/sabanas.jpg",
+      description: "lalalalalalalalalalalalalala lalalalalalalalalalalalalala lalalalalalalalalalalalalala"
+    },
   ];
 
   /* FIN Array de objetos de PRUEBA */
@@ -78,15 +99,24 @@ export default function Services() {
         {service.map((service) => (
           <div className="services-content" key={service.id}>
             <article className="service-card-front">
-              <h3>{service.title}</h3>
-              <button>Alquilar</button>
-              <button onClick={flipped}>Rotate</button>
+              <div className="h3-ctn">
+                <h3>{service.title}</h3>
+              </div>
+              <div className="img-ctn">
+                <img className="img-cover" src={service.img} />
+              </div>
+              <div className="btn-ctn">
+                <button>Alquilar</button>
+                <button onClick={flipped}>Más información</button>
+              </div>
             </article>
 
             <article className="service-card-back">
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-              <button onClick={flipped}>Rotate</button>
+              <div className="btn-ctn">
+                <button onClick={flipped}>Regresar</button>
+              </div>
             </article>
           </div>  
         ))}
