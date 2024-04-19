@@ -19,16 +19,15 @@
     "jwt-decode": "^4.0.0",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",
-    "react-data-table-component": "^7.6.2",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-qr-code": "^2.0.12",
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
-    "sweetalert2": "^11.10.7"
+    "sweetalert2": "^11.10.8"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
+    "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",

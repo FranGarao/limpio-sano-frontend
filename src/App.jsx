@@ -19,6 +19,7 @@ import Login from "./pages/main/pages/login/Login";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import Users from "./pages/dashboard/pages/users/Users";
+import Service from "./pages/dashboard/pages/services/Service";
 
 function App() {
   const [admin, setAdmin] = useState(false);
@@ -46,9 +47,10 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          {true && (
+          {admin && (
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="/dashboard/users" element={<Users />}></Route>
+              <Route path="/dashboard/services" element={<Service />}></Route>
             </Route>
           )}
           <Route path="*" element={<NotFound />} />

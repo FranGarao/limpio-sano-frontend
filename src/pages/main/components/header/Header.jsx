@@ -54,7 +54,7 @@ export default function Header() {
           confirmButtonText: "Ok",
         });
         setTimeout(() => {
-          window.location.reload();
+          window.location.href ='/';
         }, 1000);
         return response;
       })

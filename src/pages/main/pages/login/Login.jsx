@@ -25,8 +25,10 @@ export default function Login() {
   const submitFA = async () => {
     await post(`/users/verify`, { faCode })
       .then((res) => {
+        console.log(new Date());
         if (res?.verified) {
           login();
+        
         }
         return res;
       })
