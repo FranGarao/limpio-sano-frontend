@@ -10,10 +10,10 @@ export default function Faqs() {
   const { get } = useApiRequest();
   const [faqs, setFaqs] = useState([{}]);
 
-
   useEffect(() => {
-      get("/faqs")
+    get("/faqs")
       .then((response) => {
+        console.log({ response });
         setFaqs(response.data);
       })
       .catch((error) => {

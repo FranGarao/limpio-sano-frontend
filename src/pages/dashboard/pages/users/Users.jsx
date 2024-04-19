@@ -21,7 +21,18 @@ export default function Users() {
       .then((res) => {
         setQr(res?.qrSrc);
         // setToken(secret);
-        submitQrCode(res?.secret?.ascii);
+        (async () => {
+          await post("/users/code", res?.secret)
+            .then((res) => {
+              console.log(res);
+              return res;
+            })
+            .catch((error) => {
+              console.log(error);
+              return error;
+            });
+        })();
+
         return res;
       })
       .catch((error) => {

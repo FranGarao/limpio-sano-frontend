@@ -9,9 +9,9 @@ export default function Services() {
   const [categories, setCategories] = useState([]);
   const { get } = useApiRequest();
   useEffect(() => {
-    // get("/services")
-    //   .then((data) => setServices(data.services))
-    //   .catch((error) => console.log(error));
+    get("/services")
+      .then((data) => setServices(data.services))
+      .catch((error) => console.log(error));
     get("/categories")
       .then((data) => setCategories(data.categories))
       .catch((error) => console.log(error));
@@ -26,7 +26,7 @@ export default function Services() {
         <h2>Servicios</h2>
       </div>
       <section className="services-container">
-        {service.map((service) => (
+        {services.map((service) => (
           <div className="services-content" key={service.id}>
             <article className="service-card-front">
               <div className="h3-ctn">
@@ -37,7 +37,7 @@ export default function Services() {
               </div>
               <div className="btn-ctn">
                 <button>Alquilar</button>
-                <button onClick={flipped}>Más información</button>
+                {/* <button onClick={flipped}>Más información</button> */}
               </div>
             </article>
 
@@ -45,7 +45,7 @@ export default function Services() {
               <h3>{service.title}</h3>
               <p>{service.description}</p>
               <div className="btn-ctn">
-                <button onClick={flipped}>Regresar</button>
+                {/* <button onClick={flipped}>Regresar</button> */}
               </div>
             </article>
           </div>
