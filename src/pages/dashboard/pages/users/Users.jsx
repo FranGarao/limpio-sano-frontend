@@ -15,6 +15,7 @@ export default function Users() {
   const { get, post, del, update } = useApiRequest();
   const [qr, setQr] = useState(null);
   const [faCode, setFaCode] = useState("");
+  const [verified, setVerified] = useState(false);
 
   const getQr = async () => {
     await get("/users/authenticate")
@@ -24,7 +25,6 @@ export default function Users() {
         (async () => {
           await post("/users/code", res?.secret)
             .then((res) => {
-              console.log(res);
               return res;
             })
             .catch((error) => {
@@ -40,28 +40,18 @@ export default function Users() {
         return error;
       });
   };
-  const submitQrCode = async (secret) => {
-    console.log({ secretito: secret });
-    await post("/users/code", secret)
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .catch((error) => {
-        console.log(error);
-        return error;
-      });
-  };
   const submitFA = async () => {
-    await post(`/users/verify`)
+    await post(`/users/verify`, { faCode })
       .then((res) => {
-        console.log(res);
+        setVerified(res);
+        window.location.href('/dashboard');
         return res;
       })
       .catch((error) => {
         console.log(error);
         return error;
       });
+    console.log({verified});
   };
   const getUsers = async () => {
     await get("/users")
@@ -162,7 +152,6 @@ export default function Users() {
       email,
       password,
     };
-    console.log({ user, id });
     await update(`/users/update/${id}`, user)
       .then((response) => {
         getUsers();

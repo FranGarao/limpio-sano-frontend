@@ -14,7 +14,7 @@ export default function Faqs() {
     get("/faqs")
       .then((response) => {
         console.log({ response });
-        setFaqs(response.data);
+        setFaqs(response);
       })
       .catch((error) => {
         // Maneja el error (por ejemplo, si el token ha expirado)

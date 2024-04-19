@@ -1,9 +1,25 @@
+// $grey-color: rgb(71, 71, 71);
+$grey-color: rgb(105, 104, 104);
+$label-color: rgb(126, 125, 125);
+$border-grey-color: rgb(134, 133, 133);
+$white-color: #f2f2f2;
+$white-color-secondary: #fff;
+$blue-color: #0f036d;
+$green-color: #009d71;
+$wc: #e4e4e4;
+
 .login-form {
   width: 100%;
-  height: 300px;
+  height: 350px;
   max-width: 330px;
-  padding: 15px;
+  padding: 15px 25px;
   margin: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
   background-image: radial-gradient(
       circle at center center,
       transparent,
@@ -70,4 +86,186 @@
       rgb(218, 218, 218),
       rgb(218, 218, 218)
     );
+
+  .login-form-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 20px;
+    color: $grey-color;
+    border-bottom: 4px solid $green-color;
+  }
+  .form-containers {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    .username-label {
+      font-size: 16px;
+      font-weight: bold;
+      color: $label-color;
+    }
+    .username-input {
+      border: none;
+      border-bottom: 2px solid $border-grey-color;
+      background-color: transparent;
+      font-size: 14px;
+      color: $label-color;
+      padding: 5px;
+      width: 100%;
+    }
+    .username-input:focus {
+      outline: none;
+      border-bottom: 3px solid $grey-color;
+    }
+
+    .email-label {
+      @extend .username-label;
+    }
+    .email-input {
+      @extend .username-input;
+    }
+    .email-input:focus {
+      outline: none;
+    }
+    .password-label {
+      @extend .username-label;
+    }
+    .password-input {
+      @extend .username-input;
+    }
+    .password-input:focus {
+      border-bottom: 3px solid $grey-color;
+    }
+  }
+  .login-btn {
+    background-color: transparent;
+    color: $grey-color;
+    border: 3px solid $grey-color;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 20px;
+    align-self: center;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      border: 3px solid $green-color;
+      background-color: $green-color;
+      color: #e4e4e4;
+    }
+  }
+}
+.verify-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-image: radial-gradient(
+      circle at center center,
+      transparent,
+      rgb(232, 232, 232)
+    ),
+    linear-gradient(
+      300deg,
+      rgba(198, 198, 198, 0.05) 0%,
+      rgba(198, 198, 198, 0.05) 50%,
+      rgba(11, 11, 11, 0.05) 50%,
+      rgba(11, 11, 11, 0.05) 100%
+    ),
+    linear-gradient(
+      64deg,
+      rgba(54, 54, 54, 0.05) 0%,
+      rgba(54, 54, 54, 0.05) 50%,
+      rgba(132, 132, 132, 0.05) 50%,
+      rgba(132, 132, 132, 0.05) 100%
+    ),
+    linear-gradient(
+      17deg,
+      rgba(57, 57, 57, 0.05) 0%,
+      rgba(57, 57, 57, 0.05) 50%,
+      rgba(128, 128, 128, 0.05) 50%,
+      rgba(128, 128, 128, 0.05) 100%
+    ),
+    linear-gradient(
+      332deg,
+      rgba(97, 97, 97, 0.05) 0%,
+      rgba(97, 97, 97, 0.05) 50%,
+      rgba(85, 85, 85, 0.05) 50%,
+      rgba(85, 85, 85, 0.05) 100%
+    ),
+    linear-gradient(
+      148deg,
+      rgba(237, 237, 237, 0.05) 0%,
+      rgba(237, 237, 237, 0.05) 50%,
+      rgba(211, 211, 211, 0.05) 50%,
+      rgba(211, 211, 211, 0.05) 100%
+    ),
+    linear-gradient(
+      142deg,
+      rgba(168, 168, 168, 0.05) 0%,
+      rgba(168, 168, 168, 0.05) 50%,
+      rgba(32, 32, 32, 0.05) 50%,
+      rgba(32, 32, 32, 0.05) 100%
+    ),
+    linear-gradient(
+      15deg,
+      rgba(225, 225, 225, 0.05) 0%,
+      rgba(225, 225, 225, 0.05) 50%,
+      rgba(228, 228, 228, 0.05) 50%,
+      rgba(228, 228, 228, 0.05) 100%
+    ),
+    linear-gradient(
+      5deg,
+      rgba(104, 104, 104, 0.05) 0%,
+      rgba(104, 104, 104, 0.05) 50%,
+      rgba(43, 43, 43, 0.05) 50%,
+      rgba(43, 43, 43, 0.05) 100%
+    ),
+    radial-gradient(
+      circle at center center,
+      rgb(218, 218, 218),
+      rgb(218, 218, 218)
+    );
+
+  width: 60%;
+  margin: 10px auto;
+  border: 1px solid #646363;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  .verify-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: $label-color;
+  }
+  .verify-input {
+    border: none;
+    border-bottom: 2px solid $grey-color;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: transparent;
+    font-size: 18px;
+    width: 100%;
+    color: $label-color;
+    margin-top: 10px;
+  }
+  .verify-input:focus {
+    border-bottom: 3px solid $green-color;
+    outline: none;
+  }
+  .verify-btn {
+    background-color: transparent;
+    color: $grey-color;
+    border: 3px solid $grey-color;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 20px;
+    align-self: flex-end;
+    margin: 20px 0 0 0;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      border: 3px solid $green-color;
+      background-color: $green-color;
+      color: #e4e4e4;
+    }
+  }
 }

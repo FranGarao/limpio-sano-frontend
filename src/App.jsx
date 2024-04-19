@@ -46,7 +46,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          {admin && (
+          {true && (
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="/dashboard/users" element={<Users />}></Route>
             </Route>
