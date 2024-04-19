@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
-import axios from "axios";
-// import DataTable from "react-data-table-component";
-import './Users.scss';
-=======
 import "./Users.scss";
->>>>>>> 7b819ad1ca5d85b720f5c288a9e15c296778d7af
 import Swal from "sweetalert2";
 import useApiRequest from "../../../../hooks/useApiRequest";
 
