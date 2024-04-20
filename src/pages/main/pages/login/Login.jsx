@@ -8,6 +8,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [faVerify, setFaVerify] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const { post } = useApiRequest();
 
@@ -23,12 +24,11 @@ export default function Login() {
   };
   const [faCode, setFaCode] = useState("");
   const submitFA = async () => {
-    await post(`/users/verify`, { faCode })
+    await post(`/users/verify`, { faCode, userId })
       .then((res) => {
         console.log(new Date());
         if (res?.verified) {
           login();
-        
         }
         return res;
       })
@@ -63,12 +63,11 @@ export default function Login() {
       password,
     })
       .then((response) => {
-        console.log(response);
         if (response?.user?.error) {
           setError(response?.user?.error);
           setFaVerify(false);
-
         } else {
+          setUserId(response?.user?.id);
           setError(null);
           setFaVerify(true);
         }
@@ -88,58 +87,66 @@ export default function Login() {
           <label className="username-label" htmlFor="username">
             Username
           </label>
-            <input placeholder='Ingresa tu nombre de usuario aqui.'
-              className="username-input"
-              name="username"
-              type="text"
-              value={username}
-              onChange={handleUsernameChange}
-            />
+          <input
+            placeholder="Ingresa tu nombre de usuario aqui."
+            className="username-input"
+            name="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
         </div>
         <br />
         <div className="form-containers">
           <label className="email-label" htmlFor="email">
             Email
           </label>
-            <input placeholder='Ingresa tu dirección de correo aqui.'
-              className="email-input"
-              name="username"
-              type="text"
-              value={email}
-              onChange={handleEmailChange}
-            />
+          <input
+            placeholder="Ingresa tu dirección de correo aqui."
+            className="email-input"
+            name="username"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
         </div>
         <br />
         <div className="form-containers">
           <label className="password-label" htmlFor="password">
             Password
           </label>
-            <input placeholder='Ingresa tu contraseña aqui.'
-              className="password-input"
-              name="password"
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
+          <input
+            placeholder="Ingresa tu contraseña aqui."
+            className="password-input"
+            name="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
         </div>
         {error && <p>{error}</p>}
 
         <br />
-        <button className="login-btn" type="submit">SIGN IN</button>
+        <button className="login-btn" type="submit">
+          SIGN IN
+        </button>
       </form>
       {faVerify && (
         <div className="verify-container">
           <label className="verify-label" htmlFor="faCode">
             Codigo de verificacion
           </label>
-          <input className="verify-input"
+          <input
+            className="verify-input"
             type="text"
             onChange={handleFaCode}
             value={faCode}
             name="faCode"
             id="faCode"
           />
-          <button className="verify-btn" onClick={submitFA}>Confirmar</button>
+          <button className="verify-btn" onClick={submitFA}>
+            Confirmar
+          </button>
         </div>
       )}
     </>

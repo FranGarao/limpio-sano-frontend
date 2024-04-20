@@ -17,14 +17,16 @@ export default function Users() {
   const [faCode, setFaCode] = useState("");
   const [verified, setVerified] = useState(false);
 
-  const getQr = async () => {
+  const getQr = async (userId) => {
     await get("/users/authenticate")
       .then((res) => {
         setQr(res?.qrSrc);
         // setToken(secret);
         (async () => {
-          await post("/users/code", res?.secret)
+          console.log(userId);
+          await post("/users/code", { secret: res?.secret, userId })
             .then((res) => {
+              console.log(userId);
               return res;
             })
             .catch((error) => {
@@ -44,14 +46,14 @@ export default function Users() {
     await post(`/users/verify`, { faCode })
       .then((res) => {
         setVerified(res);
-        window.location.href('/dashboard');
+        window.location.href("/dashboard");
         return res;
       })
       .catch((error) => {
         console.log(error);
         return error;
       });
-    console.log({verified});
+    console.log({ verified });
   };
   const getUsers = async () => {
     await get("/users")
@@ -245,7 +247,7 @@ export default function Users() {
               <p>{user?.username}</p>
               <p>{user?.email}</p>
               <div>
-                <button onClick={getQr}>D.A</button>
+                <button onClick={() => getQr(18)}>D.A</button>
                 <button
                   onClick={() => {
                     showAlert(
