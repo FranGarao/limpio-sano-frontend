@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import useApiRequest from "../../../../hooks/useApiRequest";
 import Swal from "sweetalert2";
-
-export default function DBFaqs() {
-  const [faqs, setFaqs] = useState([]);
+export default function DBCategories() {
+  const [categories, setCategories] = useState([]);
   const { get, post, put, del } = useApiRequest();
 
   useEffect(() => {
-    get("/faqs")
+    get("/categories")
       .then((data) => {
-        setFaqs(data);
+        setCategories(data.categories);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -26,36 +25,39 @@ export default function DBFaqs() {
       if (result.isConfirmed) {
         openEdit(id);
       } else if (result.isDenied) {
-        deleteFaq(id);
+        deleteCategory(id);
       }
     });
   };
-  const findService = (id) => {
-    return faqs.find((faq) => faq?.id === id);
+  const findCategory = (id) => {
+    return categories.find((category) => category?.id === id);
   };
 
   const openEdit = (id) => {
-    const faqSelected = findService(id);
-    console.log(faqSelected);
+    const categorySelected = findCategory(id);
+    console.log(categorySelected);
     Swal.fire({
       title: "Editar Servicio",
       html: `
         <input id="name" type="text" placeholder="Nombre" value='${
-          faqSelected?.title
+          categorySelected?.title
         }'/>
         <input id="description" type="text" placeholder="Descripcion" value='${
-          faqSelected?.description
+          categorySelected?.description
         }'/>
         <input id="image" type="text" placeholder="URL de la imagen" value='${
-          faqSelected?.img
+          categorySelected?.img
         }'/>
         ${
-          faqs &&
-          faqs.length > 0 &&
+          categories &&
+          categories.length > 0 &&
           `
             <select id="category_id">
-            ${faqs
-              .map((faq) => `<option value="${faq.id}">${faq.title}</option>`)
+            ${categories
+              .map(
+                (category) =>
+                  `<option value="${category.id}">${category.title}</option>`
+              )
               .join("")}
             </select>
             `
@@ -67,17 +69,13 @@ export default function DBFaqs() {
       showLoaderOnConfirm: true,
       preConfirm: () => {
         const title = document.getElementById("name").value;
-        const description = document.getElementById("description").value;
-        console.log(title, description);
-
-        put(`/faqs/update/${faqSelected?.id}`, {
+        console.log(title);
+        console.log(categorySelected?.id);
+        put(`/categories/update/${categorySelected?.id}`, {
           title,
-          description,
         })
           .then((data) => {
-            console.log("llegue al endpoint", data);
-            setFaqs(data.faqs);
-
+            setCategories(data.categories);
             alert(
               "Servicio editado",
               "El servicio fue editado correctamente",
@@ -89,12 +87,12 @@ export default function DBFaqs() {
       allowOutsideClick: () => !Swal.isLoading(),
     });
   };
-  const deleteFaq = (id) => {
-    del(`/faqs/delete/${id}`)
+  const deleteCategory = (id) => {
+    del(`/categories/delete/${id}`)
       .then(() => {
-        get("/faqs")
+        get("/categories")
           .then((data) => {
-            setFaqs(data.faqs);
+            setCategories(data.categories);
             alert(
               "Servicio eliminado",
               "El servicio fue eliminado correctamente",
@@ -114,11 +112,13 @@ export default function DBFaqs() {
           <p>Categoria</p>
           <p>Opciones</p>
         </div>
-        {faqs?.map((faq) => (
-          <div key={faq?.id} className="row">
-            <p>{faq?.title}</p>
+        {categories?.map((category) => (
+          <div key={category?.id} className="row">
+            <p>{category?.title}</p>
             <div className="services">
-              <button onClick={() => openMenu(faq?.id)}>iconoEngranaje</button>
+              <button onClick={() => openMenu(category?.id)}>
+                iconoEngranaje
+              </button>
             </div>
           </div>
         ))}
@@ -126,21 +126,3 @@ export default function DBFaqs() {
     </>
   );
 }
-
-// {categories?.map(
-//     (category) =>
-//       services &&
-//       services
-//         .filter((service) => service?.category_id === category?.id)
-//         .map((service) => (
-//           <div key={service?.id} className="row">
-//             <p>{service?.title}</p>
-//             <h2>{category?.title}</h2>
-//             <div className="services">
-//               <button onClick={() => openMenu(service?.id)}>
-//                 iconoEngranaje
-//               </button>
-//             </div>
-//           </div>
-//         ))
-//   )}

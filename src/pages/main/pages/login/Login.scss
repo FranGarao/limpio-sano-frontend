@@ -153,6 +153,22 @@ $wc: #e4e4e4;
       color: #e4e4e4;
     }
   }
+  .form-checkbox {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    label {
+      @extend .username-label;
+    }
+    .check:checked {
+      border: 1px solid $grey-color;
+      background-color: white;
+    }
+  }
 }
 .verify-container {
   display: flex;
