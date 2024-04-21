@@ -9,13 +9,24 @@
     flex-direction: column;
     align-self: center;
   }
+
   .whatsapp-fixed {
     width: 65px;
-    height: auto;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 13px;
     position: fixed;
+    padding: 1px;
     bottom: 30px;
     right: 30px;
     cursor: pointer;
     z-index: 1000;
+    background: white;
+    transition: 0.3s;
   }
+
+  .whatsapp-fixed:hover {
+    background-color: #1d30ad;
+  }
+
 }

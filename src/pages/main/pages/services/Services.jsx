@@ -16,52 +16,69 @@ export default function Services() {
       .then((data) => setCategories(data.categories))
       .catch((error) => console.log(error));
   }, []);
+  /* Método para rotar cards */
 
+  function flipped(event) {
+    const flipped = event.currentTarget.closest(".services-content");
+    flipped.classList.toggle("flipped");
+
+    const frontRotate = flipped.querySelector(".service-card-front");
+    const backRotate = flipped.querySelector(".service-card-back");
+
+    if (flipped.classList.contains("flipped")) {
+      backRotate.classList.add("back-rotate");
+      frontRotate.classList.add("front-rotate");
+    } else {
+      frontRotate.classList.remove("front-rotate");
+      backRotate.classList.remove("back-rotate");
+    }
+  }
+
+  /* FIN rotar cards */
   return (
     <>
       <Helmet>
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
-      <div>
+      <div className="services-title-ctn">
         <h2>Servicios</h2>
       </div>
       <section className="services-container">
-        {categories.map((category) => (
-          <div key={category.id}>
-            <h2>{category.title}</h2>
-            {services.map((service) => (
-              <div className="services-content" key={service.id}>
-                {category.id === service.category_id && (
-                  <article className="service-card-front">
-                    <div className="h3-ctn">
-                      <h3>{service.title}</h3>
-                    </div>
-                    <div className="img-ctn">
-                      <img
-                        className="img-cover"
-                        src={service.img}
-                        alt={service.title}
-                      />
-                    </div>
-                    <div className="btn-ctn">
-                      <button>Alquilar</button>
-                      {/* <button onClick={flipped}>Más información</button> */}
-                    </div>
-                  </article>
-                )}{" "}
-                {category.id === service.category_id && (
-                  <article className="service-card-back">
-                    <h3>{service.title}</h3>
-                    <p>{service.description}</p>
-                    <div className="btn-ctn">
-                      {/* <button onClick={flipped}>Regresar</button> */}
-                    </div>
-                  </article>
-                )}
+        {services.map((service) => (
+          <div className="services-content" key={service.id}>
+            <article className="service-card-front">
+              <div className="h3-ctn">
+                <h3>{service.title}</h3>
               </div>
-            ))}
+              <div className="img-ctn">
+                <img className="img-cover" src={service.img} />
+              </div>
+              <div className="btn-ctn">
+                <button>Alquilar</button>
+                <button onClick={flipped}>Más información</button>
+              </div>
+            </article>
+
+            <article className="service-card-back">
+              <div className="h3-ctn">
+                <h3>{service.title}</h3>
+              </div>
+              <div className="p-ctn">
+                <p>{service.description}</p>
+              </div>
+              <div className="btn-ctn">
+                <button onClick={flipped}>Regresar</button>
+              </div>
+            </article>
           </div>
         ))}
+
+        {/* {services.map((service) => (
+          <article className="service-card" key={service.id}>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </article>
+        ))} */}
       </section>
     </>
   );

@@ -1,3 +1,9 @@
+.services-title-ctn h2 {
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 23px;
+}
+
 .services-container {
   display: flex;
   justify-content: center;
@@ -40,8 +46,24 @@
   }
 
   .h3-ctn h3 {
+    font-family: 'Inter', sans-serif;
     color: #1d30ad;
     font-size: 18px;
+  }
+
+  .p-ctn {
+    display: flex;
+    justify-content: center;
+    height: 182px;
+  }
+
+  .p-ctn p {
+    color: black;
+    font-size: 15px;
+    text-align: left;
+    padding-left: 27px;
+    padding-right: 10px;
+    overflow: auto;
   }
 
   .img-ctn {
@@ -67,6 +89,7 @@
     border: none;
     background-color: #1d30ad;
     border-radius: 20px;
+    font-family: 'Inter', sans-serif;
     color: white;
     padding: 9px 8px 9px 8px;
     cursor: pointer;
@@ -74,10 +97,11 @@
     font-weight: bold;
     letter-spacing: 0.9px;
     transition: 0.3s;
+    box-shadow: #0f036d8a 0px 2px 10px 0px;
   }
 
   .btn-ctn button:hover {
-    background-color: #1d30adb0;
+    background-color: #009d71;
   }
 
   .service-card-back {
@@ -115,4 +139,29 @@
     transition: opacity 0.1s;
     z-index: 1!important;
   }
+
+  /***** Overflow *****/
+
+  /* Opera y Chrome */
+
+  .p-ctn p::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra de desplazamiento */
+    background-color: #009d71; /* Color de fondo de la barra de desplazamiento */
+    border-radius: 12px;
+  }
+
+  .p-ctn p::-webkit-scrollbar-thumb {
+    background-color: #1d30ad; /* Color del "pulgar" de la barra de desplazamiento */
+    border-radius: 12px; /* Radio de borde del "pulgar" */
+  }
+
+  /* Firefox */
+  @-moz-document url-prefix() {
+    .p-ctn p {
+        scrollbar-width: thin;
+        scrollbar-color: #009d71 #1d30ad;
+    }
+  }
+  
+  /***** FIN Overflow *****/
 }

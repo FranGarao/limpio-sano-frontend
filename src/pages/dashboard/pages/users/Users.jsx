@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import DataTable from "react-data-table-component";
 import "./Users.scss";
 import Swal from "sweetalert2";
 import useApiRequest from "../../../../hooks/useApiRequest";
