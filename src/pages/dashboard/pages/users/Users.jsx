@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./Users.scss";
 import Swal from "sweetalert2";
 import useApiRequest from "../../../../hooks/useApiRequest";
+import { DiAptana } from "react-icons/di";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ export default function Users() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [id, setId] = useState(null);
-  const { get, post, del, update } = useApiRequest();
+  const { get, post, del, put } = useApiRequest();
   const [qr, setQr] = useState(null);
   const [faCode, setFaCode] = useState("");
   const [verified, setVerified] = useState(false);
@@ -70,18 +71,6 @@ export default function Users() {
     getUsers();
   }, []);
 
-  const deleteUser = async (id) => {
-    await del(`/users/delete/${id}`)
-      .then((response) => {
-        getUsers();
-        return response;
-      })
-      .catch((error) => {
-        console.log({ error });
-        return error;
-      });
-  };
-
   const handleUsername = (e) => {
     setUsername(e.target.value);
   };
@@ -105,28 +94,82 @@ export default function Users() {
       setShowUpdateForm(false);
     }
   };
-  const showAlert = (message, res, id) => {
+
+  const openMenu = (id) => {
     Swal.fire({
-      title: message,
+      title: "Opciones",
       showDenyButton: true,
-      confirmButtonText: `Yes`,
-      denyButtonText: `No`,
+      showCancelButton: true,
+      confirmButtonText: `Editar`,
+      confirmButtonColor: "#009d71",
+      denyButtonText: `Eliminar`,
+      cancelButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {
-        switch (res) {
-          case 0:
-            handleSubmit();
-            break;
-          case 1:
-            handleSubmit(id);
-            break;
-          default:
-            deleteUser(id);
-            break;
-        }
+        openEdit(id);
+      } else if (result.isDenied) {
+        deleteUser(id);
       }
     });
   };
+  const findUser = (id) => {
+    return users.find((user) => user?.id === id);
+  };
+
+  const openEdit = (id) => {
+    const userSelected = findUser(id);
+    console.log(userSelected);
+    Swal.fire({
+      title: "Editar Servicio",
+      html: `
+      <input id="newUsername" type="text" placeholder="Nombre" value='${userSelected?.username}'/>
+      <input id="newEmail" type="text" placeholder="Descripcion" value='${userSelected?.email}'/>
+      <input id="newPassword" type="text" placeholder="URL de la imagen" value='${userSelected?.password}'/>
+      `,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const newUsername = document.getElementById("newUsername").value;
+        const newEmail = document.getElementById("newEmail").value;
+        const newPassword = document.getElementById("newPassword").value;
+        console.log({ newUsername, newEmail, newPassword });
+
+        put(`/users/update/${userSelected?.id}`, {
+          newUsername,
+          newEmail,
+          newPassword,
+        })
+          .then((data) => {
+            setUsers(data.users);
+            alert(
+              "Servicio editado",
+              "El servicio fue editado correctamente",
+              "success"
+            );
+          })
+          .catch((error) => console.log(error));
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+  };
+  const deleteUser = (id) => {
+    del(`/users/delete/${id}`)
+      .then(() => {
+        get("/users")
+          .then((data) => {
+            setUsers(data.users);
+            alert(
+              "Servicio eliminado",
+              "El servicio fue eliminado correctamente",
+              "success"
+            );
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+  };
+
   const createUser = async (e) => {
     e.preventDefault();
 
@@ -154,7 +197,7 @@ export default function Users() {
       email,
       password,
     };
-    await update(`/users/update/${id}`, user)
+    await put(`/users/update/${id}`, user)
       .then((response) => {
         getUsers();
         return response;
@@ -246,38 +289,42 @@ export default function Users() {
             <div className="row" key={user?.id}>
               <p>{user?.username}</p>
               <p>{user?.email}</p>
-              <div>
-                <button onClick={() => getQr(18)}>D.A</button>
-                <button
-                  onClick={() => {
-                    showAlert(
-                      "Eliminar Usuario?",
-                      "Usuario Eliminado Correctamente!",
-                      user?.id
-                    );
-                  }}
-                >
-                  Eliminar
-                </button>
-                <button
-                  onClick={() => {
-                    showAlert("Deseas crear un usuario nuevo?", 0);
-                  }}
-                >
-                  crear
-                </button>
-                <button
-                  onClick={() => {
-                    showAlert("Deseas editar este usuario?", 1, user?.id);
-                  }}
-                >
-                  editar
-                </button>
-              </div>
+              <button onClick={() => openMenu(user?.id)}>
+                <DiAptana className="config-icon" />
+              </button>
             </div>
           );
         })}
       </section>
     </div>
   );
+}
+
+{
+  /* <button onClick={() => getQr(18)}>D.A</button>
+<button
+  onClick={() => {
+    showAlert(
+      "Eliminar Usuario?",
+      "Usuario Eliminado Correctamente!",
+      user?.id
+    );
+  }}
+>
+  Eliminar
+</button>
+<button
+  onClick={() => {
+    showAlert("Deseas crear un usuario nuevo?", 0);
+  }}
+>
+  crear
+</button>
+<button
+  onClick={() => {
+    showAlert("Deseas editar este usuario?", 1, user?.id);
+  }}
+>
+  editar
+</button> */
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useApiRequest from "../../../../hooks/useApiRequest";
 import Swal from "sweetalert2";
+import { DiAptana } from "react-icons/di";
 
 export default function DBFaqs() {
   const [faqs, setFaqs] = useState([]);
@@ -118,7 +119,9 @@ export default function DBFaqs() {
           <div key={faq?.id} className="row">
             <p>{faq?.title}</p>
             <div className="services">
-              <button onClick={() => openMenu(faq?.id)}>iconoEngranaje</button>
+              <button onClick={() => openMenu(faq?.id)}>
+                <DiAptana className="config-icon" />
+              </button>
             </div>
           </div>
         ))}

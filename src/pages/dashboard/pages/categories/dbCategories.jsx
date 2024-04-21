@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import useApiRequest from "../../../../hooks/useApiRequest";
 import Swal from "sweetalert2";
+import { DiAptana } from "react-icons/di";
+
 export default function DBCategories() {
   const [categories, setCategories] = useState([]);
   const { get, post, put, del } = useApiRequest();
@@ -112,12 +114,13 @@ export default function DBCategories() {
           <p>Categoria</p>
           <p>Opciones</p>
         </div>
+
         {categories?.map((category) => (
           <div key={category?.id} className="row">
             <p>{category?.title}</p>
             <div className="services">
               <button onClick={() => openMenu(category?.id)}>
-                iconoEngranaje
+                <DiAptana className="config-icon" />
               </button>
             </div>
           </div>

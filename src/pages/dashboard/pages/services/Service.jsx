@@ -2,6 +2,7 @@ import useApiRequest from "../../../../hooks/useApiRequest";
 import { useEffect, useState } from "react";
 import "../../../main/pages/services/Service.scss";
 import Swal from "sweetalert2";
+import { DiAptana } from "react-icons/di";
 
 export default function Service() {
   const [services, setServices] = useState([]);
@@ -148,7 +149,7 @@ export default function Service() {
                   <h2>{category?.title}</h2>
                   <div className="services">
                     <button onClick={() => openMenu(service?.id)}>
-                      iconoEngranaje
+                      <DiAptana className="config-icon" />
                     </button>
                   </div>
                 </div>
