@@ -100,6 +100,41 @@ export default function DBFaqs() {
       })
       .catch((error) => console.log(error));
   };
+
+  const openCreateMenu = () => {
+    Swal.fire({
+      title: "Editar Servicio",
+      html: `
+        <input id="title" type="text" placeholder="Nombre" />
+        <input id="description" type="text" placeholder="Descripcion" />
+      `,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        console.log(title, description);
+        post(`/faqs/create`, {
+          title,
+          description,
+        })
+          .then((data) => {
+            console.log("llegue al endpoint", data);
+            setFaqs(data.faqs);
+            getFaqs();
+
+            alert(
+              "Servicio editado",
+              "La pregunta fue editada correctamente",
+              "success"
+            );
+          })
+          .catch((error) => console.log(error));
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+  };
   return (
     <>
       <h1>Preguntas Frecuentes</h1>{" "}
@@ -112,9 +147,17 @@ export default function DBFaqs() {
           <div key={faq?.id} className="row">
             <p>{faq?.title}</p>
             <div className="services">
-              <button onClick={() => openMenu(faq?.id)}>
-                <DiAptana className="config-icon" />
-              </button>
+              <div className="options">
+                <p
+                  onClick={() => openCreateMenu(faq?.id)}
+                  className="options-icon"
+                >
+                  +
+                </p>
+                <button onClick={() => openMenu(faq?.id)}>
+                  <DiAptana className="config-icon" />
+                </button>
+              </div>
             </div>
           </div>
         ))}

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../../../main/pages/services/Service.scss";
 import Swal from "sweetalert2";
 import { DiAptana } from "react-icons/di";
+import "./Service.scss";
 
 export default function Service() {
   const [services, setServices] = useState([]);
@@ -131,6 +132,61 @@ export default function Service() {
       allowOutsideClick: () => !Swal.isLoading(),
     });
   };
+
+  const openCreateMenu = () => {
+    Swal.fire({
+      title: "Editar Servicio",
+      html: `
+        <input id="name" type="text" placeholder="Nombre" />
+        <input id="description" type="text" placeholder="Descripcion" />
+        <input id="image" type="text" placeholder="URL de la imagen" />
+        ${
+          categories &&
+          categories.length > 0 &&
+          `
+            <select id="category_id">
+            ${categories
+              .map(
+                (category) =>
+                  `<option value="${category.id}">${category.title}</option>`
+              )
+              .join("")}
+            </select>
+            `
+        }
+        </select>
+      `,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const title = document.getElementById("name").value;
+        const description = document.getElementById("description").value;
+        const img = document.getElementById("image").value;
+        const category_id = document.getElementById("category_id").value;
+        console.log(title, description, img);
+        post(`/services/create`, {
+          title,
+          description,
+          img,
+          category_id,
+        })
+          .then((data) => {
+            setServices(data.services);
+            getCategories();
+            getServices();
+            alert(
+              "Servicio editado",
+              "El servicio fue editado correctamente",
+              "success"
+            );
+          })
+          .catch((error) => console.log(error));
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+  };
+
   return (
     <>
       <h1>Servicios</h1>{" "}
@@ -150,9 +206,17 @@ export default function Service() {
                   <p>{service?.title}</p>
                   <p>{category?.title}</p>
                   <div className="services">
-                    <button onClick={() => openMenu(service?.id)}>
-                      <DiAptana className="config-icon" />
-                    </button>
+                    <div className="options">
+                      <p
+                        onClick={() => openCreateMenu(service?.id)}
+                        className="options-icon"
+                      >
+                        +
+                      </p>
+                      <button onClick={() => openMenu(service?.id)}>
+                        <DiAptana className="config-icon" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))

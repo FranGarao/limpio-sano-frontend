@@ -206,7 +206,7 @@ export default function Users() {
             <div className="row" key={user?.id}>
               <p>{user?.username}</p>
               <p>{user?.email}</p>
-              <div className="options">
+              <div className="options-user">
                 <RiAdminFill onClick={() => openFAMenu(user?.id)} />
                 <p
                   onClick={() => openCreateMenu(user?.id)}

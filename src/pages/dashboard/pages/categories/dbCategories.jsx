@@ -8,12 +8,17 @@ export default function DBCategories() {
   const { get, post, put, del } = useApiRequest();
 
   useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getCategories = () => {
     get("/categories")
       .then((data) => {
         setCategories(data.categories);
       })
       .catch((error) => console.log(error));
-  }, []);
+  };
+
   const openMenu = (id) => {
     Swal.fire({
       title: "Opciones",
@@ -88,6 +93,40 @@ export default function DBCategories() {
       })
       .catch((error) => console.log(error));
   };
+  const openCreateMenu = () => {
+    Swal.fire({
+      title: "Crear Categoria",
+      html: `
+        <input id="title" type="text" placeholder="Categoria" />
+        <input id="img" type="text" placeholder="Url imagen" />
+      `,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const title = document.getElementById("title").value;
+        const img = document.getElementById("img").value;
+        console.log(title, img);
+        post(`/categories/create`, {
+          title,
+          img,
+        })
+          .then((data) => {
+            console.log("llegue al endpoint", data);
+            setCategories(data.categories);
+            getCategories();
+
+            alert(
+              "Servicio editado",
+              "La pregunta fue editada correctamente",
+              "success"
+            );
+          })
+          .catch((error) => console.log(error));
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
+  };
   return (
     <>
       <h1>Servicios</h1>{" "}
@@ -102,9 +141,17 @@ export default function DBCategories() {
           <div key={category?.id} className="row">
             <p>{category?.title}</p>
             <div className="services">
-              <button onClick={() => openMenu(category?.id)}>
-                <DiAptana className="config-icon" />
-              </button>
+              <div className="options">
+                <p
+                  onClick={() => openCreateMenu(category?.id)}
+                  className="options-icon"
+                >
+                  +
+                </p>
+                <button onClick={() => openMenu(category?.id)}>
+                  <DiAptana className="config-icon" />
+                </button>
+              </div>
             </div>
           </div>
         ))}
