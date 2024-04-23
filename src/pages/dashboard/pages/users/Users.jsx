@@ -3,19 +3,12 @@ import "./Users.scss";
 import Swal from "sweetalert2";
 import useApiRequest from "../../../../hooks/useApiRequest";
 import { DiAptana } from "react-icons/di";
+import { RiAdminFill } from "react-icons/ri";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [id, setId] = useState(null);
   const { get, post, del, put } = useApiRequest();
   const [qr, setQr] = useState(null);
-  const [faCode, setFaCode] = useState("");
-  const [verified, setVerified] = useState(false);
 
   const getQr = async (userId) => {
     await get("/users/authenticate")
@@ -27,6 +20,8 @@ export default function Users() {
           await post("/users/code", { secret: res?.secret, userId })
             .then((res) => {
               console.log(userId);
+              getUsers();
+
               return res;
             })
             .catch((error) => {
@@ -42,19 +37,7 @@ export default function Users() {
         return error;
       });
   };
-  const submitFA = async () => {
-    await post(`/users/verify`, { faCode })
-      .then((res) => {
-        setVerified(res);
-        window.location.href("/dashboard");
-        return res;
-      })
-      .catch((error) => {
-        console.log(error);
-        return error;
-      });
-    console.log({ verified });
-  };
+
   const getUsers = async () => {
     await get("/users")
       .then((res) => {
@@ -70,28 +53,41 @@ export default function Users() {
     getUsers();
   }, []);
 
-  const handleUsername = (e) => {
-    setUsername(e.target.value);
-  };
-  const handleFaCode = (e) => {
-    setFaCode(e.target.value);
-  };
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const openCreateMenu = () => {
+    Swal.fire({
+      title: "Crear usuario",
+      html: `
+    <input id="username" type="text" placeholder="Username" />
+    <input id="email" type="text" placeholder="Email" />
+    <input id="password" type="text" placeholder="Password"/>
+    `,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        console.log({ username, email, password });
 
-  const handleSubmit = (id) => {
-    if (id) {
-      setShowForm(false);
-      setShowUpdateForm(true);
-      setId(id);
-    } else {
-      setShowForm(true);
-      setShowUpdateForm(false);
-    }
+        post(`/users/register`, {
+          username,
+          email,
+          password,
+        })
+          .then((data) => {
+            setUsers(data.users);
+            getUsers();
+            alert(
+              "Servicio editado",
+              "El usuario fue editado correctamente",
+              "success"
+            );
+          })
+          .catch((error) => console.log(error));
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
   };
 
   const openMenu = (id) => {
@@ -141,9 +137,11 @@ export default function Users() {
         })
           .then((data) => {
             setUsers(data.users);
+            getUsers();
+
             alert(
               "Servicio editado",
-              "El servicio fue editado correctamente",
+              "El usuario fue editado correctamente",
               "success"
             );
           })
@@ -158,9 +156,10 @@ export default function Users() {
         get("/users")
           .then((data) => {
             setUsers(data.users);
+            getUsers();
             alert(
               "Servicio eliminado",
-              "El servicio fue eliminado correctamente",
+              "El usuario fue eliminado correctamente",
               "success"
             );
           })
@@ -168,101 +167,29 @@ export default function Users() {
       })
       .catch((error) => console.log(error));
   };
-
-  const createUser = async (e) => {
-    e.preventDefault();
-
-    const user = {
-      username,
-      email,
-      password,
-    };
-    await post("/users/register", user)
-      .then((response) => {
-        setUsers([...users, response.newUser]);
-        getUsers();
-      })
-      .catch((error) => {
-        console.log({ error });
-        return error;
-      });
+  const alert = (title, text, icon) => {
+    Swal.fire({
+      title,
+      text,
+      icon,
+    });
   };
-
-  const updateUser = async (e) => {
-    e.preventDefault();
-
-    const user = {
-      username,
-      email,
-      password,
-    };
-    await put(`/users/update/${id}`, user)
-      .then((response) => {
-        getUsers();
-        return response;
-      })
-      .catch((error) => {
-        console.log({ error });
-        return error;
-      });
+  const openFAMenu = (id) => {
+    Swal.fire({
+      title: "Autenticación de dos factores",
+      showCancelButton: true,
+      confirmButtonText: `Activar`,
+      confirmButtonColor: "#009d71",
+      cancelButtonText: `Cancelar`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        getQr(id);
+      }
+    });
   };
   return (
     <div>
-      <h2>Users</h2>
-      <form action="" className={showForm ? "user-form" : "hidden"}>
-        <input
-          type="text"
-          onChange={handleUsername}
-          value={username}
-          name="username"
-          id="username"
-          placeholder="Username"
-        />
-        <input
-          type="email"
-          onChange={handleEmail}
-          value={email}
-          name="email"
-          id="email"
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          onChange={handlePassword}
-          value={password}
-          name="password"
-          id="password"
-          placeholder="Password"
-        />
-        <button onClick={createUser}>Crear Usuario</button>
-      </form>
-      <form action="" className={showUpdateForm ? "user-form" : "hidden"}>
-        <input
-          type="text"
-          onChange={handleUsername}
-          value={username}
-          name="username"
-          id="username"
-          placeholder="Username"
-        />
-        <input
-          type="email"
-          onChange={handleEmail}
-          value={email}
-          name="email"
-          id="email"
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          onChange={handlePassword}
-          value={password}
-          name="password"
-          id="password"
-          placeholder="Password"
-        />
-        <button onClick={updateUser}>Editar Usuario</button>
-      </form>
+      <h2>Usuarios</h2>
       <section className="table">
         <div className="headers">
           <p>Username</p>
@@ -272,15 +199,6 @@ export default function Users() {
         {qr && (
           <div>
             <img src={qr} alt="" />
-            <input
-              type="text"
-              onChange={handleFaCode}
-              value={faCode}
-              name="faCode"
-              id="faCode"
-              placeholder="faCode"
-            />
-            <button onClick={submitFA}>Ingresar Codigo</button>
           </div>
         )}
         {users?.map((user) => {
@@ -288,9 +206,18 @@ export default function Users() {
             <div className="row" key={user?.id}>
               <p>{user?.username}</p>
               <p>{user?.email}</p>
-              <button onClick={() => openMenu(user?.id)}>
-                <DiAptana className="config-icon" />
-              </button>
+              <div className="options">
+                <RiAdminFill onClick={() => openFAMenu(user?.id)} />
+                <p
+                  onClick={() => openCreateMenu(user?.id)}
+                  className="options-icon"
+                >
+                  +
+                </p>
+                <button onClick={() => openMenu(user?.id)}>
+                  <DiAptana className="config-icon" />
+                </button>
+              </div>
             </div>
           );
         })}

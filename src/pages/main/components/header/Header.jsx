@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import search from "../../../../assets/icons/search.svg";
 import useApiRequest from "../../../../hooks/useApiRequest";
 import checkLogin from "../../../../hooks/checkLogin";
+import { FaSignOutAlt } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+
 export default function Header() {
   const [showSearchbar, setShowSearchbar] = useState(false);
   const [hidden, setHidden] = useState(true);
@@ -54,7 +57,7 @@ export default function Header() {
           confirmButtonText: "Ok",
         });
         setTimeout(() => {
-          window.location.href ='/';
+          window.location.href = "/";
         }, 1000);
         return response;
       })
@@ -68,12 +71,12 @@ export default function Header() {
         <span>Servicios disponibles en Ibagué y Bogotá</span>
         {checkLogin() ? (
           <p onClick={logout} className="logout">
-            Cerrar Sesion
+            <CiLogout />
           </p>
         ) : (
-          <Link to='/login'>
+          <Link to="/login">
             <p className="login">
-              Iniciar Sesion
+              <FaSignOutAlt />
             </p>
           </Link>
         )}
@@ -98,8 +101,8 @@ export default function Header() {
             hidden
               ? "hidden"
               : showSearchbar
-              ? "search-div"
-              : "hidden-search-bar"
+                ? "search-div"
+                : "hidden-search-bar"
           }`}
         >
           <input onChange={searchBar} className="input-search" type="text" />
@@ -109,8 +112,8 @@ export default function Header() {
             hidden
               ? "hidden"
               : searchParams
-              ? "search-results-container"
-              : "hidden"
+                ? "search-results-container"
+                : "hidden"
           }`}
         >
           <ul className="search-results-list">

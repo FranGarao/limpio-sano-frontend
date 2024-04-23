@@ -34,53 +34,36 @@ export default function DBCategories() {
   const findCategory = (id) => {
     return categories.find((category) => category?.id === id);
   };
-
+  const alert = (title, text, icon) => {
+    Swal.fire({
+      title,
+      text,
+      icon,
+    });
+  };
   const openEdit = (id) => {
     const categorySelected = findCategory(id);
     console.log(categorySelected);
     Swal.fire({
       title: "Editar Servicio",
       html: `
-        <input id="name" type="text" placeholder="Nombre" value='${
-          categorySelected?.title
-        }'/>
-        <input id="description" type="text" placeholder="Descripcion" value='${
-          categorySelected?.description
-        }'/>
-        <input id="image" type="text" placeholder="URL de la imagen" value='${
-          categorySelected?.img
-        }'/>
-        ${
-          categories &&
-          categories.length > 0 &&
-          `
-            <select id="category_id">
-            ${categories
-              .map(
-                (category) =>
-                  `<option value="${category.id}">${category.title}</option>`
-              )
-              .join("")}
-            </select>
-            `
-        }
-        </select>
+        <input id="category" type="text" placeholder="Nombre" value='${categorySelected?.title}'/>
       `,
       showCancelButton: true,
       confirmButtonText: "Guardar",
       showLoaderOnConfirm: true,
       preConfirm: () => {
-        const title = document.getElementById("name").value;
-        console.log(title);
+        const category = document.getElementById("category").value;
+        console.log(category);
         console.log(categorySelected?.id);
         put(`/categories/update/${categorySelected?.id}`, {
-          title,
+          category,
         })
           .then((data) => {
             setCategories(data.categories);
             alert(
               "Servicio editado",
-              "El servicio fue editado correctamente",
+              "La categoria fue editada correctamente",
               "success"
             );
           })
@@ -97,7 +80,7 @@ export default function DBCategories() {
             setCategories(data.categories);
             alert(
               "Servicio eliminado",
-              "El servicio fue eliminado correctamente",
+              "La categoria fue eliminada correctamente",
               "success"
             );
           })

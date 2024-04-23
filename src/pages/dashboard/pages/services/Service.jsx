@@ -40,6 +40,8 @@ export default function Service() {
         get("/services")
           .then((data) => {
             setServices(data.services);
+            getServices();
+            getCategories();
             alert(
               "Servicio eliminado",
               "El servicio fue eliminado correctamente",
@@ -134,7 +136,7 @@ export default function Service() {
       <h1>Servicios</h1>{" "}
       <section className="table">
         <div className="headers">
-          <p>Nombre</p>
+          <p>Servicio</p>
           <p>Categoria</p>
           <p>Opciones</p>
         </div>
@@ -146,7 +148,7 @@ export default function Service() {
               .map((service) => (
                 <div key={service?.id} className="row">
                   <p>{service?.title}</p>
-                  <h2>{category?.title}</h2>
+                  <p>{category?.title}</p>
                   <div className="services">
                     <button onClick={() => openMenu(service?.id)}>
                       <DiAptana className="config-icon" />

@@ -40,45 +40,46 @@ export default function Services() {
       <Helmet>
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
-      <div className="services-title-ctn">
+      <div>
         <h2>Servicios</h2>
       </div>
       <section className="services-container">
-        {services.map((service) => (
-          <div className="services-content" key={service.id}>
-            <article className="service-card-front">
-              <div className="h3-ctn">
-                <h3>{service.title}</h3>
+        {categories.map((category) => (
+          <div key={category.id}>
+            <h2>{category.title}</h2>
+            {services.map((service) => (
+              <div className="services-content" key={service.id}>
+                {category.id === service.category_id && (
+                  <article className="service-card-front">
+                    <div className="h3-ctn">
+                      <h3>{service.title}</h3>
+                    </div>
+                    <div className="img-ctn">
+                      <img
+                        className="img-cover"
+                        src={service.img}
+                        alt={`Imagen de ${service.title}`}
+                      />
+                    </div>
+                    <div className="btn-ctn">
+                      <button>Alquilar</button>
+                      <button onClick={flipped}>Más información</button>
+                    </div>
+                  </article>
+                )}{" "}
+                {category.id === service.category_id && (
+                  <article className="service-card-back">
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
+                    <div className="btn-ctn">
+                      <button onClick={flipped}>Regresar</button>
+                    </div>
+                  </article>
+                )}
               </div>
-              <div className="img-ctn">
-                <img className="img-cover" src={service.img} />
-              </div>
-              <div className="btn-ctn">
-                <button>Alquilar</button>
-                <button onClick={flipped}>Más información</button>
-              </div>
-            </article>
-
-            <article className="service-card-back">
-              <div className="h3-ctn">
-                <h3>{service.title}</h3>
-              </div>
-              <div className="p-ctn">
-                <p>{service.description}</p>
-              </div>
-              <div className="btn-ctn">
-                <button onClick={flipped}>Regresar</button>
-              </div>
-            </article>
+            ))}
           </div>
         ))}
-
-        {/* {services.map((service) => (
-          <article className="service-card" key={service.id}>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </article>
-        ))} */}
       </section>
     </>
   );

@@ -8,12 +8,17 @@ export default function DBFaqs() {
   const { get, post, put, del } = useApiRequest();
 
   useEffect(() => {
+    getFaqs();
+  }, []);
+
+  const getFaqs = () => {
     get("/faqs")
       .then((data) => {
         setFaqs(data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  };
+
   const openMenu = (id) => {
     Swal.fire({
       title: "Opciones",
@@ -34,34 +39,21 @@ export default function DBFaqs() {
   const findService = (id) => {
     return faqs.find((faq) => faq?.id === id);
   };
-
+  const alert = (title, text, icon) => {
+    Swal.fire({
+      title,
+      text,
+      icon,
+    });
+  };
   const openEdit = (id) => {
     const faqSelected = findService(id);
     console.log(faqSelected);
     Swal.fire({
       title: "Editar Servicio",
       html: `
-        <input id="name" type="text" placeholder="Nombre" value='${
-          faqSelected?.title
-        }'/>
-        <input id="description" type="text" placeholder="Descripcion" value='${
-          faqSelected?.description
-        }'/>
-        <input id="image" type="text" placeholder="URL de la imagen" value='${
-          faqSelected?.img
-        }'/>
-        ${
-          faqs &&
-          faqs.length > 0 &&
-          `
-            <select id="category_id">
-            ${faqs
-              .map((faq) => `<option value="${faq.id}">${faq.title}</option>`)
-              .join("")}
-            </select>
-            `
-        }
-        </select>
+        <input id="name" type="text" placeholder="Nombre" value='${faqSelected?.title}'/>
+        <input id="description" type="text" placeholder="Descripcion" value='${faqSelected?.description}'/>
       `,
       showCancelButton: true,
       confirmButtonText: "Guardar",
@@ -78,10 +70,11 @@ export default function DBFaqs() {
           .then((data) => {
             console.log("llegue al endpoint", data);
             setFaqs(data.faqs);
+            getFaqs();
 
             alert(
               "Servicio editado",
-              "El servicio fue editado correctamente",
+              "La pregunta fue editada correctamente",
               "success"
             );
           })
@@ -95,10 +88,11 @@ export default function DBFaqs() {
       .then(() => {
         get("/faqs")
           .then((data) => {
+            getFaqs();
             setFaqs(data.faqs);
             alert(
               "Servicio eliminado",
-              "El servicio fue eliminado correctamente",
+              "La pregunta fue eliminada correctamente",
               "success"
             );
           })
@@ -108,11 +102,10 @@ export default function DBFaqs() {
   };
   return (
     <>
-      <h1>Servicios</h1>{" "}
+      <h1>Preguntas Frecuentes</h1>{" "}
       <section className="table">
         <div className="headers">
-          <p>Nombre</p>
-          <p>Categoria</p>
+          <p>Titulo</p>
           <p>Opciones</p>
         </div>
         {faqs?.map((faq) => (
@@ -129,21 +122,3 @@ export default function DBFaqs() {
     </>
   );
 }
-
-// {categories?.map(
-//     (category) =>
-//       services &&
-//       services
-//         .filter((service) => service?.category_id === category?.id)
-//         .map((service) => (
-//           <div key={service?.id} className="row">
-//             <p>{service?.title}</p>
-//             <h2>{category?.title}</h2>
-//             <div className="services">
-//               <button onClick={() => openMenu(service?.id)}>
-//                 iconoEngranaje
-//               </button>
-//             </div>
-//           </div>
-//         ))
-//   )}
