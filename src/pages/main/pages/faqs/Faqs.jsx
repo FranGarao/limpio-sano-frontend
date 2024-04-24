@@ -10,11 +10,11 @@ export default function Faqs() {
   const { get } = useApiRequest();
   const [faqs, setFaqs] = useState([{}]);
 
-
   useEffect(() => {
-      get("/faqs")
+    get("/faqs")
       .then((response) => {
-        setFaqs(response.data);
+        console.log({ response });
+        setFaqs(response);
       })
       .catch((error) => {
         // Maneja el error (por ejemplo, si el token ha expirado)

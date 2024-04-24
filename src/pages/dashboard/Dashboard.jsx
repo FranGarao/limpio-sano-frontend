@@ -28,7 +28,7 @@ export default function Dashboard() {
         <main className="main">
           <h1>Bienvenido al panel de control</h1>
           <div>
-            <Link to='dashboard/services'>
+            <Link to='/dashboard/services'>
               <button>Servicios</button>
             </Link>
             <Link to="/dashboard/users">

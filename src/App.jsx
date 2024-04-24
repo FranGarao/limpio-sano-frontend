@@ -19,6 +19,9 @@ import Login from "./pages/main/pages/login/Login";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import Users from "./pages/dashboard/pages/users/Users";
+import Service from "./pages/dashboard/pages/services/Service";
+import DBFaqs from "./pages/dashboard/pages/faqs/dbFaqs";
+import DBCategories from "./pages/dashboard/pages/categories/dbCategories";
 
 function App() {
   const [admin, setAdmin] = useState(false);
@@ -49,6 +52,14 @@ function App() {
           {admin && (
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="/dashboard/users" element={<Users />}></Route>
+              <Route path="/dashboard/services" element={<Service />}></Route>
+              <Route path="/dashboard/faqs" element={<DBFaqs />}></Route>
+              <Route
+                path="/dashboard/categories"
+                element={<DBCategories />}
+              ></Route>
+              <Route path="/dashboard/services" element={<Service />}></Route>
+              <Route path="/dashboard/services" element={<Service />}></Route>
             </Route>
           )}
           <Route path="*" element={<NotFound />} />

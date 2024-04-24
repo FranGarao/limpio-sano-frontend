@@ -17,9 +17,11 @@ $green-color: #009d71;
     align-items: center;
     background-color: $blue-color;
     padding: 20px;
-    .logout, .login {
+    .logout,
+    .login {
       position: absolute;
       right: 20px;
+      top: 6px;
       color: $blue-color;
       cursor: pointer;
       background-color: #e4e4e4;

@@ -33,11 +33,11 @@ const useApiRequest = () => {
     return makeRequest("POST", url, data);
   };
 
-  const update = async (url, data) => {
-    return makeRequest("UPDATE", url, data);
+  const put = async (url, data) => {
+    return makeRequest("PUT", url, data);
   };
 
-  return { get, del, post, update };
+  return { get, del, post, put };
 };
 
 export default useApiRequest;

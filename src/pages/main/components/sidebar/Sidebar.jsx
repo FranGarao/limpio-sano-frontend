@@ -70,9 +70,6 @@ export default function Sidebar() {
               <li>
                 <Link to="/contact">Contacto</Link>
               </li>
-              <li>
-                <Link to="/login">Iniciar Sesión</Link>
-              </li>
               {login && (
                 <li>
                   <Link to="/dashboard">Panel de control</Link>
