@@ -20,7 +20,7 @@ export default function Header() {
       setHidden(false);
     }
   }, [showSearchbar]);
-
+  const secret = "pepe12345";
   const possibleSearcher = [
     { id: 1, title: "Inicio", path: "/home" },
     { id: 2, title: "Servicios", path: "/services" },
@@ -65,6 +65,36 @@ export default function Header() {
         console.log(error);
       });
   };
+
+  const alertLogin = () => {
+    Swal.fire({
+      title: "Ingresa el codigo para iniciar sesión",
+      html: `<input id="loginCode" placeholder="Codigo"/> <br/> `,
+     confirmButtonText: `Confirmar`,
+      confirmButtonColor: "#009d71",
+      showCancelButton: true,
+      cancelButtonText: `Cancelar`,
+    }).then((result) => {
+      const loginCode = document.getElementById("loginCode").value;
+
+      if (result.isConfirmed) {
+        checkSecret(loginCode);
+      }
+    });
+
+const checkSecret = (loginCode) =>{
+    // Verify the login code here
+    if (loginCode === secret) {
+      // Code is correct
+      window.location.href = "/login";
+      // Perform login logic here
+    } else {
+      // Code is incorrect
+      console.log("Login correcto");
+      // Display error message or take appropriate action
+    }
+  }
+}
   return (
     <header className="header">
       <div className="header-header">
@@ -74,11 +104,9 @@ export default function Header() {
             <CiLogout />
           </p>
         ) : (
-          <Link to="/login">
-            <p className="login">
+            <p onClick={alertLogin} className="login">
               <FaSignOutAlt />
             </p>
-          </Link>
         )}
       </div>
       <div className="header-main">
