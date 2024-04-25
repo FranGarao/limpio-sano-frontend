@@ -225,32 +225,3 @@ export default function Users() {
     </div>
   );
 }
-
-{
-  /* <button onClick={() => getQr(18)}>D.A</button>
-<button
-  onClick={() => {
-    showAlert(
-      "Eliminar Usuario?",
-      "Usuario Eliminado Correctamente!",
-      user?.id
-    );
-  }}
->
-  Eliminar
-</button>
-<button
-  onClick={() => {
-    showAlert("Deseas crear un usuario nuevo?", 0);
-  }}
->
-  crear
-</button>
-<button
-  onClick={() => {
-    showAlert("Deseas editar este usuario?", 1, user?.id);
-  }}
->
-  editar
-</button> */
-}

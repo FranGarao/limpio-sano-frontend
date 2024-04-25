@@ -83,15 +83,14 @@ export default function Header() {
     });
 
 const checkSecret = (loginCode) =>{
-    // Verify the login code here
     if (loginCode === secret) {
-      // Code is correct
       window.location.href = "/login";
-      // Perform login logic here
     } else {
-      // Code is incorrect
-      console.log("Login correcto");
-      // Display error message or take appropriate action
+      Swal.fire({
+        title: "Código incorrecto",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
   }
 }

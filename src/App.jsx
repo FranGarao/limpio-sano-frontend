@@ -23,7 +23,10 @@ import Service from "./pages/dashboard/pages/services/Service";
 import DBFaqs from "./pages/dashboard/pages/faqs/dbFaqs";
 import DBCategories from "./pages/dashboard/pages/categories/dbCategories";
 
+
+
 function App() {
+
   const [admin, setAdmin] = useState(false);
   //! const [token, setToken] = useState("");
   useEffect(() => {

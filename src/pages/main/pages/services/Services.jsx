@@ -9,6 +9,7 @@ export default function Services() {
   const [categories, setCategories] = useState([]);
   const [clear, setClear] = useState(0);
   const { get } = useApiRequest();
+
   useEffect(() => {
     get("/services")
       .then((data) => setServices(data.services))
@@ -84,10 +85,20 @@ export default function Services() {
       </div>
       <section className="services-container">
         {categories.map((category) => (
-          <div className={category?.id == clear || clear == 0 ? "exist" : "hidden"} key={category?.id}>
-            {clear == null && <h2>{category?.title?.toUpperCase()}</h2>}
-            {category?.id == clear  && <h2>{category?.title?.toUpperCase()}</h2>}
-            {0 == clear  && <h2>{category?.title.toUpperCase()}</h2>}
+          <div
+            className={category?.id == clear || clear == 0 ? "exist" : "hidden"}
+            key={category?.id}
+          >
+            {clear == 0 && (
+              <h2 className="category-title">
+                {category?.title?.toUpperCase()}
+              </h2>
+            )}
+            {category?.id == clear && (
+              <h2 className="category-title">
+                {category?.title?.toUpperCase()}
+              </h2>
+            )}
             {services.map((service) => (
               <div className="services-content" key={service?.id}>
                 <article className="service-card-front">
@@ -102,16 +113,22 @@ export default function Services() {
                     />
                   </div>
                   <div className="btn-ctn">
-                    <button>Alquilar</button>
-                    <button onClick={flipped}>Más información</button>
+                    <button title="Alquilar">Alquilar</button>
+                    <button title="Más información" onClick={flipped}>
+                      Más información
+                    </button>
                   </div>
                 </article>
                 {category?.id === service?.category_id && (
                   <article className="service-card-back">
-                    <h3>{service?.title}</h3>
+                    <div className="h3-ctn">
+                      <h3>{service?.title.toUpperCase()}</h3>
+                    </div>
                     <p>{service?.description}</p>
                     <div className="btn-ctn">
-                      <button onClick={flipped}>Regresar</button>
+                      <button title="Regresar" onClick={flipped}>
+                        Regresar
+                      </button>
                     </div>
                   </article>
                 )}
