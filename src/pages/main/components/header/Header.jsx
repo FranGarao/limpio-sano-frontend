@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import search from "../../../../assets/icons/search.svg";
 import useApiRequest from "../../../../hooks/useApiRequest";
 import checkLogin from "../../../../hooks/checkLogin";
+import { FaSignOutAlt } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+
 export default function Header() {
   const [showSearchbar, setShowSearchbar] = useState(false);
   const [hidden, setHidden] = useState(true);
@@ -17,7 +20,7 @@ export default function Header() {
       setHidden(false);
     }
   }, [showSearchbar]);
-
+  const secret = "pepe12345";
   const possibleSearcher = [
     { id: 1, title: "Inicio", path: "/home" },
     { id: 2, title: "Servicios", path: "/services" },
@@ -54,7 +57,7 @@ export default function Header() {
           confirmButtonText: "Ok",
         });
         setTimeout(() => {
-          window.location.reload();
+          window.location.href = "/";
         }, 1000);
         return response;
       })
@@ -62,20 +65,47 @@ export default function Header() {
         console.log(error);
       });
   };
+
+  const alertLogin = () => {
+    Swal.fire({
+      title: "Ingresa el codigo para iniciar sesión",
+      html: `<input id="loginCode" placeholder="Codigo"/> <br/> `,
+     confirmButtonText: `Confirmar`,
+      confirmButtonColor: "#009d71",
+      showCancelButton: true,
+      cancelButtonText: `Cancelar`,
+    }).then((result) => {
+      const loginCode = document.getElementById("loginCode").value;
+
+      if (result.isConfirmed) {
+        checkSecret(loginCode);
+      }
+    });
+
+const checkSecret = (loginCode) =>{
+    if (loginCode === secret) {
+      window.location.href = "/login";
+    } else {
+      Swal.fire({
+        title: "Código incorrecto",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+  }
+}
   return (
     <header className="header">
       <div className="header-header">
         <span>Servicios disponibles en Ibagué y Bogotá</span>
         {checkLogin() ? (
           <p onClick={logout} className="logout">
-            Cerrar Sesion
+            <CiLogout />
           </p>
         ) : (
-          <Link to='/login'>
-            <p className="login">
-              Iniciar Sesion
+            <p onClick={alertLogin} className="login">
+              <FaSignOutAlt />
             </p>
-          </Link>
         )}
       </div>
       <div className="header-main">
@@ -98,8 +128,8 @@ export default function Header() {
             hidden
               ? "hidden"
               : showSearchbar
-              ? "search-div"
-              : "hidden-search-bar"
+                ? "search-div"
+                : "hidden-search-bar"
           }`}
         >
           <input onChange={searchBar} className="input-search" type="text" />
@@ -109,8 +139,8 @@ export default function Header() {
             hidden
               ? "hidden"
               : searchParams
-              ? "search-results-container"
-              : "hidden"
+                ? "search-results-container"
+                : "hidden"
           }`}
         >
           <ul className="search-results-list">

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./Login.scss";
-import { Link } from "react-router-dom";
 import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Login() {
@@ -8,6 +7,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [faVerify, setFaVerify] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const { post } = useApiRequest();
 
@@ -21,7 +22,29 @@ export default function Login() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  const [faCode, setFaCode] = useState("");
+  const submitFA = async () => {
+    await post(`/users/verify`, { faCode, userId })
+      .then((res) => {
+        console.log(new Date());
+        if (res?.verified) {
+          login();
+        }
+        return res;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+  };
 
+  const login = async () => {
+    window.location.href = "/dashboard";
+  };
+
+  const handleFaCode = (e) => {
+    setFaCode(e.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -40,12 +63,13 @@ export default function Login() {
       password,
     })
       .then((response) => {
-        console.log(response);
         if (response?.user?.error) {
           setError(response?.user?.error);
+          setFaVerify(false);
         } else {
-          window.location.href = "/dashboard";
+          setUserId(response?.user?.id);
           setError(null);
+          setFaVerify(true);
         }
         return response;
       })
@@ -57,31 +81,74 @@ export default function Login() {
   return (
     <>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="text" value={email} onChange={handleEmailChange} />
-        </label>
-        <br />
-        <label>
-          Password:
+        <h2 className="login-form-title">LOGIN</h2>
+
+        <div className="form-containers">
+          <label className="username-label" htmlFor="username">
+            Username
+          </label>
           <input
+            placeholder="Ingresa tu nombre de usuario aqui."
+            className="username-input"
+            name="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <br />
+        <div className="form-containers">
+          <label className="email-label" htmlFor="email">
+            Email
+          </label>
+          <input
+            placeholder="Ingresa tu dirección de correo aqui."
+            className="email-input"
+            name="username"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <br />
+        <div className="form-containers">
+          <label className="password-label" htmlFor="password">
+            Password
+          </label>
+          <input
+            placeholder="Ingresa tu contraseña aqui."
+            className="password-input"
+            name="password"
             type="password"
             value={password}
             onChange={handlePasswordChange}
           />
-        </label>
+        </div>
         {error && <p>{error}</p>}
+
         <br />
-        <button type="submit">Login</button>
+        <button className="login-btn" type="submit">
+          SIGN IN
+        </button>
       </form>
-      <Link to="/dashboard">
-        <button>dashboard</button>
-      </Link>
+      {faVerify && (
+        <div className="verify-container">
+          <label className="verify-label" htmlFor="faCode">
+            Codigo de verificacion
+          </label>
+          <input
+            className="verify-input"
+            type="text"
+            onChange={handleFaCode}
+            value={faCode}
+            name="faCode"
+            id="faCode"
+          />
+          <button className="verify-btn" onClick={submitFA}>
+            Confirmar
+          </button>
+        </div>
+      )}
     </>
   );
 }

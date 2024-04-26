@@ -1,24 +1,65 @@
+$grey-color: rgb(105, 104, 104);
+$green-color: #009d71;
+
 .table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  .headers {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.185);
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #ffffff3f;
+
+    backdrop-filter: blur(20px);
     align-items: center;
     width: 100%;
-    border: 1px solid #000000;
-    background-color: #e0e0e0;
-    .headers{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        padding: 10px;
-        background-color: #c0c0c0;
+    border-top: 1px solid rgba(0, 0, 0, 0.171);
+    padding: 10px;
+
+    p {
+      font-weight: 600;
     }
-    .row{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    button {
+      background-color: transparent;
+      border: none;
+      width: 25px;
+      height: 100%;
+      .config-icon {
+        cursor: pointer;
         width: 100%;
-        border: 1px 0 1px 0 solid #000000;
-        padding: 10px;
+        height: 100%;
+        color: $grey-color;
+      }
     }
+
+    .options-user {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 20%;
+      .options-icon {
+        position: relative;
+        cursor: pointer;
+        bottom: 3px;
+        font-weight: bold;
+        color: $green-color;
+        font-size: 30px;
+        width: 50%;
+        height: 100%;
+      }
+    }
+  }
 }
