@@ -1,6 +1,6 @@
 import "./CreateService.scss";
 import { useState } from "react";
-import checkLogin from "../../../../hooks/checkLogin";
+import CheckLogin from "../../../../hooks/checkLogin";
 import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function CreateService() {
@@ -29,7 +29,7 @@ export default function CreateService() {
 
 
   const handleSubmit = (e) => {
-    if (checkLogin()) {
+    if (CheckLogin()) {
       e.preventDefault();
       const service = {
         title,

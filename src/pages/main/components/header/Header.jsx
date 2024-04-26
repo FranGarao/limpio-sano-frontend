@@ -5,7 +5,7 @@ import "./Header.scss";
 import Swal from "sweetalert2";
 import search from "../../../../assets/icons/search.svg";
 import useApiRequest from "../../../../hooks/useApiRequest";
-import checkLogin from "../../../../hooks/checkLogin";
+import CheckLogin from "../../../../hooks/checkLogin";
 import { FaSignOutAlt } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 
@@ -14,13 +14,27 @@ export default function Header() {
   const [hidden, setHidden] = useState(true);
   const [searchParams, setSearchParams] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const { post } = useApiRequest();
+  const [secret, setSecret] = useState("");
+  
+  const { post, get } = useApiRequest();
   useEffect(() => {
+    getSecret();
     if (showSearchbar) {
       setHidden(false);
     }
   }, [showSearchbar]);
-  const secret = "pepe12345";
+
+  const getSecret = async () =>
+    await get("/users/secret")
+      .then((response) => {
+        console.log(response);
+        setSecret(response?.secret?.secret)
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+
   const possibleSearcher = [
     { id: 1, title: "Inicio", path: "/home" },
     { id: 2, title: "Servicios", path: "/services" },
@@ -69,8 +83,8 @@ export default function Header() {
   const alertLogin = () => {
     Swal.fire({
       title: "Ingresa el codigo para iniciar sesión",
-      html: `<input id="loginCode" placeholder="Codigo"/> <br/> `,
-     confirmButtonText: `Confirmar`,
+      html: `<input id="loginCode" type="password" placeholder="Codigo"/> <br/> `,
+      confirmButtonText: `Confirmar`,
       confirmButtonColor: "#009d71",
       showCancelButton: true,
       cancelButtonText: `Cancelar`,
@@ -82,30 +96,31 @@ export default function Header() {
       }
     });
 
-const checkSecret = (loginCode) =>{
-    if (loginCode === secret) {
-      window.location.href = "/login";
-    } else {
-      Swal.fire({
-        title: "Código incorrecto",
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
-    }
-  }
-}
+    const checkSecret = (loginCode) => {
+      console.log(loginCode, secret);
+      if (loginCode === secret) {
+        window.location.href = "/login";
+      } else {
+        Swal.fire({
+          title: "Código incorrecto",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
+    };
+  };
   return (
     <header className="header">
       <div className="header-header">
         <span>Servicios disponibles en Ibagué y Bogotá</span>
-        {checkLogin() ? (
+        {CheckLogin() ? (
           <p onClick={logout} className="logout">
             <CiLogout />
           </p>
         ) : (
-            <p onClick={alertLogin} className="login">
-              <FaSignOutAlt />
-            </p>
+          <p onClick={alertLogin} className="login">
+            <FaSignOutAlt />
+          </p>
         )}
       </div>
       <div className="header-main">
@@ -128,8 +143,8 @@ const checkSecret = (loginCode) =>{
             hidden
               ? "hidden"
               : showSearchbar
-                ? "search-div"
-                : "hidden-search-bar"
+              ? "search-div"
+              : "hidden-search-bar"
           }`}
         >
           <input onChange={searchBar} className="input-search" type="text" />
@@ -139,8 +154,8 @@ const checkSecret = (loginCode) =>{
             hidden
               ? "hidden"
               : searchParams
-                ? "search-results-container"
-                : "hidden"
+              ? "search-results-container"
+              : "hidden"
           }`}
         >
           <ul className="search-results-list">
