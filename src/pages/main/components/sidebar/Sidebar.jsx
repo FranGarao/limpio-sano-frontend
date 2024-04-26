@@ -80,7 +80,7 @@ export default function Sidebar() {
           <div className="sidebar-footer">
             <img className="network-icon" src={instagram} alt="instagram" />
             <img className="network-icon" src={facebook} alt="facebook" />
-            <img className="network-icon" src={whatsapp} alt="whatsapp" />
+            {/* <img className="network-icon" src={whatsapp} alt="whatsapp" /> */}
           </div>
         </nav>
       </div>

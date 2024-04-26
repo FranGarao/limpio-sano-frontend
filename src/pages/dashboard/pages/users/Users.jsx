@@ -224,6 +224,7 @@ export default function Users() {
       </section>
     </div>
   );
+<<<<<<< HEAD
 }
 
 {
@@ -254,3 +255,6 @@ export default function Users() {
   editar
 </button> */
 }
+=======
+}
+>>>>>>> 5ff5752b87bd2c136a2e66d7ced5cbede906a9bf

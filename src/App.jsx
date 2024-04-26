@@ -22,8 +22,14 @@ import Users from "./pages/dashboard/pages/users/Users";
 import Service from "./pages/dashboard/pages/services/Service";
 import DBFaqs from "./pages/dashboard/pages/faqs/dbFaqs";
 import DBCategories from "./pages/dashboard/pages/categories/dbCategories";
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 5ff5752b87bd2c136a2e66d7ced5cbede906a9bf
 
 function App() {
+
   const [admin, setAdmin] = useState(false);
   //! const [token, setToken] = useState("");
   useEffect(() => {
