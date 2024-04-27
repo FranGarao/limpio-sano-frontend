@@ -70,7 +70,7 @@ export default function Header() {
     Swal.fire({
       title: "Ingresa el codigo para iniciar sesión",
       html: `<input id="loginCode" placeholder="Codigo"/> <br/> `,
-     confirmButtonText: `Confirmar`,
+      confirmButtonText: `Confirmar`,
       confirmButtonColor: "#009d71",
       showCancelButton: true,
       cancelButtonText: `Cancelar`,
@@ -82,18 +82,18 @@ export default function Header() {
       }
     });
 
-const checkSecret = (loginCode) =>{
-    if (loginCode === secret) {
-      window.location.href = "/login";
-    } else {
-      Swal.fire({
-        title: "Código incorrecto",
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
-    }
-  }
-}
+    const checkSecret = (loginCode) => {
+      if (loginCode === secret) {
+        window.location.href = "/login";
+      } else {
+        Swal.fire({
+          title: "Código incorrecto",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      }
+    };
+  };
   return (
     <header className="header">
       <div className="header-header">
@@ -103,14 +103,9 @@ const checkSecret = (loginCode) =>{
             <CiLogout />
           </p>
         ) : (
-<<<<<<< HEAD
-          <Link to="/login">
-            <p className="login">
-=======
-            <p onClick={alertLogin} className="login">
->>>>>>> 5ff5752b87bd2c136a2e66d7ced5cbede906a9bf
-              <FaSignOutAlt />
-            </p>
+          <p onClick={alertLogin} className="login">
+            <FaSignOutAlt />
+          </p>
         )}
       </div>
       <div className="header-main">
