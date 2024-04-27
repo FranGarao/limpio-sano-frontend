@@ -4,10 +4,8 @@ import "./Sidebar.scss";
 import burgerMenu from "../../../../assets/icons/burgerMenu.svg";
 import facebook from "../../../../assets/footer-icons/facebook.svg";
 import instagram from "../../../../assets/footer-icons/instagram.svg";
-import whatsapp from "../../../../assets/footer-icons/whatsapp.svg";
 import xmark from "../../../../assets/icons/xmark.svg";
-import Cookie from "js-cookie";
-import checkLogin from "../../../../hooks/checkLogin";
+import CheckLogin from "../../../../hooks/checkLogin";
 
 export default function Sidebar() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -15,8 +13,8 @@ export default function Sidebar() {
   const [login, setLogin] = useState(false);
 
   useEffect(() => {
-    const session = checkLogin();
-    console.log({ checkLogin: checkLogin() });
+    const session = CheckLogin();
+    console.log({ checkLogin: CheckLogin() });
     if (session) {
       setLogin(true);
     }

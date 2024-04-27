@@ -8,14 +8,35 @@ import Header from "../main/components/header/Header";
 import Footer from "../main/components/footer/Footer";
 import whatsapp from "../../assets/footer-icons/whatsapp.svg";
 import { Helmet } from "react-helmet";
+import useApiRequest from "../../hooks/useApiRequest";
+import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   // const { isLoggedIn } = useContext(AuthContext);
-
+  const { get } = useApiRequest();
+  const [response, setResponse] = useState(null);
   // if (!isLoggedIn) {
   //   console.log("ta logueado");
   // }
+  const verify = () => {
+    get("/users/verify/session")
+      .then((res) => {
+        setResponse(res.ok);
+        console.log(res);
+      })
+      .catch((error) => {
+        setResponse(error.ok);
+        console.log(error);
+      });
+  };
 
+  useEffect(() => {
+    verify();
+    //TODO: agregar que se borren las cookies si no esta logueado (opcional)
+    response ? null : window.location.replace("/home");
+  }, []);
+
+  console.log({response});
   return (
     <>
       <Helmet>
@@ -28,7 +49,7 @@ export default function Dashboard() {
         <main className="main">
           <h1>Bienvenido al panel de control</h1>
           <div>
-            <Link to='/dashboard/services'>
+            <Link to="/dashboard/services">
               <button>Servicios</button>
             </Link>
             <Link to="/dashboard/users">

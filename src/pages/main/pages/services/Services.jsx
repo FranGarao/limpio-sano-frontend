@@ -62,19 +62,21 @@ export default function Services() {
       <Helmet>
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
-      <h2 className="service-title">Servicios</h2>
+      <div className="container">
+      <h2 className="service-title">SERVICIOS</h2>
+</div>
 
       <div className="filter-ctn">
-        <label className="filter-title" htmlFor="categoryFilter">
+        {/* <label className="filter-title" htmlFor="categoryFilter">
           Categoria
-        </label>
+        </label> */}
         <select
           className="filter-btn"
           onChange={handleFilter}
           name="categoryFilter"
           type="text"
         >
-          <option value="0">VER TODAS</option>
+          <option value="0">TODAS</option>
           {categories.map((category) => (
             <option key={category?.id} value={category?.id}>
               {category?.title?.toUpperCase()}

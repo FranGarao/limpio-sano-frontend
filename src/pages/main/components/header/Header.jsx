@@ -5,7 +5,7 @@ import "./Header.scss";
 import Swal from "sweetalert2";
 import search from "../../../../assets/icons/search.svg";
 import useApiRequest from "../../../../hooks/useApiRequest";
-import checkLogin from "../../../../hooks/checkLogin";
+import CheckLogin from "../../../../hooks/checkLogin";
 import { FaSignOutAlt } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 
@@ -14,13 +14,27 @@ export default function Header() {
   const [hidden, setHidden] = useState(true);
   const [searchParams, setSearchParams] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const { post } = useApiRequest();
+  const [secret, setSecret] = useState("");
+  
+  const { post, get } = useApiRequest();
   useEffect(() => {
+    getSecret();
     if (showSearchbar) {
       setHidden(false);
     }
   }, [showSearchbar]);
-  const secret = "pepe12345";
+
+  const getSecret = async () =>
+    await get("/users/secret")
+      .then((response) => {
+        console.log(response);
+        setSecret(response?.secret?.secret)
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+
   const possibleSearcher = [
     { id: 1, title: "Inicio", path: "/home" },
     { id: 2, title: "Servicios", path: "/services" },
@@ -69,7 +83,11 @@ export default function Header() {
   const alertLogin = () => {
     Swal.fire({
       title: "Ingresa el codigo para iniciar sesión",
+<<<<<<< HEAD
       html: `<input id="loginCode" placeholder="Codigo"/> <br/> `,
+=======
+      html: `<input id="loginCode" type="password" placeholder="Codigo"/> <br/> `,
+>>>>>>> 2edf128d0c5e88a0e314c3f815a21b9c2a63b48c
       confirmButtonText: `Confirmar`,
       confirmButtonColor: "#009d71",
       showCancelButton: true,
@@ -83,6 +101,10 @@ export default function Header() {
     });
 
     const checkSecret = (loginCode) => {
+<<<<<<< HEAD
+=======
+      console.log(loginCode, secret);
+>>>>>>> 2edf128d0c5e88a0e314c3f815a21b9c2a63b48c
       if (loginCode === secret) {
         window.location.href = "/login";
       } else {
@@ -98,7 +120,7 @@ export default function Header() {
     <header className="header">
       <div className="header-header">
         <span>Servicios disponibles en Ibagué y Bogotá</span>
-        {checkLogin() ? (
+        {CheckLogin() ? (
           <p onClick={logout} className="logout">
             <CiLogout />
           </p>
@@ -128,8 +150,8 @@ export default function Header() {
             hidden
               ? "hidden"
               : showSearchbar
-                ? "search-div"
-                : "hidden-search-bar"
+              ? "search-div"
+              : "hidden-search-bar"
           }`}
         >
           <input onChange={searchBar} className="input-search" type="text" />
@@ -139,8 +161,8 @@ export default function Header() {
             hidden
               ? "hidden"
               : searchParams
-                ? "search-results-container"
-                : "hidden"
+              ? "search-results-container"
+              : "hidden"
           }`}
         >
           <ul className="search-results-list">

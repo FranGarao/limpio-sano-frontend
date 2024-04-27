@@ -1,6 +1,6 @@
 import Cookie from "js-cookie";
 
-const checkLogin = () => {
+const CheckLogin = () => {
   let login = false;
   const session = Cookie.get("token");
 
@@ -12,4 +12,4 @@ const checkLogin = () => {
   }
 };
 
-export default checkLogin;
+export default CheckLogin;
