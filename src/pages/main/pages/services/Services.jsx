@@ -63,13 +63,10 @@ export default function Services() {
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
       <div className="container">
-      <h2 className="service-title">SERVICIOS</h2>
-</div>
+        <h2 className="service-title">SERVICIOS</h2>
+      </div>
 
       <div className="filter-ctn">
-        {/* <label className="filter-title" htmlFor="categoryFilter">
-          Categoria
-        </label> */}
         <select
           className="filter-btn"
           onChange={handleFilter}

@@ -4,11 +4,22 @@ import Header from "./components/header/Header";
 import whatsapp from "../../assets/icons/whatsappFixed.svg";
 import Footer from "./components/footer/Footer";
 import { Helmet } from "react-helmet";
-// import QRCode from "qrcode";
-// import QRCode from "react-qr-code";
-// import $ from "jquery";
+import { useState, useEffect } from "react";
+import { GoChevronUp } from "react-icons/go";
 
 export default function MainPage() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScrollY(window.scrollY);
+    });
+  }, []);
+
+  const toTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <Helmet>
@@ -17,14 +28,18 @@ export default function MainPage() {
 
       <div id="main-page">
         <Header />
-
         <main className="main">
+          {scrollY > 500 ? (
+            <button
+              title="Ir al inicio"
+              className="to-top"
+              href="#header"
+              onClick={toTop}
+            >
+              <GoChevronUp className="to-top-icon" />
+            </button>
+          ) : null}
           <Outlet />
-          {/* <div id="qrcode"></div>
-        <h2 id="test">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure adipisci at, vero enim totam porro cumque soluta earum maiores et beatae aliquid nulla cupiditate voluptates natus. Illo modi impedit natus?</h2>
-<div style={{ background: 'white', padding: '16px' }}>
-    <QRCode value={"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"}/>
-</div> */}
         </main>
         <a
           href={`https://wa.me/573225292067?text=¡Hola!%20Queria%20mas%20informacion%20sobre%20los servicios%20que%20ofrecen`}

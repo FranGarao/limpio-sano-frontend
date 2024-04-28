@@ -1,44 +1,37 @@
 import "./Contact.scss";
 import { Helmet } from "react-helmet";
-// import emailjs from "emailjs-com";
+import { useState, useEffect } from "react";
+import {
+  GetServices,
+  GetCategories,
+  GetServiceByCategory,
+} from "../../../../hooks/servicesHook";
 
 export default function Contact() {
-  const handleSubmit = (event) => {
-    //   event.preventDefault();
-    //   const name = event.target.elements.name.value;
-    //   const lastName = event.target.elements.lastName.value;
-    //   const email = event.target.elements.email.value;
-    //   const phoneNumber = event.target.elements.phoneNumber.value;
-    //   const city = event.target.elements.city.value;
-    //   const establishment = event.target.elements.establishment.value;
-    //   const message = event.target.elements.message.value;
-    //   const finalEmail = {
-    //     name,
-    //     lastName,
-    //     email,
-    //     phoneNumber,
-    //     city,
-    //     establishment,
-    //     message,
-    //   };
-    //   console.log(finalEmail);
-    //   // emailjs.init("user_your_emailjs_user_id");
-    //   // Envía el correo electrónico
-    //   // emailjs
-    //     .sendForm(
-    //       "your_service_id",
-    //       "your_template_id",
-    //       finalEmail,
-    //       "user_your_emailjs_user_id"
-    //     )
-    //     .then((result) => {
-    //       console.log("Correo electrónico enviado correctamente", result.text);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error al enviar el correo electrónico", error);
-    //     });
-    //   return finalEmail;
+  const [clientType, setClientType] = useState(0); // [0, 1]
+  const [services, setServices] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [servicesByCat, setservicesByCat] = useState(0);
+  const handleClientType = (event) => {
+    setClientType(event.target.value);
   };
+
+  const handleCategory = async (event) => {
+    console.log(event.target.value);
+    setservicesByCat(event.target.value);
+    if (servicesByCat) {
+      setServices(await GetServiceByCategory(servicesByCat));
+    }
+  };
+
+  useEffect(() => {
+    GetCategories()
+      .then((data) => setCategories(data))
+      .catch((error) => console.log(error));
+    GetServices()
+      .then((data) => setServices(data))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <>
@@ -47,20 +40,40 @@ export default function Contact() {
       </Helmet>
 
       <section className="contact">
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form">
           <h2 className="contact-title">Contáctanos</h2>
-          <div className="name-container">
-            <label className="name-label" htmlFor="name">
-              Nombre
-            </label>
-            <input className="name-input" type="text" id="name" />
-          </div>
-          <div className="name-container">
-            <label className="name-label" htmlFor="lastName">
-              Apellido
-            </label>
-            <input className="name-input" type="text" id="lastName" />
-          </div>
+          <select
+            onChange={handleClientType}
+            name="client-type"
+            id="client-type"
+          >
+            <option value="0">Empresa - Otro</option>
+            <option value="1">Persona xd</option>
+          </select>
+          {clientType == 0 ? (
+            <div className="name-container">
+              <label className="name-label" htmlFor="business-name">
+                Razon Social
+              </label>
+              <input className="name-input" type="text" id="name" />
+            </div>
+          ) : (
+            <>
+              <div className="name-container">
+                <label className="name-label" htmlFor="name">
+                  Nombre
+                </label>
+                <input className="name-input" type="text" id="name" />
+              </div>
+              <div className="name-container">
+                <label className="name-label" htmlFor="lastName">
+                  Apellido
+                </label>
+                <input className="name-input" type="text" id="lastName" />
+              </div>
+            </>
+          )}
+
           <div className="email-container">
             <label className="email-label" htmlFor="email">
               Correo Electrónico
@@ -82,12 +95,26 @@ export default function Contact() {
           </div>
           <div className="service-container">
             <label htmlFor="establishment">¿Qué establecimiento?</label>
+            <select
+              onChange={handleCategory}
+              className="service-select"
+              id="establishment"
+            >
+              {categories.map((category) => (
+                <option key={category?.id} value={category?.id}>
+                  {category?.title.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="service-container">
+            <label htmlFor="establishment">¿Qué servicio?</label>
             <select className="service-select" id="establishment">
-              <option value="casa">Casa</option>
-              <option value="oficina">Oficina</option>
-              <option value="empresa">Empresa</option>
-              <option value="cafeteria">Cafetería</option>
-              <option value="horizontal">Propiedad Horizontal</option>
+              {services.map((service) => (
+                <option key={service?.id} value={service?.id}>
+                  {service?.title.toUpperCase()}
+                </option>
+              ))}
             </select>
           </div>
           <div className="message-container">

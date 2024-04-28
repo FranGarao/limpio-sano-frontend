@@ -23,15 +23,15 @@
     background-color: #1d30ad;
     padding: 10px;
     border: 1px solid #1d30ad;
+    color: #fff;
     option {
+      color: #fff;
+      padding: 3px 0;
       font-size: 13px;
-    }
-    option:hover {
-      background-color: #009d71;
-      color: #009d71;
     }
   }
 }
+
 .services-container {
   display: flex;
   flex-direction: column !important;
