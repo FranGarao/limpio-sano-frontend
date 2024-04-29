@@ -38,6 +38,7 @@ export default function Contact() {
   };
 
   const handleSubmit = (event) => {
+
     event.preventDefault();
     console.log(formValues);
   };
@@ -84,7 +85,8 @@ export default function Contact() {
                 value={formValues.bussines}
                 className="name-input"
                 type="text"
-                id="name"
+                id="bussines"
+                name="bussines"
               />
             </div>
           ) : (
@@ -99,6 +101,7 @@ export default function Contact() {
                   className="name-input"
                   type="text"
                   id="name"
+                  name="name"
                 />
               </div>
               <div className="name-container">
@@ -111,6 +114,7 @@ export default function Contact() {
                   className="name-input "
                   type="text"
                   id="lastName"
+                  name="lastName"
                 />
               </div>
             </>
@@ -126,18 +130,20 @@ export default function Contact() {
               className="email-input "
               type="email"
               id="email"
+              name="email"
             />
           </div>
           <div className="phone-container">
             <label className="phone-label" htmlFor="phoneNumber">
               Numero de Teléfono
             </label>
-            <input
+            <input readOnly={false}
               onChange={handleChange}
               value={formValues.phoneNumber}
               className="phone-input "
               type="text"
               id="phoneNumber"
+              name="phoneNumber"
             />
           </div>
           <div className="location-container">
@@ -147,6 +153,7 @@ export default function Contact() {
               value={formValues.city}
               className="location-select"
               id="city"
+              name="city"
             >
               <option value="ibague">Ibagué</option>
               <option value="bogota">Bogotá</option>
@@ -159,6 +166,7 @@ export default function Contact() {
               value={formValues.establishment}
               className="service-select"
               id="establishment"
+              name="establishment"
             >
               {categories.map((category) => (
                 <option key={category?.id} value={category?.id}>
@@ -168,12 +176,13 @@ export default function Contact() {
             </select>
           </div>
           <div className="service-container">
-            <label htmlFor="establishment">¿Qué servicio?</label>
+            <label htmlFor="servicio">¿Qué servicio?</label>
             <select
               onChange={handleChange}
               value={formValues.service}
               className="service-select"
-              id="establishment"
+              id="service"
+              name="service"
             >
               {services.map((service) => (
                 <option key={service?.id} value={service?.id}>
@@ -216,6 +225,7 @@ export default function Contact() {
               value={formValues.message}
               className="message-textarea"
               id="message"
+              name="message"
             ></textarea>
           </div>
           <button className="submit" type="submit">
