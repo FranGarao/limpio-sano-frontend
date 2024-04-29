@@ -186,18 +186,26 @@ export default function Contact() {
             <label htmlFor="" className="date-label">
               Rango de fechas
             </label>
-            <input
-              onChange={handleChange}
-              value={formValues.startDate}
-              type="date"
-              className="date-input "
-            />
-            <input
-              onChange={handleChange}
-              value={formValues.endDate}
-              type="date"
-              className="date-input "
-            />
+            <div>
+              <label htmlFor="startDate">Desde</label>
+              <input
+                onChange={handleChange}
+                value={formValues.startDate}
+                type="date"
+                className="date-input"
+                name="startDate"
+              />
+            </div>
+            <div>
+              <label htmlFor="endDate">Hasta</label>
+              <input
+                onChange={handleChange}
+                value={formValues.endDate}
+                type="date"
+                name="endDate"
+                className="date-input "
+              />
+            </div>
           </div>
           <div className="message-container">
             <label className="message-label" htmlFor="message">
