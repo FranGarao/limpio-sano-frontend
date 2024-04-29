@@ -9,7 +9,7 @@ $wc: #e4e4e4;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-height: 100vh;
+  min-height: 90vh;
   width: 90%;
   align-items: center;
   .contact-form {
@@ -17,8 +17,8 @@ $wc: #e4e4e4;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 100%;
-    min-height: 70%;
+    width: 95%;
+    max-height: 60%;
     background-image: linear-gradient(
         112.5deg,
         rgb(214, 214, 214) 0%,
@@ -73,27 +73,70 @@ $wc: #e4e4e4;
       linear-gradient(96deg, rgb(195, 195, 195), rgb(228, 228, 228));
     background-blend-mode: overlay, overlay, overlay, normal;
     border: 2px solid #909192;
-    box-shadow:
-      rgba(14, 30, 37, 0.12) 0px 8px 19px 0px,
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 8px 19px 0px,
       rgba(14, 30, 37, 0.32) 0px 8px 16px 0px;
     color: $black-color;
     border-radius: 15px;
     backdrop-filter: blur(10px);
     justify-content: center;
     padding: 0 10px;
+
     .contact-title {
       margin: 30px 0 10px 0;
+      align-self: center;
+      font-size: 2em;
+      color: #009d71a4;
     }
+    .client-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 70%;
+      height: 14%;
+      align-items: flex-start;
+      .client-label {
+        position: relative;
+        padding: 5px 0;
+        top: 15px;
+        align-self: flex-start;
+        left: 5px;
+        padding: 0 7px;
+        margin: 0 0 3px 10px;
+        background-color: #fdfdfd;
+        border-radius: 8px;
+        font-weight: 650;
+        color: #1d1d1dcb;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+      }
+      .client-select {
+        margin-top: 5px;
+        width: 80% !important;
+        height: 35px;
+        background-color: transparent;
+        padding: 5px 25px;
+        color: #1d1d1d;
+        animation: inputNotFocus 0.3s forwards;
+        border: 2px solid #909192;
+        -webkit-animation: inputNotFocus 0.3s forwards;
+      }
+    }
+
     .name-container {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      justify-content: center;
+      width: 70%;
       height: 14%;
       align-items: flex-start;
+      margin: 5px 0;
       .name-label {
         position: relative;
         padding: 5px 0;
         top: 15px;
+        align-self: flex-start;
         left: 5px;
         padding: 0 7px;
         margin: 0 0 5px 10px;
@@ -110,12 +153,12 @@ $wc: #e4e4e4;
         width: 80% !important;
         height: 35px;
         background-color: #fdfdfd;
-        border-radius: 15px;
         padding: 5px 25px;
         caret-color: #0b57d0;
         color: #1d1d1d;
         animation: inputNotFocus 0.3s forwards;
-        border: 2px solid #909192;
+        border: none;
+        border-bottom: 2px solid #909192;
         -webkit-animation: inputNotFocus 0.3s forwards;
       }
       .name-input::placeholder {
@@ -162,13 +205,14 @@ $wc: #e4e4e4;
       @extend .name-container;
       label {
         @extend .name-label;
+        margin-left: 0;
+        padding-left: 0;
       }
       .location-select {
         margin-top: 5px;
         width: 80% !important;
         height: 35px;
-        background-color: #fdfdfd;
-        border-radius: 15px;
+        background-color: transparent;
         padding: 5px 25px;
         color: #1d1d1d;
         animation: inputNotFocus 0.3s forwards;
@@ -185,6 +229,17 @@ $wc: #e4e4e4;
         @extend .location-select;
       }
     }
+
+    .date-container {
+      @extend .name-container;
+      .date-label {
+        @extend .name-label;
+      }
+      .date-input {
+        @extend .name-input;
+      }
+    }
+
     .message-container {
       @extend .name-container;
       height: 250px;
@@ -196,10 +251,11 @@ $wc: #e4e4e4;
       .message-textarea {
         width: 100%;
         height: 100%;
-        background-color: $wc;
+        background-color: transparent;
         border-radius: 12px;
         padding: 10px 15px;
-        border: 2px solid #909192;
+        border: none;
+        border: 1px solid #1c1c1c;
         color: $black-color;
         animation: textNotFocus 0.3s forwards;
         -webkit-border-radius: 12px;

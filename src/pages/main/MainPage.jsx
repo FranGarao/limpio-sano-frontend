@@ -41,7 +41,6 @@ export default function MainPage() {
             </button>
           ) : null}
           <Outlet />
-          <Slider />
         </main>
         <a
           href={`https://wa.me/573225292067?text=¡Hola!%20Queria%20mas%20informacion%20sobre%20los servicios%20que%20ofrecen`}

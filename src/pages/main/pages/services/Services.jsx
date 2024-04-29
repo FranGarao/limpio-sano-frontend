@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
 import "./Service.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
+import Alert from "../../../../hooks/alerts";
 
 export default function Services() {
   const [services, setServices] = useState([]);
@@ -55,6 +56,19 @@ export default function Services() {
       backRotate.classList.remove("back-rotate");
     }
   }
+
+  const confirmService = () => {
+    Alert(
+      "Elija un tipo",
+      "Que tipo de servicio desea?",
+      "info",
+      "Ocasional",
+      "Fijo"
+    )
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   /* FIN rotar cards */
   return (
@@ -111,7 +125,9 @@ export default function Services() {
                     />
                   </div>
                   <div className="btn-ctn">
-                    <button title="Alquilar">Alquilar</button>
+                    <button onClick={confirmService} title="Alquilar">
+                      Alquilar
+                    </button>
                     <button title="Más información" onClick={flipped}>
                       Más información
                     </button>

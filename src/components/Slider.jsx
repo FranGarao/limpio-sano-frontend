@@ -25,7 +25,7 @@ function Slider() {
   return (
     <div className="slider">
       {images.map((image, i) => (
-        <img
+        <img className="slider-image"
           key={i}
           src={image?.url}
           alt=""
