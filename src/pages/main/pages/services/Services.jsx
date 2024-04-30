@@ -3,12 +3,15 @@ import { Helmet } from "react-helmet";
 import { useEffect, useState } from "react";
 import "./Service.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
-import Alert from "../../../../hooks/alerts";
+// import Alert from "../../../../hooks/alerts";
+import Alert from "../../../../components/Alert/Alert";
 
 export default function Services() {
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
   const [clear, setClear] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
+
   const { get } = useApiRequest();
   useEffect(() => {
     get("/services")
@@ -58,17 +61,8 @@ export default function Services() {
   }
 
   const confirmService = () => {
-    Alert(
-      "Elija un tipo",
-      "Que tipo de servicio desea?",
-      "info",
-      "Ocasional",
-      "Fijo"
-    )
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    setShowAlert(true);
+ };
 
   /* FIN rotar cards */
   return (
@@ -95,7 +89,8 @@ export default function Services() {
           ))}
         </select>
       </div>
-      <section className="services-container">
+      <section className="services-container">  
+        {showAlert && <Alert setShowAlert={setShowAlert} />}
         {categories.map((category) => (
           <div
             className={category?.id == clear || clear == 0 ? "exist" : "hidden"}

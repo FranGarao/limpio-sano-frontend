@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-
+import RedirectTo from "./RedirectTo";
 export default function Alert(
   title,
   text,
@@ -19,11 +19,9 @@ export default function Alert(
   })
     .then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Redireccionando...");
-        window.location.href =
-          "https://wa.me/573225292067?text=¡Hola!%20Queria%20mas%20informacion%20sobre%20los servicios%20que%20ofrecen";
+        RedirectTo("/contact")
       } else {
-        window.location.href = "/contact";
+        RedirectTo("/contact")
       }
     })
     .catch((error) => {

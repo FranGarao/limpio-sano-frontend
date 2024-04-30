@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Login.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -9,8 +10,12 @@ export default function Login() {
   const [error, setError] = useState("");
   const [faVerify, setFaVerify] = useState(false);
   const [userId, setUserId] = useState("");
-
+  const navigate = useNavigate();
   const { post } = useApiRequest();
+
+  const redirect = (path) => {
+    navigate(path);
+  };
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -39,7 +44,7 @@ export default function Login() {
   };
 
   const login = async () => {
-    window.location.href = "/dashboard";
+    redirect('/dashboard/users');
   };
 
   const handleFaCode = (e) => {

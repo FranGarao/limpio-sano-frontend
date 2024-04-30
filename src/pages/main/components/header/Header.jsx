@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import "./Header.scss";
 import Swal from "sweetalert2";
@@ -15,6 +15,7 @@ export default function Header() {
   const [searchParams, setSearchParams] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [secret, setSecret] = useState("");
+  const navigate = useNavigate();  
 
   const { post, get } = useApiRequest();
   useEffect(() => {
@@ -68,18 +69,19 @@ export default function Header() {
         Swal.fire({
           title: "Sesion cerrada",
           icon: "success",
-          confirmButtonText: "Ok",
         });
         setTimeout(() => {
-          window.location.href = "/";
-        }, 1000);
+          redirect("/");
+        }, 600);
         return response;
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
+   const redirect = (path) => {
+    navigate(path);
+    };
   const alertLogin = () => {
     Swal.fire({
       title: "Ingresa el codigo para iniciar sesión",
@@ -96,9 +98,11 @@ export default function Header() {
       }
     });
 
+ 
+
     const checkSecret = (loginCode) => {
       if (loginCode === secret) {
-        window.location.href = "/login";
+        redirect('/login');
       } else {
         Swal.fire({
           title: "Código incorrecto",
