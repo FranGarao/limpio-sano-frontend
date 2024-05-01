@@ -73,7 +73,8 @@ $wc: #e4e4e4;
       linear-gradient(96deg, rgb(195, 195, 195), rgb(228, 228, 228));
     background-blend-mode: overlay, overlay, overlay, normal;
     border: 2px solid #909192;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 8px 19px 0px,
+    box-shadow:
+      rgba(14, 30, 37, 0.12) 0px 8px 19px 0px,
       rgba(14, 30, 37, 0.32) 0px 8px 16px 0px;
     color: $black-color;
     border-radius: 15px;
@@ -85,7 +86,7 @@ $wc: #e4e4e4;
       margin: 30px 0 10px 0;
       align-self: center;
       font-size: 2em;
-      color: #009d71a4;
+      color: #009d71da;
     }
     .client-container {
       display: flex;

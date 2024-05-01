@@ -1,6 +1,7 @@
 import "./Contact.scss";
 import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   GetCategories,
   GetServiceByCategory,
@@ -26,7 +27,11 @@ export default function Contact() {
   });
 
   const handleChange = (event) => {
-    console.log(event.target.value);
+    event.target.name === "establishment"
+      ? (async () => {
+          setServices(await GetServiceByCategory(event.target.value));
+        })()
+      : null;
     setFormValues({
       ...formValues,
       [event.target.name]: event.target.value,
@@ -38,7 +43,6 @@ export default function Contact() {
   };
 
   const handleSubmit = (event) => {
-
     event.preventDefault();
     console.log(formValues);
   };
@@ -137,7 +141,8 @@ export default function Contact() {
             <label className="phone-label" htmlFor="phoneNumber">
               Numero de Teléfono
             </label>
-            <input readOnly={false}
+            <input
+              readOnly={false}
               onChange={handleChange}
               value={formValues.phoneNumber}
               className="phone-input "
