@@ -1,0 +1,27 @@
+.alert {
+  width: 70vw;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10%;
+  height: 30vh;
+  z-index: 99999;
+  background-color: #fff;
+  border-radius: 10px;
+  .oc-btn {
+    width: 40%;
+    margin-top: 1rem;
+    background-color: #3e2db9;
+  }
+  .fij-btn {
+    width: 40%;
+    margin-top: 1rem;
+  }
+  .alert-text {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+  }
+}

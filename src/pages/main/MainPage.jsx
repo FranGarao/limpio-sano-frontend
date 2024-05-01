@@ -6,7 +6,6 @@ import Footer from "./components/footer/Footer";
 import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
 import { GoChevronUp } from "react-icons/go";
-import Slider from "../../components/Slider";
 
 export default function MainPage() {
   const [scrollY, setScrollY] = useState(0);
