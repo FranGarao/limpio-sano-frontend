@@ -43,6 +43,7 @@ $green-color: #009d71;
     .title {
       font-size: 2rem;
       font-weight: bold;
+      
       color: $blue-color;
       cursor: pointer;
       text-decoration: none;
@@ -133,6 +134,14 @@ $green-color: #009d71;
       }
     }
   }
+}
+
+#loginCode {
+  height: 20px;
+  background-color: transparent;
+  color: #000000;
+  padding: 10px;
+  border: 3px solid #242424;
 }
 
 @keyframes slideInSearch {

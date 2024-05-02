@@ -1,10 +1,7 @@
 import { Helmet } from "react-helmet";
-// import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Service.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
-// import Alert from "../../../../hooks/alerts";
-import Alert from "../../../../components/Alert/Alert";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +9,6 @@ export default function Services() {
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
   const [clear, setClear] = useState(0);
-  const [showAlert, setShowAlert] = useState(false);
 
   const { get } = useApiRequest();
   useEffect(() => {
@@ -63,7 +59,7 @@ export default function Services() {
   }
 
   const navigate = useNavigate();
-  const confirmService = () => {
+  const confirmService = (service) => {
     Swal.fire({
       title: "Selecciona la regularidad",
       icon: "info",
@@ -71,12 +67,15 @@ export default function Services() {
       confirmButtonText: "Ocasional",
       showDenyButton: true,
       denyButtonText: "Fijo",
+      confirmButtonColor: "#009d71",
+      denyButtonColor: "#1d30ad",
       cancelButtonText: "Cancelar",
+      cancelButtonColor: "#00000057",
     }).then((result) => {
       if (result.isConfirmed) {
-        redirect("/contact"); // reemplaza 'url1' con la URL a la que deseas redirigir para el primer botón
+        window.open(`https://wa.me/573225292067?text=¡Hola!%20Queria%20mas%20informacion%20sobre%20el servicio de %20${service}%20que%20ofrecen`, '_blank');
       } else if (result.isDenied) {
-        redirect("/login"); // reemplaza 'url2' con la URL a la que deseas redirigir para el segundo botón
+        redirect("/contact"); // reemplaza 'url2' con la URL a la que deseas redirigir para el segundo botón
       }
     });
 
@@ -112,7 +111,6 @@ export default function Services() {
       </div>
 
       <section className="services-container">
-        {showAlert && <Alert setShowAlert={setShowAlert} />}
         {categories.map((category) => (
           <div
             className={category?.id == clear || clear == 0 ? "exist" : "hidden"}
@@ -142,7 +140,7 @@ export default function Services() {
                     />
                   </div>
                   <div className="btn-ctn">
-                    <button onClick={confirmService} title="Alquilar">
+                    <button onClick={()=>confirmService(service?.title)} title="Alquilar">
                       Alquilar
                     </button>
                     <button title="Más información" onClick={flipped}>

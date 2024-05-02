@@ -2,3 +2,36 @@
 //   text-align: start;
 //   padding: 20px;
 // }
+
+.about-ctn {
+  position: relative;
+  bottom: 160px;
+  background-color: rgba(250, 235, 215, 0.377);
+  padding: 20px;
+  text-align: start;
+  border-radius: 0 50px 0 50px;
+  h2 {
+    color: #1d30ad;
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+  }
+}
+.about-contact {
+  position: relative;
+  background-color: rgba(250, 235, 215, 0.377);
+  border-radius: 100px 0 100px 50px;
+  bottom: 100px;
+  padding: 20px 5px;
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

@@ -85,14 +85,14 @@ export default function Header() {
   const alertLogin = () => {
     Swal.fire({
       title: "Ingresa el codigo para iniciar sesión",
-      html: `<input id="loginCode" type="password" placeholder="Codigo"/> <br/> `,
+      html: `<input className='login-btn' id="loginCode" type="password" /> <br/> `,
       confirmButtonText: `Confirmar`,
       confirmButtonColor: "#009d71",
       showCancelButton: true,
       cancelButtonText: `Cancelar`,
     }).then((result) => {
       const loginCode = document.getElementById("loginCode").value;
-
+      
       if (result.isConfirmed) {
         checkSecret(loginCode);
       }
