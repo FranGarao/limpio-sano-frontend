@@ -7,12 +7,13 @@ import {
   GetCategories,
   GetServiceByCategory,
 } from "../../../../hooks/servicesHook";
+import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Contact() {
   const [clientType, setClientType] = useState(0);
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
-
+  const { post } = useApiRequest();
   const {
     register,
     handleSubmit,
@@ -21,8 +22,10 @@ export default function Contact() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    setServices(await GetServiceByCategory(data?.establishmentRequired));
-
+    // setServices(await GetServiceByCategory(data?.establishmentRequired));
+    post('/contacts/submit', {data})
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error));
     console.log({ data });
     setFormValues(data);
   };
@@ -44,16 +47,11 @@ export default function Contact() {
   });
 
   const handleChange = (e) => {
-    // console.log(value);
     e.target.name === "establishment"
       ? (async () => {
           setServices(await GetServiceByCategory(e.target.value));
         })()
       : null;
-    // setFormValues({
-    //   ...formValues,
-    //   [e.target.name]: e.target.value,
-    // });
   };
 
   const handleClientType = (event) => {
@@ -284,7 +282,6 @@ export default function Contact() {
             <div className="service-container">
               <label htmlFor="establishment">¿Qué establecimiento?</label>
               <select
-                onChange={handleChange}
                 defaultValue={formValues.establishment}
                 className="service-select"
                 id="establishment"
@@ -292,7 +289,13 @@ export default function Contact() {
                 {...register("establishmentRequired", { required: true })}
               >
                 {categories.map((category) => (
-                  <option key={category?.id} value={category?.id}>
+                  <option
+                    onClick={async () =>
+                      setServices(await GetServiceByCategory(category?.id))
+                    }
+                    key={category?.id}
+                    value={category?.id}
+                  >
                     {category?.title.toUpperCase()}
                   </option>
                 ))}

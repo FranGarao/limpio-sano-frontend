@@ -4,6 +4,7 @@ import Slider from "../../../../components/Slider";
 import wsp from "../../../../assets/icons/whatsapp.svg";
 import mail from "../../../../assets/icons/email.svg";
 export default function About() {
+
   return (
     <>
       <Helmet>
@@ -18,7 +19,7 @@ export default function About() {
           <br />
           Ofrecemos atención tanto para hogares como para empresas y oficinas.
           Nuestro equipo de profesionales está capacitado para mantener los
-          espacios en perfectas condiciones. Adaptamos nuestros servicios a las
+          espacios en perfectas condiciones. <br /><br /> Adaptamos nuestros servicios a las
           necesidades de cada cliente, con turnos flexibles desde 2 horas en
           adelante. <br />
           <br />
@@ -29,8 +30,8 @@ export default function About() {
       <div className="about-contact">
         <p>Contactanos!</p>
         <div>
-          <img className="icon" src={mail} alt="" />
-          <img className="icon" src={wsp} alt="" />
+          <img title="enviar un mail" className="icon" src={mail} alt="" />
+          <img title="enviar un whatsapp" className="icon" src={wsp} alt="" />
         </div>
       </div>
     </>

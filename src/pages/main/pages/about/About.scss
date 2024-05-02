@@ -18,20 +18,26 @@
 }
 .about-contact {
   position: relative;
-  background-color: rgba(250, 235, 215, 0.377);
-  border-radius: 100px 0 100px 50px;
+  background-color: rgba(0, 0, 0, 0.377);
+  border-radius: 0px 100px 00px 50px;
   bottom: 100px;
-  padding: 20px 5px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
-
+  p {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+  }
   div {
     display: flex;
     width: 40%;
-    justify-content: space-between;
+    justify-content: space-evenly;
     .icon {
       width: 40px;
       height: 40px;
+      ;
     }
   }
 }

@@ -9,7 +9,6 @@ export default function Services() {
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
   const [clear, setClear] = useState(0);
-
   const { get } = useApiRequest();
   useEffect(() => {
     get("/services")
