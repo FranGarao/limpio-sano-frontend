@@ -13,15 +13,17 @@ export default function Alert() {
   };
 
   return (
-    <div className="alert">
-      <p className="alert-text">Elija la regularidad del servicio</p>
-      <div>
-        <button onClick={handleOc} className="oc-btn">
-          Ocasional
-        </button>
-        <button onClick={handleFij} className="fij-btn">
-          Fijo
-        </button>
+    <div className="background">
+      <div className="alert">
+        <p className="alert-text">Elija la regularidad del servicio</p>
+        <div>
+          <button onClick={handleOc} className="oc-btn">
+            Ocasional
+          </button>
+          <button onClick={handleFij} className="fij-btn">
+            Fijo
+          </button>
+        </div>
       </div>
     </div>
   );

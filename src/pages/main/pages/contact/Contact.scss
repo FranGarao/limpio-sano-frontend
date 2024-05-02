@@ -322,6 +322,11 @@ $wc: #e4e4e4;
     }
   }
 
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+
   @keyframes inputFocus {
     0% {
       width: 70%;

@@ -20,7 +20,9 @@ export default function Contact() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    setServices(await GetServiceByCategory(data?.establishmentRequired));
+
     console.log({ data });
     setFormValues(data);
   };
@@ -41,13 +43,13 @@ export default function Contact() {
     message: "",
   });
 
-  const handleChange = (e, value) => {
+  const handleChange = (e) => {
     // console.log(value);
-    // e.target.name === "establishment"
-    //   ? (async () => {
-    //       setServices(await GetServiceByCategory(e.target.value));
-    //     })()
-    //   : null;
+    e.target.name === "establishment"
+      ? (async () => {
+          setServices(await GetServiceByCategory(e.target.value));
+        })()
+      : null;
     // setFormValues({
     //   ...formValues,
     //   [e.target.name]: e.target.value,
@@ -55,10 +57,12 @@ export default function Contact() {
   };
 
   const handleClientType = (event) => {
+    console.log({ event: event.target.value });
     setClientType(event.target.value);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     GetCategories()
       .then((data) => setCategories(data))
       .catch((error) => console.log(error));
@@ -86,7 +90,6 @@ export default function Contact() {
                 name="client-type"
                 id="client-type"
                 className="client-select"
-                {...register("clientType", { required: true })}
               >
                 <option value="0">Razon Social</option>
                 <option value="1">Persona Fisica</option>
@@ -98,19 +101,28 @@ export default function Contact() {
                   Razon Social
                 </label>
                 <input
-                  onChange={(e) => handleChange(e.target.value)}
                   defaultValue={formValues.bussines}
                   className="name-input"
                   type="text"
                   id="bussines"
                   name="bussines"
-                  {...register("bussinesMin", { minLength: 3 })}
-                  {...register("bussinesMax", { maxLength: 20 })}
-                  {...register("bussinesPattern", {
-                    pattern: /^[A-Za-z]+$/i,
+                  {...register("bussinesRequired", {
+                    required: {
+                      value: true,
+                      message: "El campo es requerido",
+                    },
+                    minLength: { value: 3, message: "Minimo 3 caracteres" },
+                    maxLength: {
+                      value: 20,
+                      message: "Maximo 20 caracteres",
+                    },
+                    pattern: {
+                      value: /^[A-Za-z]+$/i,
+                      message: "Solo se pueden ingresar letras",
+                    },
                   })}
                 />
-                <input
+                {/* <input
                   className="hidden"
                   type="text"
                   value="Razon Social"
@@ -123,7 +135,12 @@ export default function Contact() {
                   type="text"
                   id="lastName"
                   name="lastName"
-                />
+                /> */}
+                {errors.bussinesRequired && (
+                  <span className="error">
+                    *{errors.bussinesRequired.message}
+                  </span>
+                )}
               </div>
             ) : (
               <>
@@ -157,7 +174,9 @@ export default function Contact() {
                     />
                   ) : null}
                   {clientType == 1 && errors.nameRequired && (
-                    <span>{errors.nameRequired.message}</span>
+                    <span className="error">
+                      *{errors.nameRequired.message}
+                    </span>
                   )}
                 </div>
                 <div className="name-container">
@@ -188,7 +207,9 @@ export default function Contact() {
                     })}
                   />
                   {errors.lastNameRequired && (
-                    <span>{errors.lastNameRequired.message}</span>
+                    <span className="error">
+                      *{errors.lastNameRequired.message}
+                    </span>
                   )}
                 </div>
               </>
@@ -215,7 +236,7 @@ export default function Contact() {
                 })}
               />{" "}
               {errors.emailRequired && (
-                <span>{errors.emailRequired.message}</span>
+                <span className="error">*{errors.emailRequired.message}</span>
               )}
             </div>
             <div className="phone-container">
@@ -241,7 +262,7 @@ export default function Contact() {
                 })}
               />{" "}
               {errors.phoneRequired && (
-                <span>{errors.phoneRequired.message}</span>
+                <span className="error">*{errors.phoneRequired.message}</span>
               )}
             </div>
           </div>
@@ -308,7 +329,11 @@ export default function Contact() {
                   type="date"
                   className="date-input"
                   name="startDate"
-                  defaultValue={new Date().toISOString().split("T")[0]}
+                  defaultValue={
+                    new Date(new Date().setDate(new Date().getDate() + 1))
+                      .toISOString()
+                      .split("T")[0]
+                  }
                   {...register("startDateRequired", {
                     required: {
                       value: true,
@@ -327,7 +352,9 @@ export default function Contact() {
                   })}
                 />{" "}
                 {errors.startDateRequired && (
-                  <span>{errors.startDateRequired.message}</span>
+                  <span className="error">
+                    *{errors.startDateRequired.message}
+                  </span>
                 )}
               </div>
               <div>
@@ -357,7 +384,7 @@ export default function Contact() {
                   })}
                 />
                 {errors.endRequired && (
-                  <span>{errors.endRequired.message}</span>
+                  <span className="error">*{errors.endRequired.message}</span>
                 )}
               </div>
             </div>
@@ -380,7 +407,9 @@ export default function Contact() {
                   },
                 })}
               ></textarea>{" "}
-              {errors.msgRequired && <span>{errors.msgRequired.message}</span>}
+              {errors.msgRequired && (
+                <span className="error">*{errors.msgRequired.message}</span>
+              )}
             </div>
             <button className="submit" type="submit">
               Enviar

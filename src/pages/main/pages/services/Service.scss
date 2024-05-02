@@ -3,31 +3,36 @@
   font-family: "Inter", sans-serif;
   font-size: 23px;
 }
-
-.service-title {
-  color: #1d30ad;
-  font-size: 1.7rem;
-  margin: 10px;
-}
-
-.filter-ctn {
-  margin: 20px;
+.container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  .filter-title {
-    font-size: 16px;
-    font-weight: 600;
-  }
-  .filter-btn {
-    background-color: #1d30ad;
-    padding: 10px;
-    border: 1px solid #1d30ad;
+  justify-content: flex-start;
+  background-image: url("../../../../assets/ashwini-chaudhary-monty-Iu6parQAO-U-unsplash.jpg");
+  .service-title {
     color: #fff;
-    option {
+    font-size: 1.7rem;
+    margin: 10px;
+  }
+
+  .filter-ctn {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .filter-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .filter-btn {
+      background-color: #1d30ad;
+      padding: 10px;
+      border: 1px solid #1d30ad;
       color: #fff;
-      padding: 3px 0;
-      font-size: 13px;
+      option {
+        color: #fff;
+        padding: 3px 0;
+        font-size: 13px;
+      }
     }
   }
 }

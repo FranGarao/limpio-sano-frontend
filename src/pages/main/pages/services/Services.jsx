@@ -5,6 +5,8 @@ import "./Service.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
 // import Alert from "../../../../hooks/alerts";
 import Alert from "../../../../components/Alert/Alert";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function Services() {
   const [services, setServices] = useState([]);
@@ -60,9 +62,28 @@ export default function Services() {
     }
   }
 
+  const navigate = useNavigate();
   const confirmService = () => {
-    setShowAlert(true);
- };
+    Swal.fire({
+      title: "Selecciona la regularidad",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonText: "Ocasional",
+      showDenyButton: true,
+      denyButtonText: "Fijo",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        redirect("/contact"); // reemplaza 'url1' con la URL a la que deseas redirigir para el primer botón
+      } else if (result.isDenied) {
+        redirect("/login"); // reemplaza 'url2' con la URL a la que deseas redirigir para el segundo botón
+      }
+    });
+
+    function redirect(url) {
+      navigate(url);
+    }
+  };
 
   /* FIN rotar cards */
   return (
@@ -71,25 +92,26 @@ export default function Services() {
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
       <div className="container">
-        <h2 className="service-title">SERVICIOS</h2>
+        <h2 className="service-title">Servicios de Limpieza y Aseo</h2>
+
+        <div className="filter-ctn">
+          <select
+            className="filter-btn"
+            onChange={handleFilter}
+            name="categoryFilter"
+            type="text"
+          >
+            <option value="0">TODAS</option>
+            {categories.map((category) => (
+              <option key={category?.id} value={category?.id}>
+                {category?.title?.toUpperCase()}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <div className="filter-ctn">
-        <select
-          className="filter-btn"
-          onChange={handleFilter}
-          name="categoryFilter"
-          type="text"
-        >
-          <option value="0">TODAS</option>
-          {categories.map((category) => (
-            <option key={category?.id} value={category?.id}>
-              {category?.title?.toUpperCase()}
-            </option>
-          ))}
-        </select>
-      </div>
-      <section className="services-container">  
+      <section className="services-container">
         {showAlert && <Alert setShowAlert={setShowAlert} />}
         {categories.map((category) => (
           <div
