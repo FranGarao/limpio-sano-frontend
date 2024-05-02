@@ -6,9 +6,9 @@ export default function NotFound() {
     <div className="not-found-container">
     <div className="not-found">
       <img src={question} alt="question icon" />
-      <h1>404 - Not Found</h1>
-        <h2>Parece que no se ha encontrado nada en esta ubicación.</h2>
-        <h3 className="back-to-home"><Link to='/home' className="link">Volver a la página principal</Link></h3>
+      <h1><b>Error 404</b></h1>
+        <h2>Parece que seguimos limpiando esta ubicación!</h2>
+        <button className="back-to-home"><Link to='/home' className="link">Volver al inicio</Link></button>
     </div>
     </div>
   );
