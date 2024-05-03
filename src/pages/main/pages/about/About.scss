@@ -6,24 +6,36 @@
 .about-ctn {
   position: relative;
   bottom: 160px;
-  background-color: rgba(250, 235, 215, 0.377);
+  background-color: rgba(0, 0, 0, 0.377);
   padding: 20px;
+  padding-bottom: 30px;
   text-align: start;
   border-radius: 0 50px 0 50px;
   h2 {
-    color: #1d30ad;
+    color: #fff;
     font-size: 2rem;
     margin: 0 0 10px 0;
+  }
+  b {
+    color: #1d30ad;
+  }
+  p {
+    font-weight: bold;
+    color: #fff;
   }
 }
 .about-contact {
   position: relative;
   background-color: rgba(0, 0, 0, 0.377);
-  border-radius: 0px 100px 00px 50px;
+  border-radius: 10px 50px 10px 50px;
   bottom: 100px;
   padding: 20px;
   display: flex;
   justify-content: space-between;
+  -webkit-border-radius: 10px 50px 10px 50px;
+  -moz-border-radius: 10px 50px 10px 50px;
+  -ms-border-radius: 10px 50px 10px 50px;
+  -o-border-radius: 10px 50px 10px 50px;
   p {
     font-size: 1.8em;
     font-weight: bold;
@@ -37,7 +49,7 @@
     .icon {
       width: 40px;
       height: 40px;
-      ;
+      cursor: pointer;
     }
   }
 }

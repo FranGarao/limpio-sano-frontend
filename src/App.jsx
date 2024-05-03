@@ -22,6 +22,8 @@ import Users from "./pages/dashboard/pages/users/Users";
 import Service from "./pages/dashboard/pages/services/Service";
 import DBFaqs from "./pages/dashboard/pages/faqs/dbFaqs";
 import DBCategories from "./pages/dashboard/pages/categories/dbCategories";
+import DContact from "./pages/dashboard/pages/contact/DContact";
+import DAbout from "./pages/dashboard/pages/about/DAbout";
 
 function App() {
   const [admin, setAdmin] = useState(false);
@@ -50,16 +52,34 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Route>
           {admin && (
-            <Route path="/dashboard" element={<Dashboard />}>
-              <Route path="/dashboard/users" element={<Users />}></Route>
-              <Route path="/dashboard/services" element={<Service />}></Route>
-              <Route path="/dashboard/faqs" element={<DBFaqs />}></Route>
+            <Route
+              path="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14"
+              element={<Dashboard />}
+            >
               <Route
-                path="/dashboard/categories"
+                path="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/users"
+                element={<Users />}
+              ></Route>
+              <Route
+                path="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/services"
+                element={<Service />}
+              ></Route>
+              <Route
+                path="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/faqs"
+                element={<DBFaqs />}
+              ></Route>
+              <Route
+                path="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/categories"
                 element={<DBCategories />}
               ></Route>
-              <Route path="/dashboard/services" element={<Service />}></Route>
-              <Route path="/dashboard/services" element={<Service />}></Route>
+              <Route
+                path="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/contact"
+                element={<DContact />}
+              ></Route>
+              <Route
+                path="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/about"
+                element={<DAbout />}
+              ></Route>
             </Route>
           )}
           <Route path="*" element={<NotFound />} />

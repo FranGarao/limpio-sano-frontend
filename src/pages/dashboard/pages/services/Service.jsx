@@ -18,7 +18,7 @@ export default function Service() {
     });
   };
   const getServices = () => {
-    get("/services")
+    get("/services/dash")
       .then((data) => setServices(data.services))
       .catch((error) => console.log(error));
   };

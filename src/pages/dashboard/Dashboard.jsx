@@ -22,22 +22,22 @@ export default function Dashboard() {
         <main className="main">
           <h1>Bienvenido al panel de control</h1>
           <div>
-            <Link to="/dashboard/services">
+            <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/services">
               <button>Servicios</button>
             </Link>
-            <Link to="/dashboard/users">
+            <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/users">
               <button>Usuarios</button>
             </Link>
-            <Link to="/dashboard/faqs">
+            <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/faqs">
               <button>Faqs</button>
             </Link>
-            <Link to="/dashboard/about">
+            <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/about">
               <button>About Me</button>
             </Link>
-            <Link to="/dashboard/categories">
+            <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/categories">
               <button>Categorias</button>
             </Link>
-            <Link to="/dashboard/contact">
+            <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/contact">
               <button>Contacto</button>
             </Link>
           </div>

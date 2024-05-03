@@ -14,14 +14,15 @@ $green-color: #009d71;
     font-weight: bold;
     width: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.185);
+    background-color: rgba(0, 0, 0, 0.767);
+    color: #fff;
   }
   .row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #ffffff3f;
-
+    background-color: #1d30ad;
+    color: #fff;
     backdrop-filter: blur(20px);
     align-items: center;
     width: 100%;

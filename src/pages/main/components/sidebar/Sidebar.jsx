@@ -70,7 +70,9 @@ export default function Sidebar() {
               </li>
               {login && (
                 <li>
-                  <Link to="/dashboard">Panel de control</Link>
+                  <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14">
+                    Panel de control
+                  </Link>
                 </li>
               )}
             </ul>

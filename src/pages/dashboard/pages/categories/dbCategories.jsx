@@ -132,7 +132,6 @@ export default function DBCategories() {
       <h1>Servicios</h1>{" "}
       <section className="table">
         <div className="headers">
-          <p>Nombre</p>
           <p>Categoria</p>
           <p>Opciones</p>
         </div>

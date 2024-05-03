@@ -2,13 +2,39 @@ import "./Footer.scss";
 import facebook from "../../../../assets/footer-icons/facebook.svg";
 import instagram from "../../../../assets/footer-icons/instagram.svg";
 import whatsapp from "../../../../assets/footer-icons/whatsapp.svg";
-import phone from "../../../../assets/icons/phone.svg";
-import email from "../../../../assets/icons/email.svg";
+import iphone from "../../../../assets/icons/phone.svg";
+import iemail from "../../../../assets/icons/email.svg";
 import location from "../../../../assets/icons/location.svg";
 import copy from "../../../../assets/icons/copy.svg";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import useApiRequest from "../../../../hooks/useApiRequest";
 
 export default function Footer() {
+  const [wsp, setWsp] = useState("");
+  const [phone, setPhone] = useState("");
+  const [phone2, setPhone2] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+
+  const { get } = useApiRequest();
+  useEffect(() => {
+    get("/contacts")
+      .then((res) => {
+        console.log(res.contacts);
+        res?.contacts?.forEach((contact) => {
+          if (contact.type === "whatsapp") setWsp(contact?.contact);
+          if (contact.type === "phone") setPhone(contact?.contact);
+          if (contact.type === "phone2") setPhone2(contact?.contact);
+          if (contact.type === "mail") setEmail(contact?.contact);
+          if (contact.type === "direccion") setAddress(contact?.contact);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const copyToClipboard = async (text) => {
     if (navigator.clipboard) {
       try {
@@ -36,7 +62,7 @@ export default function Footer() {
       } else {
         // Fallback para navegadores que no soportan clipboard API
         try {
-          document.execCommand("copy");
+          await navigator.clipboard.writeText(text);
           Swal.fire({
             title: "¡Copiado al portapapeles!",
             confirmButtonText: "Confirmar",
@@ -68,10 +94,10 @@ export default function Footer() {
           <h5>Contacto</h5>
           <div>
             <img className="icon" src={whatsapp} alt="whatsapp icon" />
-            <p>+57 322 5292067</p>
+            <p>{wsp}</p>
             <img
               onClick={() => {
-                copyToClipboard("+57 322 5292067");
+                copyToClipboard(wsp);
               }}
               className="copy-contact"
               src={copy}
@@ -79,11 +105,13 @@ export default function Footer() {
             />
           </div>
           <div>
-            <img className="icon" src={phone} alt="phone icon" />
-            <p>3124641455 - 3225292067</p>
+            <img className="icon" src={iphone} alt="phone icon" />
+            <p>
+              {phone} - {phone2}
+            </p>
             <img
               onClick={() => {
-                copyToClipboard("3124641455 - 3225292067");
+                copyToClipboard(`${phone} ${phone2}`);
               }}
               className="copy-contact"
               src={copy}
@@ -91,11 +119,11 @@ export default function Footer() {
             />
           </div>
           <div>
-            <img className="icon" src={email} alt="email icon" />
-            <p>comercial@limpioysanosas.com</p>
+            <img className="icon" src={iemail} alt="email icon" />
+            <p>{email}</p>
             <img
               onClick={() => {
-                copyToClipboard("comercial@limpioysanosas.com");
+                copyToClipboard(email);
               }}
               className="copy-contact"
               src={copy}
@@ -107,10 +135,10 @@ export default function Footer() {
           <h5>Nuestra sede</h5>
           <div className="location-container">
             <img className="icon" src={location} alt="instagram" />
-            <p>Calle 85 # 22A-39 Barrio Polo (Solo correspondencia)</p>
+            <p>{address} (Solo correspondencia)</p>
             <img
               onClick={() => {
-                copyToClipboard("Calle 85 # 22A-39 Barrio Polo");
+                copyToClipboard(address);
               }}
               className="copy-contact"
               src={copy}

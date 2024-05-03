@@ -23,9 +23,9 @@ export default function Contact() {
 
   const onSubmit = async (data) => {
     // setServices(await GetServiceByCategory(data?.establishmentRequired));
-    post('/contacts/submit', {data})
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
+    post("/contacts/submit", { data })
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
     console.log({ data });
     setFormValues(data);
   };
