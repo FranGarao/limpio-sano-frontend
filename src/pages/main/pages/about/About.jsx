@@ -9,6 +9,9 @@ export default function About() {
   const redirect = (path) => {
     navigate(path);
   };
+  const toService = () => {
+    navigate("/services");
+  };
   return (
     <>
       <Helmet>
@@ -16,6 +19,18 @@ export default function About() {
       </Helmet>
       <Slider />
       <div className="about-ctn">
+      <div className="title-slider">
+        <p className="title">
+          Servicios de aseo, limpieza y desinfección para hogares, empresas,
+          oficinas y propiedad horizontal
+        </p><br />
+        <p>
+          ¡Agenda y cotiza tu servicio de limpieza y aseo por horas o como mejor
+          te convenga!
+        </p><br />
+        <button onClick={toService}>Ver Servicios</button>
+      </div>
+<div className="about-us">
         <h2>¿Quiénes somos?</h2>
         <p>
           <b>Limpi&Sano SAS</b> es una empresa colombiana especializada en
@@ -31,6 +46,7 @@ export default function About() {
           en Bogotá e Ibagué.
         </p>
       </div>
+</div>
       <div className="about-contact">
         <p>Contactanos!</p>
         <div>

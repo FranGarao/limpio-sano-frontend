@@ -4,21 +4,32 @@ import "./Service.scss";
 import useApiRequest from "../../../../hooks/useApiRequest";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Services() {
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
   const [clear, setClear] = useState(0);
   const { get } = useApiRequest();
-  useEffect(() => {
-    get("/services")
-      .then((data) => setServices(data.services))
+  const location = useLocation();
+
+  const findServices = (categoryId) => {
+    get(`/services/category/${categoryId}`)
+      .then((data) => {
+        setServices(data.services);
+        console.log(services);
+        setClear(categoryId);
+        console.log(categoryId, clear);
+      })
       .catch((error) => console.log(error));
+  };
+ useEffect(() => {
+    findServices(3);
     get("/categories")
       .then((data) => setCategories(data.categories))
       .catch((error) => console.log(error));
   }, []);
-
+ 
   const handleFilter = (event) => {
     const categoryId = event.target.value;
     if (categoryId === "0") {
@@ -29,14 +40,7 @@ export default function Services() {
         })
         .catch((error) => console.log(error));
     } else {
-      get(`/services/category/${categoryId}`)
-        .then((data) => {
-          setServices(data.services);
-          console.log(services);
-          setClear(categoryId);
-          console.log(categoryId, clear);
-        })
-        .catch((error) => console.log(error));
+      findServices(categoryId);
     }
   };
   /* Método para rotar cards */
@@ -72,7 +76,10 @@ export default function Services() {
       cancelButtonColor: "#00000057",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.open(`https://wa.me/573225292067?text=¡Hola!%20Queria%20mas%20informacion%20sobre%20el servicio de %20${service}%20que%20ofrecen`, '_blank');
+        window.open(
+          `https://wa.me/573225292067?text=¡Hola!%20Queria%20mas%20informacion%20sobre%20el servicio de %20${service}%20que%20ofrecen`,
+          "_blank"
+        );
       } else if (result.isDenied) {
         redirect("/contact"); // reemplaza 'url2' con la URL a la que deseas redirigir para el segundo botón
       }
@@ -89,7 +96,7 @@ export default function Services() {
       <Helmet>
         <title>Servicios | Limpio&Sano</title>
       </Helmet>
-      <div className="container">
+      <div className={location.pathname === '/home' ? "container" : "responsive-container"}>
         <h2 className="service-title">Servicios de Limpieza y Aseo</h2>
 
         <div className="filter-ctn">
@@ -101,7 +108,11 @@ export default function Services() {
           >
             <option value="0">TODAS</option>
             {categories.map((category) => (
-              <option key={category?.id} value={category?.id}>
+              <option
+                key={category?.id}
+                value={category?.id}
+                selected={category?.id === 3 ? "selected" : ""}
+              >
                 {category?.title?.toUpperCase()}
               </option>
             ))}
@@ -109,7 +120,7 @@ export default function Services() {
         </div>
       </div>
 
-      <section className="services-container">
+      <section className={location.pathname === '/home' ? "services-container" : "responsive-container"}>
         {categories.map((category) => (
           <div
             className={category?.id == clear || clear == 0 ? "exist" : "hidden"}
@@ -139,7 +150,10 @@ export default function Services() {
                     />
                   </div>
                   <div className="btn-ctn">
-                    <button onClick={()=>confirmService(service?.title)} title="Alquilar">
+                    <button
+                      onClick={() => confirmService(service?.title)}
+                      title="Alquilar"
+                    >
                       Alquilar
                     </button>
                     <button title="Más información" onClick={flipped}>

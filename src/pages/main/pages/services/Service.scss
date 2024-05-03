@@ -5,10 +5,14 @@
 }
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  background-image: url("../../../../assets/ashwini-chaudhary-monty-Iu6parQAO-U-unsplash.jpg");
+  position: relative;
+  bottom: 150px;
+  background-color: rgba(255, 255, 255, 0.158);
+  box-shadow: 0px 0px 10px 0px #000000;
   .service-title {
-    color: #fff;
+    color: #1d30ad;
     font-size: 1.7rem;
     margin: 10px;
   }
@@ -40,6 +44,8 @@
 .services-container {
   display: flex;
   flex-direction: column !important;
+  position: relative;
+  bottom: 150px;
   justify-content: flex-start;
   align-items: center;
   perspective: 800px;
@@ -65,6 +71,7 @@
   }
 
   .service-card-front {
+    box-shadow: 0px 0px 10px 0px #000000;
     width: 350px;
     height: 350px;
     margin: 10px 5px;
@@ -150,6 +157,7 @@
   }
 
   .service-card-back {
+    box-shadow: 0px 0px 10px 0px #000000;
     width: 350px;
     height: 350px;
     margin: 10px 5px;

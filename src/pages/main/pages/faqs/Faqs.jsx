@@ -39,7 +39,7 @@ export default function Faqs() {
         <title>FAQS | Limpio&Sano </title>
       </Helmet>
       <section className="section-container">
-        <h2>Preguntas Frecuentes</h2>
+        <p className="title">Preguntas Frecuentes</p>
         <section className="faqs-container">
           {faqs.map((faq, index) => (
             <div

@@ -26,9 +26,9 @@ export default function DAbout() {
   }, []);
   console.log(sliderImages);
 
-  const deleteService = (id) => {
+  const deleteImage = (id) => {
     console.log(id);
-    del(`/contacts/delete/${id}`)
+    del(`/slider/delete/${id}`)
       .then(() => {
         get("/slider")
           .then((data) => {
@@ -57,7 +57,7 @@ export default function DAbout() {
       if (result.isConfirmed) {
         openEdit(id);
       } else if (result.isDenied) {
-        deleteService(id);
+        deleteImage(id);
       }
     });
   };
@@ -113,7 +113,7 @@ export default function DAbout() {
       preConfirm: () => {
         const url = document.getElementById("url").value;
 
-        post(`/services/create`, {
+        post(`/slider/create`, {
           url,
         })
           .then((data) => {

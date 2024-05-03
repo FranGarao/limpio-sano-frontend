@@ -6,7 +6,6 @@
 .about-ctn {
   position: relative;
   bottom: 160px;
-  background-color: rgba(0, 0, 0, 0.377);
   padding: 20px;
   padding-bottom: 30px;
   text-align: start;
@@ -24,11 +23,21 @@
     color: #fff;
   }
 }
+.about-us {
+  background-color: rgba(0, 0, 0, 0.377);
+position: relative;
+bottom: 100px;
+padding: 15px;
+border-radius: 5px 30px 5px 30px;
+  box-shadow: 0px 0px 10px 0px #000000;
+
+}
 .about-contact {
   position: relative;
   background-color: rgba(0, 0, 0, 0.377);
+  box-shadow: 0px 0px 10px 0px #000000;
   border-radius: 10px 50px 10px 50px;
-  bottom: 100px;
+  bottom: 200px;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -51,5 +60,28 @@
       height: 40px;
       cursor: pointer;
     }
+  }
+}
+.title-slider {
+  background-color: #00000036;
+  height: 100%;
+  position: relative;
+  z-index: 99;
+  color: #fff;
+  bottom: 150px;
+  padding: 15px;
+border-radius: 10px;
+.title{
+font-size: 22px;
+}
+  button {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    background-color: #1d30ad;
+    font-weight: bold;
+    border: 1px solid #1d30ad;
   }
 }
