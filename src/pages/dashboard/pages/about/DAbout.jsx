@@ -16,7 +16,7 @@ export default function DAbout() {
     });
   };
   const getSliderImages = () => {
-    get("/slider")
+    get("/slider/dash")
       .then((data) => setSliderImages(data.images))
       .catch((error) => console.log(error));
   };

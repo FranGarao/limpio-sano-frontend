@@ -12,7 +12,7 @@ export default function DBFaqs() {
   }, []);
 
   const getFaqs = () => {
-    get("/faqs")
+    get("/faqs/dash")
       .then((data) => {
         setFaqs(data);
       })

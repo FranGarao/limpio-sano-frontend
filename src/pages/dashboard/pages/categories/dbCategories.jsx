@@ -12,7 +12,7 @@ export default function DBCategories() {
   }, []);
 
   const getCategories = () => {
-    get("/categories")
+    get("/categories/dash")
       .then((data) => {
         setCategories(data.categories);
       })
