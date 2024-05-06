@@ -22,7 +22,6 @@ export default function Faqs() {
       });
   }, []);
 
-  console.log(faqs);
   const [faqVisibility, setFaqVisibility] = useState(
     Array(faqs.length).fill(true)
   );
