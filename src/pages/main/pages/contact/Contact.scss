@@ -15,7 +15,6 @@ $wc: #e4e4e4;
   align-items: center;
   .contact-form {
     display: flex;
-
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
@@ -377,4 +376,10 @@ $wc: #e4e4e4;
       height: 140px;
     }
   }
+}
+
+@media screen and (min-width: 530px){
+  .contact-form {
+  width: 75% !important;
+}
 }

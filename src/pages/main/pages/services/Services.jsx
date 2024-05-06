@@ -98,7 +98,6 @@ export default function Services() {
       </Helmet>
       <div className={location.pathname === '/home' ? "container" : "responsive-container"}>
         <h2 className="service-title">Servicios de Limpieza y Aseo</h2>
-
         <div className="filter-ctn">
           <select
             className="filter-btn"
@@ -136,6 +135,7 @@ export default function Services() {
                 {category?.title?.toUpperCase()}
               </h2>
             )}
+            <div className="services-ctn">
             {services.map((service) => (
               <div className="services-content" key={service?.id}>
                 <article className="service-card-front">
@@ -176,6 +176,7 @@ export default function Services() {
                 )}
               </div>
             ))}
+            </div>
           </div>
         ))}
       </section>

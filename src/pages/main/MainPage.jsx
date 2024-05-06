@@ -14,12 +14,16 @@ export default function MainPage() {
     window.addEventListener("scroll", () => {
       setScrollY(window.scrollY);
     });
-  }, []);
 
+  }, []);
+  
   const toTop = () => {
     window.scrollTo(0, 0);
   };
-
+  const test = () => {
+const width =  document.documentElement.clientWidth
+  console.log(width);
+}
   return (
     <>
       <Helmet>
@@ -35,16 +39,19 @@ export default function MainPage() {
               className="to-top"
               href="#header"
               onClick={toTop}
+              onMouseEnter={test}
             >
               <GoChevronUp className="to-top-icon" />
             </button>
           ) : null}
           <Outlet />
         </main>
+            <button onClick={test}>TEEESSSTTTT</button>
         <a
           href={`https://wa.me/573225292067?text=¡Hola!%20Queria%20mas%20informacion%20sobre%20los servicios%20que%20ofrecen`}
           target="_blank"
         >
+
           <img
             className="whatsapp-fixed"
             src={whatsapp}

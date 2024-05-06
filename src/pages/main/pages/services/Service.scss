@@ -228,3 +228,15 @@
 
   /***** FIN Overflow *****/
 }
+
+
+@media screen and (min-width: 718px) {
+.services-container {
+
+.services-ctn{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+}}
