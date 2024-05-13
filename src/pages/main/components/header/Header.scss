@@ -37,14 +37,24 @@ $green-color: #009d71;
     flex-direction: row;
     height: 100% ;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 10px 0;
     background-color: #e4e4e4;
     border-bottom: 6px solid $green-color;
+    .menu{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      img{
+          width: 25px;
+          height: auto;
+      }
+    }
     .title {
-      font-size: 2rem;
+      font-size: 0.8rem;
       font-weight: bold;
-      
       color: $blue-color;
       cursor: pointer;
       text-decoration: none;
@@ -52,10 +62,9 @@ $green-color: #009d71;
     .search-icon {
       width: 25px;
       height: auto;
-      position: fixed;
-      top: 62px;
-      right: 40px;
       cursor: pointer;
+      position: relative;
+      right: 25px;
     }
   }
   .search-div-container {

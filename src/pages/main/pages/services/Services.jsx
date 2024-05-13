@@ -65,7 +65,7 @@ export default function Services() {
   const confirmService = (service) => {
     Swal.fire({
       title: "Selecciona la regularidad",
-      icon: "info",
+      icon: "question",
       showCancelButton: true,
       confirmButtonText: "Ocasional",
       showDenyButton: true,
@@ -119,7 +119,7 @@ export default function Services() {
         </div>
       </div>
 
-      <section className={location.pathname === '/home' ? "services-container" : "responsive-container"}>
+      <section className={location.pathname === '/home' ? "services-container" : "responsive-s-container"}>
         {categories.map((category) => (
           <div
             className={category?.id == clear || clear == 0 ? "exist" : "hidden"}

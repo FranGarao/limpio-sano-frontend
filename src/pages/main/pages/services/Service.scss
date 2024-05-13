@@ -3,7 +3,8 @@
   font-family: "Inter", sans-serif;
   font-size: 23px;
 }
-.container {
+.container,
+.responsive-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -41,7 +42,8 @@
   }
 }
 
-.services-container {
+.services-container,
+.responsive-s-container {
   display: flex;
   flex-direction: column !important;
   position: relative;
@@ -72,7 +74,7 @@
 
   .service-card-front {
     box-shadow: 0px 0px 10px 0px #000000;
-    width: 350px;
+    width: 300px;
     height: 350px;
     margin: 10px 5px;
     padding: 15px !important;
@@ -158,7 +160,7 @@
 
   .service-card-back {
     box-shadow: 0px 0px 10px 0px #000000;
-    width: 350px;
+    width: 300px;
     height: 350px;
     margin: 10px 5px;
     padding: 15px !important;
@@ -228,15 +230,51 @@
 
   /***** FIN Overflow *****/
 }
-
-
-@media screen and (min-width: 718px) {
-.services-container {
-
-.services-ctn{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
+.responsive-container {
+  bottom: 0;
 }
+.responsive-s-container {
+  bottom: 0;
+}
+@media screen and (min-width: 718px) {
+  .services-container {
+    .services-ctn {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  }
+}
+@media screen and (min-width: 500px) {
+ .services-container {
+  .service-card-front {
+    width: 400px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .service-card-back {
+    width: 400px;
+    height: 450px;
+    flex-direction: column;
+    justify-content: space-between;
+  }}
+}
+
+@media screen and (min-width: 900px) {
+ .services-container {
+  .services-ctn{
+  gap: 10px;
+  .service-card-front {
+    width: 400px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .service-card-back {
+
+  }}
 }}

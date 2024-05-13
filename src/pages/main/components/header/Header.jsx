@@ -127,12 +127,14 @@ export default function Header() {
         )}
       </div>
       <div className="header-main">
-        <Sidebar />
-        <h1>
+        <div className="menu">
+          <Sidebar />
+        </div>
           <Link className="title" to="home">
+        <h1>
             Limpio<b className="special-char">&</b>Sano
-          </Link>
         </h1>
+          </Link>
         <img
           onClick={() => hiddenSearchBar()}
           className="search-icon"
