@@ -15,11 +15,9 @@
     text-align: start;
     text-justify: inter-word;
     padding: 0 20px;
-  color: #fff;
-font-weight: bold;
+    color: #fff;
+    font-weight: bold;
     text-shadow: 2px 2px 4px #0000009d;
-
-  
   }
 }
 .faqs-container {
@@ -67,14 +65,19 @@ font-weight: bold;
         -webkit-animation: open-faq 0.5s forwards;
       }
     }
-
-    .faq-description {
-      color: #2b2b2b;
-      font-size: 1rem;
-      padding: 5px;
+    div {
+      overflow: scroll;
+      width: 100%;
       display: flex;
-      align-items: flex-start;
-      text-align: left;
+      justify-content: flex-start;
+     .faq-description {
+        color: #2b2b2b;
+        font-size: 1rem;
+        padding: 5px;
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+      }
     }
   }
 }
@@ -118,12 +121,12 @@ font-weight: bold;
 }
 
 @media screen and (min-width: 530px) {
-  .faqs-container{
+  .faqs-container {
     width: 80%;
   }
 }
 @media screen and (min-width: 560px) {
-  .faqs-container{
+  .faqs-container {
     width: 60%;
   }
 }

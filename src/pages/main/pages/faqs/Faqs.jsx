@@ -93,6 +93,7 @@ export default function Faqs() {
                 />
               </div>
               <hr className={`${faqVisibility[index] ? "hr" : "hidden"}`} />
+              <div>
               <p
                 className={`${
                   faqVisibility[index] ? "faq-description" : "hidden"
@@ -100,6 +101,7 @@ export default function Faqs() {
               >
                 {faq.description}
               </p>
+            </div>
             </div>
           ))}
         </section>
