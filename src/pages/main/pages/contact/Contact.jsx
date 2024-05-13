@@ -76,8 +76,8 @@ export default function Contact() {
       </Helmet>
 
       <section className="contact">
-        <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
           <h2 className="contact-title">Contáctanos</h2>
+        <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="contact-ctn">
             <div className="client-container">
               <label htmlFor="client-type" className="client-label">

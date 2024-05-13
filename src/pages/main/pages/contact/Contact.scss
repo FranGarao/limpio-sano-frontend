@@ -11,8 +11,17 @@ $wc: #e4e4e4;
   justify-content: flex-start;
   min-height: 100vh;
   width: 90%;
-
   align-items: center;
+    .contact-title {
+      margin: 0 0 10px 0;
+      align-self: center;
+      font-size: 2em;
+      color: #fff;
+      color: #1d30ad;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 2px 2px 4px #1d30ad;
+    }
   .contact-form {
     display: flex;
     flex-direction: column;
@@ -20,16 +29,7 @@ $wc: #e4e4e4;
     justify-content: space-evenly;
     width: 95%;
     min-height: 90% !important;
-    .contact-title {
-      margin: 0 0 10px 0;
-      align-self: center;
-      font-size: 2em;
-      color: #fff;
-    color: #1d30ad;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 2px 2px 4px #1d30ad;
-    }
+
     // background-image: linear-gradient(
     //     112.5deg,
     //     rgb(214, 214, 214) 0%,
@@ -92,7 +92,6 @@ $wc: #e4e4e4;
     justify-content: center;
     padding: 8px;
     .contact-ctn {
-
       height: 20% !important;
       margin: 10px 0;
       display: flex;
@@ -104,10 +103,9 @@ $wc: #e4e4e4;
       padding: 10px 7px 20px 7px;
       background-blend-mode: overlay, overlay, overlay, normal;
       border: 2px solid #909192;
-      box-shadow:
-        rgba(14, 30, 37, 0.12) 0px 8px 19px 0px,
+      box-shadow: rgba(14, 30, 37, 0.12) 0px 8px 19px 0px,
         rgba(14, 30, 37, 0.32) 0px 8px 16px 0px;
-    box-shadow: 0px 0px 10px 0px #000000;
+      box-shadow: 0px 0px 10px 0px #000000;
 
       .client-container {
         display: flex;
@@ -378,8 +376,24 @@ $wc: #e4e4e4;
   }
 }
 
-@media screen and (min-width: 530px){
+@media screen and (min-width: 530px) {
   .contact-form {
-  width: 75% !important;
+    width: 75% !important;
+  }
 }
+@media screen and (min-width: 748px) {
+  .contact {
+    margin: 0;
+    width: 100%;
+    .contact-form {
+      width: 100% !important;
+      gap: 10px;
+      flex-wrap: wrap;
+      display: flex;
+      flex-direction: row;
+      .contact-ctn{
+      width: 45%;
+    }
+    }
+  }
 }
