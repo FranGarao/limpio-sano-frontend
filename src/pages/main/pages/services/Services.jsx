@@ -81,7 +81,7 @@ export default function Services() {
           "_blank"
         );
       } else if (result.isDenied) {
-        redirect("/contact"); // reemplaza 'url2' con la URL a la que deseas redirigir para el segundo botón
+        redirect("/contact"); 
       }
     });
 

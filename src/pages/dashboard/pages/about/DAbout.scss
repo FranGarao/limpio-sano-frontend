@@ -1,0 +1,18 @@
+.img {
+  position: fixed;
+  z-index: 999;
+  width: 50vw;
+  margin: 0 auto;
+  top: 25%;
+  left: 25%;
+  height: auto;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.image {
+  width: 80%;
+  height: auto;
+}

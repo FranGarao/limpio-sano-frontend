@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../../../main/pages/services/Service.scss";
 import Swal from "sweetalert2";
 import { DiAptana } from "react-icons/di";
+import "./DAbout.scss";
 
 export default function DAbout() {
   const [sliderImages, setSliderImages] = useState([]);
@@ -131,6 +132,13 @@ export default function DAbout() {
     });
   };
 
+  const alertx = () => {
+    Swal.fire({
+      title: "Esta es la imagen",
+      html: `<img className='image' src=${sliderImages[0]?.url} alt="imagen" />`,
+    });
+  }
+
   return (
     <>
       <section className="table">
@@ -138,6 +146,8 @@ export default function DAbout() {
           <p>Imagen</p>
           <p>Opciones</p>
         </div>
+{/* <img src={sliderImages[0]?.url} alt="" /> */}
+        <div onClick={alertx} className="img">Click</div>
         {sliderImages?.map((img) => (
           <div key={img?.id} className="row">
             <p>{img?.id}</p>
