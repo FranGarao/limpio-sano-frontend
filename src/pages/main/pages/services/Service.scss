@@ -264,17 +264,42 @@
 }
 
 @media screen and (min-width: 900px) {
- .services-container {
+ .services-container, .responsive-s-container {
+  .exist{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: white;
+    font-size: 2rem;
+  }
   .services-ctn{
+  width: 100%;
+  height: 100%;
   gap: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   .service-card-front {
     width: 400px;
     height: 450px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+      .h3-ctn {
+    h3{
+      font-size: 1.4rem;
+    }
+  }
   }
   .service-card-back {
-
+    width: 400px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }}
-}}
+}
+
+}
