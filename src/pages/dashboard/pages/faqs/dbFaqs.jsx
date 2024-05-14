@@ -137,7 +137,6 @@ export default function DBFaqs() {
   };
   return (
     <>
-      <h1>Preguntas Frecuentes</h1>{" "}
       <section className="table">
         <div className="headers">
           <p>Titulo</p>

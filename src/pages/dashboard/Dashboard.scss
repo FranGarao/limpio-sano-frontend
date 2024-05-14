@@ -8,6 +8,34 @@
     display: flex;
     flex-direction: column;
     align-self: center;
+    h2{ 
+      display: inline-block;
+      min-width: 60%;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 2px solid #1d30ad;
+      margin: 0 auto;
+      color: #1d30ad;
+      font-weight: bold;
+      font-size: 1.3rem;
+      background-color: #fff;
+    }
+    .select-btn {
+      margin: 5px;
+      padding: 5px 10px;
+      background-color: #1d30ad;
+      border: 1px solid white;
+      color: #fff;
+    }
+    .selected{
+      margin: 5px;
+      padding: 5px 10px;
+      background-color: #fff;
+      border: 1px solid #1d30ad;
+      font-weight: bold;
+      color: #1d30ad;
+
+    }
   }
 
   .whatsapp-fixed {

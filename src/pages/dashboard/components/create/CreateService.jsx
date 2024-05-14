@@ -51,7 +51,6 @@ export default function CreateService() {
 
   return (
     <>
-      <h1>Create Service</h1>
       <form className="create-product" onSubmit={handleSubmit}>
         <label htmlFor="name">Nombre</label>
         <input

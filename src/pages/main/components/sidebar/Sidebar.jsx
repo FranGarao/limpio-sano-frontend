@@ -7,10 +7,12 @@ import instagram from "../../../../assets/footer-icons/instagram.svg";
 import xmark from "../../../../assets/icons/xmark.svg";
 import CheckLogin from "../../../../hooks/checkLogin";
 
+
 export default function Sidebar() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [hidden, setHidden] = useState(true);
   const [login, setLogin] = useState(false);
+
 
   useEffect(() => {
     const session = CheckLogin();
@@ -53,23 +55,23 @@ export default function Sidebar() {
           </div>
           <div className="sidebar-main">
             <ul className="sidebar-list">
-              <li>
+              <li onClick={()=>setShowSidebar(false)}>
                 <Link to="/home">Inicio</Link>
               </li>
-              <li>
+              <li onClick={()=>setShowSidebar(false)}>
                 <Link to="/about">¿Quiénes somos?</Link>
               </li>
-              <li>
+              <li onClick={()=>setShowSidebar(false)}>
                 <Link to="/services">Servicios</Link>
               </li>
-              <li>
+              <li onClick={()=>setShowSidebar(false)}>
                 <Link to="/faqs">Preguntas Frecuentes</Link>
               </li>
-              <li>
+              <li onClick={()=>setShowSidebar(false)}>
                 <Link to="/contact">Contacto</Link>
               </li>
               {login && (
-                <li>
+                <li onClick={()=>setShowSidebar(false)}>
                   <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14">
                     Panel de control
                   </Link>

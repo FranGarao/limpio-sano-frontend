@@ -189,7 +189,6 @@ export default function Service() {
 
   return (
     <>
-      <h1>Servicios</h1>{" "}
       <section className="table">
         <div className="headers">
           <p>Servicio</p>

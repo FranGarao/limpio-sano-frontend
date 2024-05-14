@@ -117,7 +117,6 @@ export default function DContact() {
 
   return (
     <>
-      <h1>Servicios</h1>{" "}
       <section className="table">
         <div className="headers">
           <p>Contacto</p>

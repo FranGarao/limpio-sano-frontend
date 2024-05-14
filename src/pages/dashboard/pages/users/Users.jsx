@@ -189,7 +189,7 @@ export default function Users() {
   };
   return (
     <div>
-      <h2>Usuarios</h2>
+      <h3>Usuarios</h3>
       <section className="table">
         <div className="headers">
           <p>Username</p>
