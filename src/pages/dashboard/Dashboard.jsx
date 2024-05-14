@@ -56,7 +56,7 @@ export default function Dashboard() {
               </button>
             </Link>
             <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/users">
-              <button onClick={()=> setClass(1)} id="1" >Usuarios</button>
+              <button onClick={()=> setClass(1)} id="1">Usuarios</button>
             </Link>
             <Link to="/4a70ee7b6091dd9e951975b25f7f101fd9d3f6a18f7b170ec5da1a2b38ad8b14/faqs">
               <button id="2" onClick={()=> setClass(2)}>Faqs</button>
